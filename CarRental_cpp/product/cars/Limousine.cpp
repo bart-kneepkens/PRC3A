@@ -3,7 +3,7 @@
 bool Limousine::GetHasMinibar() const{
     return hasMinibar;
 }
-bool Limousine::GetNeedsCleaning() const{
+bool Limousine::GetNeedsCleaning() {
     return needsCleaning;
 }
     

@@ -5,7 +5,7 @@ bool Sedan::GetHasTowbar() const {
     return hasTowbar;
 }
 
-bool Sedan::GetNeedsCleaning() const {
+bool Sedan::GetNeedsCleaning() {
     cout << lastCleanedAtKm;
     cout << "\n";
     cout << Car::GetKilometers();

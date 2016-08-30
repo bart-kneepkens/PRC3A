@@ -20,7 +20,7 @@ public:
     string GetModel() const;
     int GetBuildYear() const;
     string GetLicencePlate() const;
-    bool GetNeedsCleaning() const;
+    virtual bool GetNeedsCleaning() = 0;
     int GetKilometers() const;
     bool GetIsAvailable() const;
     

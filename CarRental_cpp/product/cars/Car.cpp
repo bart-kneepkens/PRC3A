@@ -22,9 +22,9 @@ using namespace std;
         return licencePlate;
     }
 
-    bool Car::GetNeedsCleaning() const {
-        return needsCleaning;
-    }
+//    bool Car::GetNeedsCleaning() const {
+//        return needsCleaning;
+//    }
 
     int Car::GetKilometers() const {
         return kilometers;
