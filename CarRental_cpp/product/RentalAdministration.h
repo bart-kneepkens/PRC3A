@@ -21,8 +21,6 @@ public:
     bool RentCar(string licencePlate);
     double ReturnCar(string licencePlate, int kilometers);
     void CleanCar(string licencePlate);
-    
-    RentalAdministration();
 };
 
 #endif

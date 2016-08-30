@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 #include "Car.h"
@@ -56,7 +57,7 @@ using namespace std;
     double Car::Return(int kilometers_) {
         if (isAvailable)
         {
-                // TODO: Exception. TEST.
+            throw invalid_argument("Car is not rented!");
         }
         if (kilometers_ < kilometers)
         {
@@ -95,5 +96,8 @@ using namespace std;
     
     string Car::ToString() const {
             // Ook bouwjaar en km stand
-        return manufacturer + "-" + model;
+        ostringstream ostr;
+        ostr << buildYear;
+        
+        return manufacturer + " - " + model + ", " + licencePlate + " (" + ostr.str() + ") \n";
     }

@@ -7,6 +7,7 @@
 //============================================================================
 
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 using namespace std;
@@ -33,23 +34,64 @@ static void addTestDataToAdministration(RentalAdministration* administration)
 
 static void printCars(const RentalAdministration* administration)
 {
+    cout << ("Printing Cars...\n");
+    cout << ("===============\n");
+    
+    for (unsigned int i = 0; i < administration->GetCars().size(); i++) {
+        cout << administration->GetCars().at(i)->ToString();
+    }
 }
 
 static size_t selectCar(const RentalAdministration* administration)
 {
-    return 0;
+    cout << ("Please enter the number of the car you'd like to select.\n");
+    cout << ("===============\n");
+    
+    for (unsigned int i = 0; i < administration->GetCars().size(); i++) {
+        stringstream sstm;
+        
+        sstm << i << ". " << administration->GetCars().at(i)->ToString();
+        cout << sstm.str();
+    }
+    
+    int choice = 0;
+    
+    cin >> choice;
+    cin.ignore();
+    
+    return choice;
 }
 
 static void rentCar(RentalAdministration* administration, size_t carNumber)
 {
+    Car* selected = administration->GetCars().at(carNumber);
+    administration->RentCar(selected->GetLicencePlate());
+    
+    cout << ("===============\n");
+    cout << ("Rented car with licence plate : " + selected->GetLicencePlate() + "\n");
+    cout << ("===============\n");
 }
 
 static void returnCar(RentalAdministration* administration, size_t carNumber)
 {
+    Car* selected = administration->GetCars().at(carNumber);
+    administration->ReturnCar(selected->GetLicencePlate(), 999);
+    
+    cout << ("===============\n");
+    cout << ("Return car with licence plate : " + selected->GetLicencePlate() + " after 999 KM.\n");
+    cout << ("===============\n");
 }
 
 static void printIfCarNeedsCleaning(const RentalAdministration* administration, size_t carNumber)
 {
+    Car* selected = administration->GetCars().at(carNumber);
+    
+    if(selected->GetNeedsCleaning()){
+        cout << ("This car does need cleaning.\n");
+    }
+    else{
+        cout << ("This car is brandschoon.");
+    }
 }
 
 static void cleanCar(RentalAdministration* administration, size_t carNumber)
@@ -79,7 +121,7 @@ int main( void )
 
     RentalAdministration administration;
     
-        addTestDataToAdministration(&administration);
+    addTestDataToAdministration(&administration);
 
     while (!quit)
     {

@@ -1,10 +1,16 @@
 #include "Sedan.h"
+#include <iostream>
 
 bool Sedan::GetHasTowbar() const {
     return hasTowbar;
 }
 
 bool Sedan::GetNeedsCleaning() const {
+    cout << lastCleanedAtKm;
+    cout << "\n";
+    cout << Car::GetKilometers();
+    
+    
     if((Car::GetKilometers() - lastCleanedAtKm) >= 1000){
         return true;
     }

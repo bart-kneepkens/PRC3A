@@ -1,6 +1,7 @@
 #include "RentalAdministration.h"
 #include <stdexcept>
 #include <iostream>
+#include <vector>
 
 
 Car* RentalAdministration::FindCar(string licencePlate){
@@ -19,22 +20,21 @@ Car* RentalAdministration::FindCarWithException(string licencePlate){
     Car* found = FindCar(licencePlate);
     
     if(!found){
-        throw out_of_range("Licenceplate Not found!!");
+        throw out_of_range("Licenceplate Not found!");
     }
     return found;
 }
 
+vector<Car*> RentalAdministration::GetCars() const {
+    return cars;
+}
+
 bool RentalAdministration::Add(Car* car){
     if(!car){
-            // Exception
+        throw invalid_argument("Car paramater can't be null!");
     }
     
-    if(FindCar(car->GetLicencePlate()) == NULL){
-        return false;
-    }
-    
-    
-    if(!FindCar(car->GetLicencePlate())){
+    if(FindCar(car->GetLicencePlate()) != NULL){
         return false;
     }
     
@@ -45,7 +45,7 @@ bool RentalAdministration::Add(Car* car){
 
 bool RentalAdministration::RentCar(string licencePlate){
     if(licencePlate.empty()){
-            // Exception
+        throw invalid_argument("License plate can't be empty!");
     }
     
     Car* found = FindCarWithException(licencePlate);
@@ -55,12 +55,12 @@ bool RentalAdministration::RentCar(string licencePlate){
 
 double RentalAdministration::ReturnCar(string licencePlate, int kilometers){
     if(licencePlate.empty()){
-            // Exception
+        throw invalid_argument("License plate can't be empty!");
     }
     Car* found = FindCarWithException(licencePlate);
     
     if(found->GetIsAvailable()){
-            // Exception
+        throw invalid_argument("The car is not even rented!");
     }
     
     return found->Return(kilometers);
@@ -68,13 +68,9 @@ double RentalAdministration::ReturnCar(string licencePlate, int kilometers){
 
 void RentalAdministration::CleanCar(string licencePlate){
     if(licencePlate.empty()){
-            // Exception
+        throw invalid_argument("License plate can't be empty!");
     }
     Car* found = FindCarWithException(licencePlate);
     
     found->Clean();
-}
-
-RentalAdministration::RentalAdministration(){
-    
 }
