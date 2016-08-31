@@ -102,8 +102,8 @@ TEST_F(SedanTest, test_clean_car)
 TEST_F(SedanTest, test_toString)
 {
     // before the stringstream change:
-    EXPECT_EQ("Audi - R8, 1-c++-98", testPtr->ToString());
+        //EXPECT_EQ("Audi - R8, 1-c++-98", testPtr->ToString());
     // after the stringstream change:
-    //EXPECT_EQ("Audi - R8 (2015), 1-c++-98, 0 km", testPtr->ToString());
+    EXPECT_EQ("Audi - R8 (2015), 1-c++-98, 0 km", testPtr->ToString());
 }
 

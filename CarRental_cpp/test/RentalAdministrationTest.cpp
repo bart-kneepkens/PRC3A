@@ -3,13 +3,14 @@
 #include "gtest/gtest.h"
 
 #include "RentalAdministration.h"
+#include "Car.h"
 
 using ::testing::Return;
 
 TEST(RentalAdministrationAdd, test_add_car_to_empty_administration)
 {
     RentalAdministration admin;
-    Car car;
+    Car *car;
     EXPECT_CALL(car, GetLicencePlate()).WillOnce(Return("fh-01-ict"));
     EXPECT_TRUE(admin.Add(&car));
 }

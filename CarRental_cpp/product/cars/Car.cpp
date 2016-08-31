@@ -86,18 +86,20 @@ using namespace std;
         }
         
         if(buildYear < 1890){
-            throw out_of_range("Cars can not be built before 1890.");
+            throw invalid_argument("Cars can not be built before 1890.");
         }
         
         if(pricePerKm < 0){
             throw out_of_range("Cannot be smaller than 0.");
         }
     }
+
     
     string Car::ToString() const {
-            // Ook bouwjaar en km stand
-        ostringstream ostr;
-        ostr << buildYear;
+            //EXPECTED : "Audi - R8 (2015), 1-c++-98, 0 km"
+        ostringstream byStr, kmStr;
+        byStr << buildYear;
+        kmStr << kilometers;
         
-        return manufacturer + " - " + model + ", " + licencePlate + " (" + ostr.str() + ") \n";
+        return manufacturer + " - " + model + " (" + byStr.str() + "), " + licencePlate + ", " + kmStr.str() + " km";
     }

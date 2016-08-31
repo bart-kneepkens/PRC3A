@@ -1,7 +1,7 @@
 #include "Sedan.h"
 #include <iostream>
 
-bool Sedan::GetHasTowbar() const {
+bool Sedan::HasTowBar() const {
     return hasTowbar;
 }
 

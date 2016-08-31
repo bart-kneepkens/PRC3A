@@ -12,7 +12,7 @@ private:
     bool hasTowbar;
     
 public:
-    bool GetHasTowbar() const;
+    bool HasTowBar() const;
     bool NeedsCleaning();
     
     Sedan(string manufacturer, string model, int buildYear,
