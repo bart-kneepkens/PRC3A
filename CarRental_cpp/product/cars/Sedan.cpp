@@ -5,11 +5,10 @@ bool Sedan::GetHasTowbar() const {
     return hasTowbar;
 }
 
-bool Sedan::GetNeedsCleaning() {
-    cout << lastCleanedAtKm;
-    cout << "\n";
-    cout << Car::GetKilometers();
-    
+bool Sedan::NeedsCleaning() {
+//    cout << lastCleanedAtKm;
+//    cout << "\n";
+//    cout << Car::GetKilometers();
     
     if((Car::GetKilometers() - lastCleanedAtKm) >= 1000){
         return true;
@@ -24,5 +23,7 @@ Sedan::Sedan(string manufacturer, string model, int buildYear,
 , hasTowbar(hasTowbar){}
 
 void Sedan::Clean(){
+//    cout << "------------------------";
+//    cout << Car::GetKilometers();
     lastCleanedAtKm = Car::GetKilometers();
 }

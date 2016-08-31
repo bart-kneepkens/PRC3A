@@ -20,9 +20,9 @@ public:
     string GetModel() const;
     int GetBuildYear() const;
     string GetLicencePlate() const;
-    virtual bool GetNeedsCleaning() = 0;
+    virtual bool NeedsCleaning() = 0;
     int GetKilometers() const;
-    bool GetIsAvailable() const;
+    bool IsAvailable() const;
     
         //Setters
     void SetKilometers(int kilometers);

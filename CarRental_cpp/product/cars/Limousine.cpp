@@ -1,9 +1,9 @@
 #include "Limousine.h"
 
-bool Limousine::GetHasMinibar() const{
+bool Limousine::HasMinibar() const{
     return hasMinibar;
 }
-bool Limousine::GetNeedsCleaning() {
+bool Limousine::NeedsCleaning() {
     return needsCleaning;
 }
     

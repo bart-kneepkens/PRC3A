@@ -75,10 +75,10 @@ static void rentCar(RentalAdministration* administration, size_t carNumber)
 static void returnCar(RentalAdministration* administration, size_t carNumber)
 {
     Car* selected = administration->GetCars().at(carNumber);
-    administration->ReturnCar(selected->GetLicencePlate(), 999);
+    administration->ReturnCar(selected->GetLicencePlate(), 999999);
     
     cout << ("===============\n");
-    cout << ("Return car with licence plate : " + selected->GetLicencePlate() + " after 999 KM.\n");
+    cout << ("Return car with licence plate : " + selected->GetLicencePlate() + " after 999999 KM.\n");
     cout << ("===============\n");
 }
 
@@ -86,7 +86,7 @@ static void printIfCarNeedsCleaning(const RentalAdministration* administration, 
 {
     Car* selected = administration->GetCars().at(carNumber);
     
-    if(selected->GetNeedsCleaning()){
+    if(selected->NeedsCleaning()){
         cout << ("This car does need cleaning.\n");
     }
     else{
@@ -96,6 +96,8 @@ static void printIfCarNeedsCleaning(const RentalAdministration* administration, 
 
 static void cleanCar(RentalAdministration* administration, size_t carNumber)
 {
+    Car* selected = administration->GetCars().at(carNumber);
+    administration->CleanCar(selected->GetLicencePlate());
 }
 
 

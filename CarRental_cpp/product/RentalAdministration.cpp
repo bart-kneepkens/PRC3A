@@ -59,7 +59,7 @@ double RentalAdministration::ReturnCar(string licencePlate, int kilometers){
     }
     Car* found = FindCarWithException(licencePlate);
     
-    if(found->GetIsAvailable()){
+    if(found->IsAvailable()){
         throw invalid_argument("The car is not even rented!");
     }
     

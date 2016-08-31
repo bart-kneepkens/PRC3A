@@ -12,8 +12,8 @@ private:
     bool hasMinibar;
     
 public:
-    bool GetHasMinibar() const;
-    bool GetNeedsCleaning();
+    bool HasMinibar() const;
+    bool NeedsCleaning();
     
     Limousine(string manufacturer, string model, int buildYear,
               string licencePlate, bool hasMinibar);

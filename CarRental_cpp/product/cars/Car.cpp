@@ -30,7 +30,7 @@ using namespace std;
         return kilometers;
     }
 
-    bool Car::GetIsAvailable() const {
+    bool Car::IsAvailable() const {
         return isAvailable;
     }
     
