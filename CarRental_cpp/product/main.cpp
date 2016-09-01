@@ -39,6 +39,7 @@ static void printCars(const RentalAdministration* administration)
     
     for (unsigned int i = 0; i < administration->GetCars().size(); i++) {
         cout << administration->GetCars().at(i)->ToString();
+        cout << "\n";
     }
 }
 
@@ -52,6 +53,7 @@ static size_t selectCar(const RentalAdministration* administration)
         
         sstm << i << ". " << administration->GetCars().at(i)->ToString();
         cout << sstm.str();
+        cout << "\n";
     }
     
     int choice = 0;

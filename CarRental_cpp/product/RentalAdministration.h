@@ -17,10 +17,12 @@ private:
 public:
     vector<Car*> GetCars() const;
     
-    bool Add(Car* car);
+    bool Add(Car *car);
     bool RentCar(string licencePlate);
     double ReturnCar(string licencePlate, int kilometers);
     void CleanCar(string licencePlate);
+    
+    RentalAdministration();
 };
 
 #endif
