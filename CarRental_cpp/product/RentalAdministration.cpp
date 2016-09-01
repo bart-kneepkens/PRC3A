@@ -74,3 +74,5 @@ void RentalAdministration::CleanCar(string licencePlate){
     
     found->Clean();
 }
+
+RentalAdministration::RentalAdministration(){}
