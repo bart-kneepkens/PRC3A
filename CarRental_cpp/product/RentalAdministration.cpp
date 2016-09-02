@@ -1,11 +1,10 @@
 #include "RentalAdministration.h"
 #include <stdexcept>
-#include <iostream>
 #include <vector>
 
+RentalAdministration::RentalAdministration(){}
 
 Car* RentalAdministration::FindCar(string licencePlate){
-    
     for (unsigned int i = 0; i < cars.size();i++)
     {
         if(cars[i]->GetLicencePlate() == licencePlate){
@@ -73,5 +72,3 @@ void RentalAdministration::CleanCar(string licencePlate){
     
     found->Clean();
 }
-
-RentalAdministration::RentalAdministration(){}

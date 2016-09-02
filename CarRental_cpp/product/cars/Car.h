@@ -23,9 +23,6 @@ public:
     int GetKilometers() const;
     bool IsAvailable() const;
     
-    void SetKilometers(int kilometers);
-    void SetIsAvailable(bool isAvailable);
-    
     bool Rent();
     virtual double Return(int kilometers);
     
