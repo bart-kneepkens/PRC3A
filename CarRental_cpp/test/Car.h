@@ -13,6 +13,7 @@ class Car
         MOCK_METHOD0(Rent, bool());
         MOCK_METHOD1(Return, double(int kilometers));
         MOCK_METHOD0(Clean, void());
+        MOCK_METHOD0(IsAvailable, bool());
 };
 
 
