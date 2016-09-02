@@ -107,11 +107,13 @@ TEST_F(AdminTest, test_return_non_existng_car)
     EXPECT_THROW(admin.ReturnCar(licencePlates[0], 12), out_of_range);
 }
 
-TEST_F(AdminTest, test_return_existng_car)
+TEST_F(AdminTest, test_return_existing_car)
 {
     EXPECT_CALL(car, GetLicencePlate()).WillOnce(Return(licencePlates[0]));
     EXPECT_CALL(car, Return(12)).WillOnce(Return(100));
+    EXPECT_CALL(car, IsAvailable()).Times(1);
     EXPECT_EQ(100, admin.ReturnCar(licencePlates[0], 12));
+    
 }
 
 TEST_F(AdminTest, test_clean_non_existing_car)
@@ -127,7 +129,4 @@ TEST_F(AdminTest, test_clean_existing_car)
     EXPECT_NO_THROW(admin.CleanCar(licencePlates[0]));
 }
 
-TEST_F(AdminTest, test_is_available)
-{
-    
-}
+
