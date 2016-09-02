@@ -127,3 +127,7 @@ TEST_F(AdminTest, test_clean_existing_car)
     EXPECT_NO_THROW(admin.CleanCar(licencePlates[0]));
 }
 
+TEST_F(AdminTest, test_is_available)
+{
+    
+}

@@ -77,10 +77,21 @@ static void rentCar(RentalAdministration* administration, size_t carNumber)
 static void returnCar(RentalAdministration* administration, size_t carNumber)
 {
     Car* selected = administration->GetCars().at(carNumber);
-    administration->ReturnCar(selected->GetLicencePlate(), 999999);
+    
+    cout << ("How many kilometers did you drive?\n");
+    
+    int kilometers;
+    
+    cin >> kilometers;
+    cin.ignore();
+    
+    administration->ReturnCar(selected->GetLicencePlate(), kilometers);
+    
+    stringstream sstm;
+    sstm << kilometers;
     
     cout << ("===============\n");
-    cout << ("Return car with licence plate : " + selected->GetLicencePlate() + " after 999999 KM.\n");
+    cout << ("Return car with licence plate : " + selected->GetLicencePlate() + " after " + sstm.str() +  " KM.\n");
     cout << ("===============\n");
 }
 
