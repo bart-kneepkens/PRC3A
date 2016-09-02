@@ -15,7 +15,6 @@ private:
     int kilometers;
     bool isAvailable;
 public:
-        //Getters
     string GetManufacturer() const;
     string GetModel() const;
     int GetBuildYear() const;
@@ -24,21 +23,17 @@ public:
     int GetKilometers() const;
     bool IsAvailable() const;
     
-        //Setters
     void SetKilometers(int kilometers);
     void SetIsAvailable(bool isAvailable);
     
-    
-        //Functions
     bool Rent();
     virtual double Return(int kilometers);
     
-    Car(string manufacturer, string model, int buildYear, string licencePlate, double pricePerKm);
-    
     virtual void Clean() = 0;
     
-    string ToString() const;
+    Car(string manufacturer, string model, int buildYear, string licencePlate, double pricePerKm);
     
+    string ToString() const;
 };
 
 #endif

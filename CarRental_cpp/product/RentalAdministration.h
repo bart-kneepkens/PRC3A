@@ -10,18 +10,15 @@ class RentalAdministration {
     
 private:
     vector<Car*> cars;
-    
     Car* FindCar(string licencePlate);
     Car* FindCarWithException(string licencePlate);
     
 public:
     vector<Car*> GetCars() const;
-    
     bool Add(Car *car);
     bool RentCar(string licencePlate);
     double ReturnCar(string licencePlate, int kilometers);
     void CleanCar(string licencePlate);
-    
     RentalAdministration();
 };
 

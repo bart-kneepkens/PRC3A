@@ -5,7 +5,6 @@ using namespace std;
 
 #include "Car.h"
 
-        //Getters
     string Car::GetManufacturer() const {
         return manufacturer;
     }
@@ -22,10 +21,6 @@ using namespace std;
         return licencePlate;
     }
 
-//    bool Car::GetNeedsCleaning() const {
-//        return needsCleaning;
-//    }
-
     int Car::GetKilometers() const {
         return kilometers;
     }
@@ -33,17 +28,14 @@ using namespace std;
     bool Car::IsAvailable() const {
         return isAvailable;
     }
-    
-        //Setters
+
     void Car::SetKilometers(int kilometers_) {
         kilometers = kilometers_;
     }
     void Car::SetIsAvailable(bool isAvailable_) {
         isAvailable = isAvailable_;
     }
-    
-    
-        //Functions
+
     bool Car::Rent() {
         if (!isAvailable)
         {
@@ -96,7 +88,6 @@ using namespace std;
 
     
     string Car::ToString() const {
-            //EXPECTED : "Audi - R8 (2015), 1-c++-98, 0 km"
         ostringstream byStr, kmStr;
         byStr << buildYear;
         kmStr << kilometers;

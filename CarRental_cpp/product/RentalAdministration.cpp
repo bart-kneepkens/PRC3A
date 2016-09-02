@@ -12,7 +12,6 @@ Car* RentalAdministration::FindCar(string licencePlate){
             return cars[i];
         }
     }
-    
     return NULL;
 }
 
