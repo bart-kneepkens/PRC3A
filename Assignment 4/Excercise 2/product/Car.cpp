@@ -17,7 +17,7 @@ Car::Car(const string& model, const string& material, int diameter, int nrWheels
 Car::~Car(){ }
 
 string Car::getModel(){
-    
+    return "";
 }
 
 void Car::setLicencePlate(const string& licence){
@@ -25,15 +25,15 @@ void Car::setLicencePlate(const string& licence){
 }
 
 string Car::getLicencePlate(){
-    
+    return "";
 }
 
 int Car::getNrWheels(){
-    
+    return -1;
 }
 
 Wheel* Car::getWheel(int index){
-    
+    return NULL;
 }
 
 void Car::removeWheel(int index){
@@ -50,6 +50,6 @@ Car::Car(const Car& myCar){
 }
 
 Car& Car::operator=(const Car& myCar){
-    
+    return *this;
 }
 
