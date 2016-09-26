@@ -11,7 +11,14 @@ protected:
 };
 
 
-TEST_F(CarTest, test_anything)
-{
+TEST_F(CarTest, test_destructor){
     EXPECT_TRUE(true);
+}
+
+TEST_F(CarTest, test_copy_constructor){
+    
+}
+
+TEST_F(CarTest, test_operator){
+    
 }
