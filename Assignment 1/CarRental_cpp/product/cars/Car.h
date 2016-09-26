@@ -29,6 +29,7 @@ public:
     virtual void Clean() = 0;
     
     Car(string manufacturer, string model, int buildYear, string licencePlate, double pricePerKm);
+    virtual ~Car();
     
     string ToString() const;
 };

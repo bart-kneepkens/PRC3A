@@ -72,3 +72,11 @@ void RentalAdministration::CleanCar(string licencePlate){
     
     found->Clean();
 }
+
+RentalAdministration::~RentalAdministration(){
+    for (unsigned int i = 0; i < cars.size();i++)
+    {
+        delete cars[i];
+        cars[i] = NULL;
+    }
+}

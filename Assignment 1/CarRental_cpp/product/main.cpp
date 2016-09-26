@@ -165,7 +165,6 @@ int main( void )
             case '6' :
                 cleanCar(&administration, carNumber);
                 break;
-                
             case '9' :
                 quit = true;
                 break;

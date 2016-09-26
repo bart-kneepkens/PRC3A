@@ -20,6 +20,7 @@ public:
     double ReturnCar(string licencePlate, int kilometers);
     void CleanCar(string licencePlate);
     RentalAdministration();
+    ~RentalAdministration();
 };
 
 #endif

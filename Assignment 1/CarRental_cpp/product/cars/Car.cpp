@@ -27,6 +27,8 @@ Car::Car(string manufacturer, string model, int buildYear,
     }
 }
 
+Car::~Car(){}
+
 string Car::GetManufacturer() const {
     return manufacturer;
 }

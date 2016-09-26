@@ -1,0 +1,114 @@
+Valgrind results of assignment 1. (CarRental)
+================
+Main program:
+
+CarRental:
+
+==17965== HEAP SUMMARY:
+==17965==     in use at exit: 642 bytes in 24 blocks
+==17965==   total heap usage: 248 allocs, 224 frees, 25,634 bytes allocated
+==17965== 
+==17965== LEAK SUMMARY:
+==17965==    definitely lost: 272 bytes in 6 blocks
+==17965==    indirectly lost: 370 bytes in 18 blocks
+==17965==      possibly lost: 0 bytes in 0 blocks
+==17965==    still reachable: 0 bytes in 0 blocks
+==17965==         suppressed: 0 bytes in 0 blocks
+==17965== Rerun with --leak-check=full to see details of leaked memory
+==17965== 
+==17965== For counts of detected and suppressed errors, rerun with: -v
+==17965== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+================
+Unit tests:
+
+- SedanTest
+	==18260== HEAP SUMMARY:
+	==18260==     in use at exit: 1,115 bytes in 44 blocks
+	==18260==   total heap usage: 467 allocs, 423 frees, 51,828 bytes allocated
+	==18260== 
+	==18260== LEAK SUMMARY:
+	==18260==    definitely lost: 528 bytes in 11 blocks
+	==18260==    indirectly lost: 587 bytes in 33 blocks
+	==18260==      possibly lost: 0 bytes in 0 blocks
+	==18260==    still reachable: 0 bytes in 0 blocks
+	==18260==         suppressed: 0 bytes in 0 blocks
+	==18260== Rerun with --leak-check=full to see details of leaked memory
+	==18260== 
+	==18260== For counts of detected and suppressed errors, rerun with: -v
+	==18260== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+- LimousineTest
+	==18282== HEAP SUMMARY:
+	==18282==     in use at exit: 333 bytes in 12 blocks
+	==18282==   total heap usage: 264 allocs, 252 frees, 37,142 bytes allocated
+	==18282== 
+	==18282== LEAK SUMMARY:
+	==18282==    definitely lost: 120 bytes in 3 blocks
+	==18282==    indirectly lost: 213 bytes in 9 blocks
+	==18282==      possibly lost: 0 bytes in 0 blocks
+	==18282==    still reachable: 0 bytes in 0 blocks
+	==18282==         suppressed: 0 bytes in 0 blocks
+	==18282== Rerun with --leak-check=full to see details of leaked memory
+	==18282== 
+	==18282== For counts of detected and suppressed errors, rerun with: -v
+	==18282== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+- RentalAdministrationTest
+	==18300== HEAP SUMMARY:
+	==18300==     in use at exit: 0 bytes in 0 blocks
+	==18300==   total heap usage: 1,254 allocs, 1,254 frees, 131,618 bytes allocated
+	==18300== 
+	==18300== All heap blocks were freed -- no leaks are possible
+	==18300== 
+	==18300== For counts of detected and suppressed errors, rerun with: -v
+	==18300== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+================================================================================================================================
+
+Getting rid of the memory leaks
+
+- CarRental:
+	==19267== HEAP SUMMARY:
+	==19267==     in use at exit: 0 bytes in 0 blocks
+	==19267==   total heap usage: 28 allocs, 28 frees, 702 bytes allocated
+	==19267== 
+	==19267== All heap blocks were freed -- no leaks are possible
+	==19267== 
+	==19267== For counts of detected and suppressed errors, rerun with: -v
+	==19267== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+	
+	FIX: Added virtual deconstructor to Car. Also added deconstructor to RentalAdministration which deletes the cars.
+
+- SedanTest:
+	==19507== HEAP SUMMARY:
+	==19507==     in use at exit: 0 bytes in 0 blocks
+	==19507==   total heap usage: 467 allocs, 467 frees, 51,825 bytes allocated
+	==19507== 
+	==19507== All heap blocks were freed -- no leaks are possible
+	==19507== 
+	==19507== For counts of detected and suppressed errors, rerun with: -v
+	==19507== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+	FIX: Added a destructor to SedanTest class which deletes the testPtr.
+		Delete pointers in tests that use the new keyword.
+
+-LimousineTest
+	==19552== HEAP SUMMARY:
+	==19552==     in use at exit: 0 bytes in 0 blocks
+	==19552==   total heap usage: 264 allocs, 264 frees, 37,145 bytes allocated
+	==19552== 
+	==19552== All heap blocks were freed -- no leaks are possible
+	==19552== 
+	==19552== For counts of detected and suppressed errors, rerun with: -v
+	==19552== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+	
+	FIX: Added a destructor to the LimousineTest class which deletes the testPtr.
+
+	
+
+
+
+
+
+
+
