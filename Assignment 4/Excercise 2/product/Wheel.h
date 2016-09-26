@@ -2,6 +2,7 @@
 #define WHEEL_H_
 
 #include <string>
+
 using std::string;
 
 /*
@@ -21,7 +22,7 @@ class Wheel
        post: A Wheel object is created with the given material and diameter
     */
 
-    string getMaterial();
+    string getMaterial() const;
     /* pre : -
        post: getMaterial()= <Wheel>'s material
     */
@@ -31,11 +32,12 @@ class Wheel
        post: <Wheel>'s material is now material
     */
 
-    int getDiameter();
+    int getDiameter() const;
     /* pre : -
        post getDiameter() = <Wheel>'s diameter
     */
 
+	Wheel(const Wheel& myWheel);
 };
 
 #endif

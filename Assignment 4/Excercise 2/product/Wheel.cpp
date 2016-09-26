@@ -1,41 +1,32 @@
-#ifndef WHEEL_H_
-#define WHEEL_H_
+#include "Wheel.h"
+#include <stdexcept>
 
-#include <string>
-using std::string;
+using std::invalid_argument;
 
-/*
- *  destructor, copy constructor en assignment operator overloading is not needed as
- *  this class does not contain allocated memory
-*/
+Wheel::Wheel(int diameter, const string& material) {
+	
+	if (diameter <= 0) {
+		throw invalid_argument("diameter must be > 0");
+	}
+	
+	this->diameter = diameter;
+	this->material = material;
+}
 
-class Wheel
-{
-  private:
-    int diameter;
-    string material;
+string Wheel::getMaterial() const {
+	return material;
+}
 
-  public:
-    Wheel(int diameter, const string& material);
-    /* pre : d > 0
-       post: A Wheel object is created with the given material and diameter
-    */
+void Wheel::setMaterial(const string& material) {
+	this->material = material;
+}
 
-    string getMaterial();
-    /* pre : -
-       post: getMaterial()= <Wheel>'s material
-    */
+int Wheel::getDiameter() const {
+	return diameter;
+}
 
-    void setMaterial(const string& material);
-    /* pre : -
-       post: <Wheel>'s material is now material
-    */
+Wheel::Wheel(const Wheel& myWheel) {	
+	diameter = myWheel.getDiameter();
+	material = myWheel.getMaterial();
+}
 
-    int getDiameter();
-    /* pre : -
-       post getDiameter() = <Wheel>'s diameter
-    */
-
-};
-
-#endif

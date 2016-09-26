@@ -1,55 +1,103 @@
-
-#include "Wheel.h"
 #include "Car.h"
-#include <vector>
-#include <string>
-using std::string;
-using std::vector;
+#include <stdexcept>
 
-vector<Wheel*> wheels;
-string licencePlate;
-string model;
+using std::invalid_argument;
+using std::out_of_range;
 
-Car::Car(const string& model, const string& material, int diameter, int nrWheels){
+Car::Car(const string& model, const string& material, int diameter, int nrWheels) {
     
+    if (diameter < 1) {
+		throw invalid_argument("diameter must be > 0");
+	}
+	
+	if (nrWheels < 3) {
+		throw invalid_argument("nrWheels must be > 2");
+	}
+	
+	this->model = model;
+	
+	for (int i = 0; i < nrWheels; i++) {
+		wheels.push_back(new Wheel(diameter, material));
+	}
 }
 
-Car::~Car(){ }
-
-string Car::getModel(){
-    return "";
+Car::~Car() {
+	for (unsigned int i = 0; i < wheels.size(); i++)
+		delete wheels[i];
+		
+	wheels.clear();
 }
 
-void Car::setLicencePlate(const string& licence){
+string Car::getModel() const {
+    return model;
+}
+
+void Car::setLicencePlate(const string& licence) {
+    this->licencePlate = licence;
+}
+
+string Car::getLicencePlate() const {
+    return licencePlate;
+}
+
+int Car::getNrWheels() const {
+    return wheels.size();
+}
+
+Wheel* Car::getWheel(int index) const {
+	
+    if (index < 0 || index >= (int) wheels.size()) {
+		throw out_of_range("illegal index");
+	}
+	
+	return wheels[index];
+}
+
+void Car::removeWheel(int index) {
     
+    if (index < 0 || index >= (int) wheels.size()) {
+		throw out_of_range("illegal index");
+	}
+	
+	wheels.erase(wheels.begin() + index);
 }
 
-string Car::getLicencePlate(){
-    return "";
-}
-
-int Car::getNrWheels(){
-    return -1;
-}
-
-Wheel* Car::getWheel(int index){
-    return NULL;
-}
-
-void Car::removeWheel(int index){
+void Car::addWheel(int diameter, const string& material) {
     
+    if (diameter < 1) {
+		throw invalid_argument("diameter must be > 0");
+	}
+	
+	wheels.push_back(new Wheel(diameter, material));
 }
 
-void Car::addWheel(int diameter, const string& material){
+Car::Car(const Car& myCar) {
+	
+    for (int i = 0; i < myCar.getNrWheels(); i++) {
+		wheels.push_back(new Wheel(*(myCar.getWheel(i))));
+	}
+	
+	licencePlate = myCar.getLicencePlate();
+	model = myCar.getModel();
+}
+
+Car& Car::operator=(const Car& myCar) {
+	
+    if (&myCar == this) 
+		return *this;
+
+    // Delete this car's wheels.
+    for (unsigned int i = 0; i < wheels.size(); i++)
+		delete wheels[i];
+		
+	wheels.clear();
+
+	// Copy wheels from myCar to this.
+    for (int i = 0; i < myCar.getNrWheels(); i++)
+		wheels.push_back(new Wheel(*(myCar.getWheel(i))));
     
-}
-
-// Copy Constructor
-Car::Car(const Car& myCar){
-    
-}
-
-Car& Car::operator=(const Car& myCar){
+    licencePlate = myCar.getLicencePlate();
+	model = myCar.getModel();   
     return *this;
 }
 

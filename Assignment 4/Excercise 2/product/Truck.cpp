@@ -1,40 +1,40 @@
-#ifndef TRUCK_H_
-#define TRUCK_H_
+#include "Truck.h"
+#include <stdexcept>
 
-#include "Car.h"
+using std::invalid_argument;
 
-class Truck : public Car
-{
-  private:
-    int* power;
+Truck::Truck(const string& model, const string& material, int diameter, 
+	int nrWheels, int power) : Car(model, material, diameter, nrWheels) {
+	
+	if (power < 1) {
+		throw invalid_argument("power must be > 0");
+	}
+	
+	this->power = new int(power);
+}
 
-  public:
-	Truck(const string& model, const string& material, int diameter, int nrWheels, int power);
-    /* pre : diameter > 0, nrWheels > 2 and vermogen > 0
-       post: A Truck object is created that contains 'power' power and nrWheels
-             Wheel objects with the given material and diameter
-    */
+Truck::~Truck() {
+	delete power;
+}
 
-	virtual ~Truck();
-	/* pre : -
-	   post: the Truck object is destroyed including all allocated memory
-	*/
+int Truck::getPower() const {
+	return *power;
+}
 
-	int getPower();
-	/* pre : -
-	   post: returns power
-	*/
+Truck::Truck(const Truck& myTruck) : Car(myTruck) {
+	this->power = new int(myTruck.getPower());
+}
 
-	Truck(const Truck& myTruck);
-    /* pre : -
-	   post: a Truck object is created with all properties of myTruck, a deep copy is performed
-    */
+Truck& Truck::operator=(const Truck& myTruck) {
+	
+	if (&myTruck == this) 
+		return *this;
+		
+	Car::operator=(myTruck);
+	delete power;
+	power = new int(myTruck.getPower());
+	return *this;
+}
 
-	Truck& operator=(const Truck& myTruck);
-	/* pre : -
-	   post: all properties of this object are replaced with myTruck's properties,
-	         all previously existing properties are properly cleaned up and new
-	         properties are deep copied
-	*/
-};
-#endif
+
+

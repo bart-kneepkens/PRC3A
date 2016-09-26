@@ -4,6 +4,7 @@
 #include "Wheel.h"
 #include <vector>
 #include <string>
+
 using std::string;
 using std::vector;
 
@@ -26,7 +27,7 @@ class Car
 	   post: the Car object is destroyed including all allocated memory
 	*/
 
-    string getModel();
+    string getModel() const;
     /* pre : -
        post: getModel()= <Car> model
     */
@@ -36,17 +37,17 @@ class Car
        post: <Car>'s licence plate is licence
     */
 
-    string getLicencePlate();
+    string getLicencePlate() const;
     /* pre : -
        post: getLicencePlate()= <Car>'s licence plate
     */
 
-    int getNrWheels();
+    int getNrWheels() const;
     /* pre : -
        post: getNrWheels()= <Car>'s nr wheels
     */
 
-    Wheel* getWheel(int index);
+    Wheel* getWheel(int index) const;
     /* pre : 0 <= index < nr wheels in <Car>
        post: getWheel(i) = Wheel nr index of <Car>
     */
@@ -68,7 +69,7 @@ class Car
 	   post: a Car object is created with all properties of myCar, a deep copy is performed
     */
 
-	Car& operator=(const Car& myCar);
+	virtual Car& operator=(const Car& myCar);
 	/* pre : -
 	   post: all properties of this object are replaced with myCar's properties,
 	         all previously existing properties are properly cleaned up and new
