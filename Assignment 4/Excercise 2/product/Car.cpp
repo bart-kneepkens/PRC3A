@@ -1,5 +1,6 @@
 #include "Car.h"
 #include <stdexcept>
+#include <iostream>
 
 using std::invalid_argument;
 using std::out_of_range;
@@ -72,7 +73,9 @@ void Car::addWheel(int diameter, const string& material) {
 }
 
 Car::Car(const Car& myCar) {
-	
+    
+        //std::cout << "copy constructor.\n";
+    
     for (int i = 0; i < myCar.getNrWheels(); i++) {
 		wheels.push_back(new Wheel(*(myCar.getWheel(i))));
 	}
@@ -81,8 +84,11 @@ Car::Car(const Car& myCar) {
 	model = myCar.getModel();
 }
 
+
+    // Does not get called for some reason.
 Car& Car::operator=(const Car& myCar) {
 	
+    std::cout << "= operator!\n\n\n";
     if (&myCar == this) 
 		return *this;
 
