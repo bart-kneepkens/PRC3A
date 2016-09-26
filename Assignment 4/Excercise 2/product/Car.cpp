@@ -14,6 +14,7 @@ Car::Car(const string& model, const string& material, int diameter, int nrWheels
     
 }
 
+Car::~Car(){ }
 
 string Car::getModel(){
     
