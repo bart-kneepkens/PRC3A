@@ -1,5 +1,6 @@
 #include "Wheel.h"
 #include <stdexcept>
+#include <iostream>
 
 using std::invalid_argument;
 
@@ -25,7 +26,7 @@ int Wheel::getDiameter() const {
 	return diameter;
 }
 
-Wheel::Wheel(const Wheel& myWheel) {	
+Wheel::Wheel(const Wheel& myWheel) {
 	diameter = myWheel.getDiameter();
 	material = myWheel.getMaterial();
 }
