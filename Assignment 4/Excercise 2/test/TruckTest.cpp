@@ -36,11 +36,21 @@ protected:
 };
 
 TEST_F(TruckTest, test_destructor){
-    EXPECT_TRUE(true);
+    Truck* truck = new Truck("Scania", "Plastic", 20, 12, 300);
+    ASSERT_TRUE(truck->getNrWheels() > 0);
+    
+    Wheel* wheel = truck->getWheel(0);
+    ASSERT_TRUE(wheel);
+    
+    delete truck;
+    truck = NULL;
+    
+    EXPECT_FALSE(truck);
+    EXPECT_FALSE(wheel);
 }
 
 TEST_F(TruckTest, test_copy_constructor){
-    Truck truck1 = Truck("Cabrio", "Leather", 20, 4, 420);
+    Truck truck1 = Truck("DAF", "Leather", 20, 18, 420);
     Truck truck2 = Truck(truck1);
     
     CheckTruckPropertiesEqual(truck1, truck2);

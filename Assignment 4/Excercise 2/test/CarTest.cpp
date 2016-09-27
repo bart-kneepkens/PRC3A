@@ -29,7 +29,21 @@ protected:
 
 
 TEST_F(CarTest, test_destructor){
-    EXPECT_TRUE(true);
+    Car* car = new Car("Cabrio", "Plastic", 2, 4);
+    ASSERT_TRUE(car->getNrWheels() > 0);
+    
+    Wheel* wheel = car->getWheel(0);
+    ASSERT_TRUE(wheel);
+    
+    delete car;
+        //car = NULL;
+    
+    EXPECT_FALSE(car);
+    
+        //This doesn't work.
+        //Wheel stays alive.
+        //Would only work with shared pointers.
+    EXPECT_FALSE(wheel);
 }
 
 TEST_F(CarTest, test_copy_constructor){
