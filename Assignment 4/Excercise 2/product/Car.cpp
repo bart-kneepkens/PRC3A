@@ -84,11 +84,10 @@ Car::Car(const Car& myCar) {
 	model = myCar.getModel();
 }
 
-
-    // Does not get called for some reason.
 Car& Car::operator=(const Car& myCar) {
-	
+    
     std::cout << "= operator!\n\n\n";
+    
     if (&myCar == this) 
 		return *this;
 

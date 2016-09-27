@@ -1,5 +1,6 @@
 #include "Truck.h"
 #include <stdexcept>
+#include <iostream>
 
 using std::invalid_argument;
 
@@ -26,11 +27,10 @@ Truck::Truck(const Truck& myTruck) : Car(myTruck) {
 }
 
 Truck& Truck::operator=(const Truck& myTruck) {
-	
 	if (&myTruck == this) 
 		return *this;
 		
-	Car::operator=(myTruck);
+        Car::operator=(myTruck);
 	delete power;
 	power = new int(myTruck.getPower());
 	return *this;
