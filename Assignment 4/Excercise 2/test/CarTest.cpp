@@ -41,4 +41,10 @@ TEST_F(CarTest, test_copy_constructor){
 }
 
 TEST_F(CarTest, test_operator){
+    Car car1 = Car("Cabrio", "Leather", 2, 4);
+    
+    Car car2 = car1;
+    
+    CheckCarProperties(car1, car2);
+
 }
