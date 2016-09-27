@@ -73,9 +73,6 @@ void Car::addWheel(int diameter, const string& material) {
 }
 
 Car::Car(const Car& myCar) {
-    
-        //std::cout << "copy constructor.\n";
-    
     for (int i = 0; i < myCar.getNrWheels(); i++) {
 		wheels.push_back(new Wheel(*(myCar.getWheel(i))));
 	}
@@ -85,9 +82,6 @@ Car::Car(const Car& myCar) {
 }
 
 Car& Car::operator=(const Car& myCar) {
-    
-    std::cout << "= operator!\n\n\n";
-    
     if (&myCar == this) 
 		return *this;
 
