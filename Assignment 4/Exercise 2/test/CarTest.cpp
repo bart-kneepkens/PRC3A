@@ -22,29 +22,20 @@ static void CheckCarPropertiesEqual(Car& car, Car& other){
 class CarTest : public ::testing::Test {
     
 protected:
+    Car* car;
+    Wheel * wheel;
+    
     CarTest(){
-        
+        car = new Car("Cabrio", "Plastic", 2, 4);
+        wheel = car->getWheel(0);
+    }
+    
+    ~CarTest(){
+        delete car;
+        car = NULL;
     }
 };
 
-
-TEST_F(CarTest, test_destructor){
-    Car* car = new Car("Cabrio", "Plastic", 2, 4);
-    ASSERT_TRUE(car->getNrWheels() > 0);
-    
-    Wheel* wheel = car->getWheel(0);
-    ASSERT_TRUE(wheel);
-    
-    delete car;
-        //car = NULL;
-    
-    EXPECT_FALSE(car);
-    
-        //This doesn't work.
-        //Wheel stays alive.
-        //Would only work with shared pointers.
-    EXPECT_FALSE(wheel);
-}
 
 TEST_F(CarTest, test_copy_constructor){
     Car car1 = Car("Cabrio", "Leather", 2, 4);
@@ -62,5 +53,4 @@ TEST_F(CarTest, test_operator){
     car2 = car1;
     
     CheckCarPropertiesEqual(car1, car2);
-
 }
