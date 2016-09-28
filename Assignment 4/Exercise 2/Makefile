@@ -37,4 +37,4 @@ truck: TruckTest
 	@valgrind ./TruckTest
 
 wheel: WheelTest
-	@./WheelTest
+	@valgrind ./WheelTest

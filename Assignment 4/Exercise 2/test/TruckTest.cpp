@@ -36,10 +36,9 @@ protected:
         truck = new Truck("Scania", "Metal", 20, 8, 40);
     }
     
-    
     ~TruckTest(){
-            delete truck;
-            truck = NULL;
+        delete truck;
+        truck = NULL;
     }
 };
 
@@ -53,9 +52,11 @@ TEST_F(TruckTest, test_copy_constructor){
 
 TEST_F(TruckTest, test_operator){
     Truck truck1 = Truck("Cabrio", "Leather", 20, 4, 420);
+    
+    // For the overloaded = operator to work car2 has to be initialised first.
     Truck truck2 = Truck("ccc", "ccc", 21, 8, 12);
     
     truck2 = truck1;
-    
+
     CheckTruckPropertiesEqual(truck1, truck2);
 }

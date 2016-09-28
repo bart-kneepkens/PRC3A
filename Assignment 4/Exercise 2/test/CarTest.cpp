@@ -48,6 +48,7 @@ TEST_F(CarTest, test_copy_constructor){
 TEST_F(CarTest, test_operator){
     Car car1 = Car("Cabrio", "Leather", 2, 4);
     
+    // For the overloaded = operator to work car2 has to be initialised first.
     Car car2 = Car("", "", 3, 5);
     
     car2 = car1;
