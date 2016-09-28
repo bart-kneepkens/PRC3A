@@ -5,7 +5,6 @@
 using std::invalid_argument;
 
 Wheel::Wheel(int diameter, const string& material) {
-	
 	if (diameter <= 0) {
 		throw invalid_argument("diameter must be > 0");
 	}
@@ -25,9 +24,3 @@ void Wheel::setMaterial(const string& material) {
 int Wheel::getDiameter() const {
 	return diameter;
 }
-
-Wheel::Wheel(const Wheel& myWheel) {
-	diameter = myWheel.getDiameter();
-	material = myWheel.getMaterial();
-}
-

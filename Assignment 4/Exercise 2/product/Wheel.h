@@ -36,8 +36,6 @@ class Wheel
     /* pre : -
        post getDiameter() = <Wheel>'s diameter
     */
-
-	Wheel(const Wheel& myWheel);
 };
 
 #endif

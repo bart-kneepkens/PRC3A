@@ -30,24 +30,19 @@ static void CheckTruckPropertiesEqual(Truck& truck, Truck& other){
 class TruckTest : public ::testing::Test{
     
 protected:
+    Truck* truck;
+    
     TruckTest(){
-        
+        truck = new Truck("Scania", "Metal", 20, 8, 40);
+    }
+    
+    
+    ~TruckTest(){
+            delete truck;
+            truck = NULL;
     }
 };
 
-TEST_F(TruckTest, test_destructor){
-    Truck* truck = new Truck("Scania", "Plastic", 20, 12, 300);
-    ASSERT_TRUE(truck->getNrWheels() > 0);
-    
-    Wheel* wheel = truck->getWheel(0);
-    ASSERT_TRUE(wheel);
-    
-    delete truck;
-    truck = NULL;
-    
-    EXPECT_FALSE(truck);
-    EXPECT_FALSE(wheel);
-}
 
 TEST_F(TruckTest, test_copy_constructor){
     Truck truck1 = Truck("DAF", "Leather", 20, 18, 420);
