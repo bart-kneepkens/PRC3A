@@ -1,6 +1,7 @@
 #ifndef Led_H
 #define Led_H
 #include "Timer.h"
+#include "ButtonListener.h"
 #include <arduino.h>
 
 class Led : ButtonListener {
@@ -12,9 +13,9 @@ public:
   void Off();
   void Blink(float frequency);
   void beActive();
+  void HandleButtonClick();
  
 private:
-  void HandleButtonClick(/* ....*/);
   Timer mytimer;
 
   int LedPin;
