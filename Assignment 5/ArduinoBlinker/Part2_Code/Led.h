@@ -8,8 +8,10 @@
 class Led : public ButtonListener {
 public:
   enum State { BLINKING, ONFOR5, OFFAFTER5 };
+  
   Led(int pin);
   ~Led();
+  
   void On();
   void Off();
   void Blink(float frequency);
