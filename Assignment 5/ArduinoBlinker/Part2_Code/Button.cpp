@@ -10,7 +10,7 @@ Button::~Button() {
 }
 
 void Button::beActive() {
-  bool isCurrentlyPressed = digitalRead(ButtonPin);
+  bool isCurrentlyPressed = RegisterValue;// digitalRead(ButtonPin);
 
   if (!IsPressed && isCurrentlyPressed) {
     IsPressed = true;

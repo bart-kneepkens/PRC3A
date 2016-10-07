@@ -10,6 +10,7 @@ public:
   Button(int pin, ButtonListener* listener);
   ~Button();
   void beActive();
+  bool RegisterValue;
 
 private:
   bool IsPressed;

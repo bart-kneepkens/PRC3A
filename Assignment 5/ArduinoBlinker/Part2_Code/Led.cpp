@@ -51,7 +51,10 @@ void Led::HandleButtonClick() {
       On();
       break;
     case ONFOR5: /* Do nothing */ break;
-    case OFFAFTER5: MyState = BLINKING; break;
+    case OFFAFTER5: 
+      MyState = BLINKING;
+      mytimer.Start(BlinkTime);
+      break;
   }
 }
 
