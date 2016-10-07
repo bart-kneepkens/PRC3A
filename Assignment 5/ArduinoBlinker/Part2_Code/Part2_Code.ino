@@ -5,6 +5,7 @@ Led led1(13);
 Led led2(9);
 Led led3(11);
 Led led4(10);
+Button button1(1, &led1);
 
 // the setup function runs once when you press reset or power the board
 void setup()
@@ -22,6 +23,7 @@ void loop()
   led2.beActive();    
   led3.beActive();
   led4.beActive();
+  button1.beActive();
 }
 
 

@@ -3,6 +3,7 @@
 Led::Led(int pin) {
   mytimer = Timer();
   LedPin = pin;
+  MyState = BLINKING;
   pinMode(LedPin, OUTPUT);
 }
 
@@ -21,17 +22,37 @@ void Led::Blink(float frequency) {
   mytimer.Start(BlinkTime);
 }
 
-void Led::beActive() {
-  if (mytimer.Elapsed()) {
-    HandleButtonClick();
-    mytimer.Start(BlinkTime);
+void Led::beActive() { 
+  switch (MyState) {
+    case BLINKING:
+      if (mytimer.Elapsed()) {
+        if (digitalRead(LedPin) == HIGH)
+          Off();
+        else
+          On();     
+        mytimer.Start(BlinkTime);
+      }
+      break;
+    case ONFOR5:
+      if (mytimer.Elapsed()) {
+        Off();
+        MyState = OFFAFTER5;
+      }
+      break;
+    case OFFAFTER5: /* Do nothing */ break;
   }
 }
+
 void Led::HandleButtonClick() {
-  if (digitalRead(LedPin) == HIGH)
-    Off();
-  else
-    On();
+  switch (MyState) {
+    case BLINKING: 
+      MyState = ONFOR5;
+      mytimer.Start(5000.0);
+      On();
+      break;
+    case ONFOR5: /* Do nothing */ break;
+    case OFFAFTER5: MyState = BLINKING; break;
+  }
 }
 
 
