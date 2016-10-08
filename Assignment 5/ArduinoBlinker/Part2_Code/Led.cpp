@@ -1,13 +1,9 @@
 #include "Led.h"
 
-Led::Led(int pin) {
-  mytimer = Timer();
+Led::Led(unsigned int pin) {
   LedPin = pin;
-  MyState = BLINKING;
   pinMode(LedPin, OUTPUT);
 }
-
-Led::~Led() { }
 
 void Led::On() {
   digitalWrite(LedPin, HIGH);
@@ -23,8 +19,9 @@ void Led::Blink(float frequency) {
 }
 
 void Led::beActive() { 
-  switch (MyState) {
-    case BLINKING:
+  switch (MyState) {  // According to the current state, take appropriate actions.
+    
+    case BLINKING:  // If blinking, just keep on blinking.
       if (mytimer.Elapsed()) {
         if (digitalRead(LedPin) == HIGH)
           Off();
@@ -33,25 +30,30 @@ void Led::beActive() {
         mytimer.Start(BlinkTime);
       }
       break;
-    case ONFOR5:
+      
+    case ONFOR5:  // If we're in ONFOR5 state and 5 seconds have passed, move to OFFAFTER5 state.
       if (mytimer.Elapsed()) {
         Off();
         MyState = OFFAFTER5;
       }
       break;
+      
     case OFFAFTER5: /* Do nothing */ break;
   }
 }
 
 void Led::HandleButtonClick() {
-  switch (MyState) {
-    case BLINKING: 
+  switch (MyState) {  // According to the current state, take appropriate actions.
+    
+    case BLINKING:  // If blinking, move to ONFOR5 state.
       MyState = ONFOR5;
       mytimer.Start(5000.0);
       On();
       break;
+      
     case ONFOR5: /* Do nothing */ break;
-    case OFFAFTER5: 
+    
+    case OFFAFTER5: // If in OFFAFTER5 state, return to BLINKING state.
       MyState = BLINKING;
       mytimer.Start(BlinkTime);
       break;

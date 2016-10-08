@@ -3,7 +3,7 @@
 
 #include <arduino.h>
 
-class Timer {
+class Timer { // Used for timing events.
 public:
   Timer();
 
