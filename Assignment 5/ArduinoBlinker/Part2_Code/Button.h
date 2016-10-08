@@ -10,7 +10,6 @@ public:
   Button(unsigned int pin);                                           // Constructor. Takes a button pin.
   void beActive();                                                    // Updates the button; should be called every loop.
   void addListener(ButtonListener* listener);                         // Adds a new event listener.
-  void addListeners(ButtonListener*& listeners, unsigned int count);  // Adds several new event listeners.
 
 private:
   bool IsPressed;                 // Whether the button is currently pressed or not.
