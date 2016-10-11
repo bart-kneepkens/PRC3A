@@ -2,15 +2,16 @@
 
 ScanList::ScanList()
 {
+	head = 0;
 }
 
 ScanList::~ScanList()
 {
-  Scan * current = head;
+  Scan* current = head;
 
   while (current != 0)
   {
-    Scan * newCurrent = current->getNext();
+    Scan* newCurrent = current->getNext();
     delete current;
     current = newCurrent;
   }
