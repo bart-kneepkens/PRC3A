@@ -1,17 +1,17 @@
-CFLAGS=-Wall -Werror -ggdb -O0 -Iproduct
+CFLAGS=-Wall -Werror -ggdb -O0
 
-SCAN_SOURCES=code/Scan.cpp \
-            test/ScanTest.cpp
+SCAN_SOURCES=			code/Scan.cpp \
+           						code/ScanTest.cpp
 
-SCANLIST_SOURCES=code/Scan.cpp \
-			  code/ScanList.cpp \
-			  test/ScanListTest.cpp
+SCANLIST_SOURCES=	code/Scan.cpp \
+			  				code/ScanList.cpp \
+							code/ScanListTest.cpp	  
 
-TEST_LIBS=-lgtest -lgtest_main -lpthread
+TEST_LIBS=-lgtest -lgtest_main -pthread
 
 GCC=g++
 
-all: ScanTest ScanListTest
+all: scanTest scanListTest
 
 scanTest: $(SCAN_SOURCES) Makefile code/Scan.h
 	@$(GCC) $(CFLAGS) $(SCAN_SOURCES) $(TEST_LIBS) -o $@
@@ -22,8 +22,8 @@ scanListTest: $(SCANLIST_SOURCES) Makefile code/ScanList.h
 clean:
 	@rm -rf ScanTest ScanListTest
 
-scanTestValgrind: ScanTest
-	@valgrind ./ScanTest
+scanTestValgrind: scanTest
+	@valgrind ./scanTest
 
-scanListTestValgrind: ScanListTest
-	@valgrind ./ScanListTest
+scanListTestValgrind: scanListTest
+	@valgrind ./scanListTest

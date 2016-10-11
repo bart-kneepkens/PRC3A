@@ -83,7 +83,7 @@ Scan * ScanList::getScanByNr(int position)
 
   // Iterate over Scans until position is found.
   Scan * current = head;
-  unsigned int counter = 0;
+  int counter = 0;
 
   while (current != 0)
   {
