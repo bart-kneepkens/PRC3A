@@ -2,7 +2,9 @@
 #include <iostream>
 #include "ScanList.h"
 
-ScanList::ScanList(){}
+ScanList::ScanList(){
+    head = NULL;
+}
 
 ScanList::~ScanList(){
     while(head != NULL){
@@ -11,17 +13,6 @@ ScanList::~ScanList(){
         delete temp;
         temp = NULL;
     }
-}
-
-void ScanList::show(){
-    Scan* scan = head;
-    std::cout << "\n current scanlist: \n";
-    
-    while(scan != NULL){
-        std::cout << scan->getSerialNumber();
-        scan = scan->getNext();
-    }
-    std::cout << "NULL\n";
 }
 
 void ScanList::addScan (int serialNumber){
@@ -60,7 +51,6 @@ void ScanList::addScan (int serialNumber){
     // There hasn't been found a suitable place for this Scan
     // Place it at the end.
     previous->setNext(new Scan(serialNumber));
-    
 }
 
 Scan* ScanList::getScanByNr(int position){

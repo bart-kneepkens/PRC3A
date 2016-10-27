@@ -35,7 +35,5 @@ public:
     // post: IF a scan with serialNumber is present in the list
     // THEN return the value of timesRecycled of that scan
     // ELSE return 0
-    
-    void show();
 };
 #endif
