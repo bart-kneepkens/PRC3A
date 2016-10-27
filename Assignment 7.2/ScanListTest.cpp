@@ -15,4 +15,11 @@ protected:
     }
 };
 
-
+//TEST_F(ScanListTest, test_add_scan_to_empty_list){
+//    int serial = 100;
+//    scanList.addScan(serial);
+//    
+//    EXPECT_EQ(
+//    
+//    
+//}
