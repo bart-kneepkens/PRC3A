@@ -27,6 +27,12 @@ void ScanList::addScan (int serialNumber){
         head->recycle();
     }
     
+    if(head->getSerialNumber() > serialNumber){
+        Scan * temp = head;
+        head = new Scan(serialNumber);
+        head->setNext(temp);
+    }
+    
     Scan* previous = head;
     Scan* next = head->getNext();
     
