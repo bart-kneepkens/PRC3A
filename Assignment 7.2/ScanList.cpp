@@ -25,12 +25,14 @@ void ScanList::addScan (int serialNumber){
     
     if (head->getSerialNumber() == serialNumber){
         head->recycle();
+        return;
     }
     
     if(head->getSerialNumber() > serialNumber){
         Scan * temp = head;
         head = new Scan(serialNumber);
         head->setNext(temp);
+        return;
     }
     
     Scan* previous = head;
@@ -43,7 +45,7 @@ void ScanList::addScan (int serialNumber){
             return;
         }
         
-        if((next->getSerialNumber() > serialNumber) && (serialNumber < previous->getSerialNumber())){
+        if((next->getSerialNumber() > serialNumber) && (serialNumber > previous->getSerialNumber())){
             Scan* toAdd = new Scan(serialNumber);
             previous->setNext(toAdd);
             toAdd->setNext(next);
@@ -73,7 +75,6 @@ Scan* ScanList::getScanByNr(int position){
     }
     return h;
 }
-
 
 bool ScanList::removeScan (int serialNumber){
     
@@ -124,85 +125,3 @@ int ScanList::getTimesRecycled(int serialNumber){
     
     return 0;
 }
-
-//bool ScanList::removeScan (int serialNumber){
-//    Scan* toBeRemoved = getScanByNr(serialNumber);
-//
-//    if(toBeRemoved == NULL){
-//        return false;
-//    }
-//
-//    // If this scan is head, make sure to move the head forward.
-//    if(toBeRemoved == head){
-//        head = toBeRemoved->getNext();
-//        delete toBeRemoved;
-//        return true;
-//    }
-//
-//    // Make sure that Scan h is the scan BEFORE the scan that needs to be deleted.
-//    Scan* h = head;
-//    while(h->getNext() != toBeRemoved && h != NULL){
-//        h = h->getNext();
-//    }
-//
-//    // Make sure the Scan h will point to the scan AFTER the deleted one.
-//    if(h != NULL){
-//        h->setNext(toBeRemoved->getNext());
-//        delete toBeRemoved;
-//        return true;
-//    }
-//
-//    // Not found.
-//    return false;
-//}
-
-//int ScanList::getTimesRecycled(int serialNumber){
-//    Scan* scan = getScanByNr(serialNumber);
-//
-//    if(scan == NULL){
-//        return 0;
-//    }
-//
-//    return scan->getTimesRecycled();
-//}
-
-//void ScanList::addScan (int serialNumber){
-//
-//    // If the list is empty, just add a new Scan.
-//    if (head == NULL)
-//    {
-//        head = new Scan(serialNumber);
-//        return;
-//    }
-//
-//    Scan* scan = getScanByNr(serialNumber);
-//
-//    if(scan != NULL){
-//        scan->recycle();
-//        return;
-//    }
-//
-//    scan = new Scan(serialNumber);
-//
-//    // If smaller serial than head, make it head
-//    if(head->getSerialNumber() > serialNumber){
-//        scan->setNext(head->getNext());
-//        head->setNext(scan);
-//        return;
-//    }
-//
-//    Scan* previous = head;
-//
-//    // Make sure that Scan previous is the scan BEFORE the scan that needs to be added.
-//    while(previous->getNext()->getSerialNumber() << scan->getSerialNumber()){
-//        previous = previous->getNext();
-//    }
-//
-//    // Insert after previous.
-//    if(previous != NULL){
-//        scan->setNext(previous->getNext());
-//        previous->setNext(scan);
-//    }
-//
-//}
-

@@ -1,25 +1,28 @@
 #include "gtest/gtest.h"
 #include "Scan.h"
 
-TEST (ScanTest, test_properties) {
+class ScanTest : public ::testing::Test{
+protected:
+    Scan* scan;
+    
+    ScanTest(){
+        scan = new Scan(1);
+    }
+    
+    ~ScanTest(){
+        delete scan;
+        scan = NULL;
+    }
+};
 
-	// setup
-	int serialNo = 0;
-	int timesRecycled = 0;
-	Scan* s1 = new Scan(serialNo);		// initialize, setting serial number
-	Scan* s2 = new Scan(serialNo + 1);
-	s1->setNext(s2);					// set next scan
+// Not going to test getters and setters.
 
-	// properties tests
-	EXPECT_EQ(s1->getSerialNumber(), serialNo);			// test serial number
-	EXPECT_EQ(s1->getNext(), s2);						// test next scan
-	EXPECT_EQ(s1->getTimesRecycled(), timesRecycled);	// test recycle
-
-	// extra test for times recycled
-	s1->recycle();
-	EXPECT_EQ(s1->getTimesRecycled(), ++timesRecycled);
-
-	// clean-up
-	delete s1;
-	delete s2;
+TEST_F(ScanTest, test_recycle){
+    EXPECT_EQ(scan->getTimesRecycled(), 0);
+    
+    for (int i = 0; i <= 9; i++) {
+        scan->recycle();
+    }
+    
+    EXPECT_EQ(scan->getTimesRecycled(), 10);
 }
