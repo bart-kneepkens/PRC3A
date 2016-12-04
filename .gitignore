@@ -27,7 +27,16 @@
 *.exe
 *.out
 *.app
+
+# Other
 Assignment 4/Excercise 2/CarTest
 Assignment 4/Excercise 2/TruckTest
 Assignment 7.2/scanListTest
 Assignment 7.2/scanTest
+Sort/data
+Sort/objects
+Sort/sort
+Sort/sorted.bin
+Sort/sorted.txt
+Sort/unsorted.bin
+Sort/unsorted.txt
