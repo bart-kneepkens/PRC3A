@@ -5,11 +5,22 @@
 #include <time.h>
 #include "FileStructure.h"
 //#include "BubbleSort.h"
-#include "MergeSort.h"
+//#include "MergeSort.h"
+#include "MSMultiThreaded.h"
 
 int main() {
     FileStructure f;
     Dir headVal;
+
+    /*Dir headVal = Dir("dicks");
+    Dir* next1 = new Dir("cocks");
+    Dir* next2 = new Dir("balls");
+    headVal.setNext(next1);
+    next1->setNext(next2);
+    File* f1 = new File("dicks.txt");
+    File* f2 = new File("cocks.jpg");
+    next2->setFirstFile(f1);
+    f1->setNext(f2);*/
 
     std::cout << "Loading 'data/gibberish.bin'... " << std::flush;
     f.loadFile("data/gibberish.bin", headVal);
@@ -30,8 +41,8 @@ int main() {
     timespec ts_beg, ts_end;
     clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts_beg);;
 
-    bubbleSortDirs(headPtr);
-    //mergeSortDirsAndSubDirs(headPtr);
+    //bubbleSortDirs(headPtr);
+    mergeSortDirsAndSubDirs(headPtr);
 
     clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts_end);
     std::cout << "Done!" << std::endl;
