@@ -22,7 +22,6 @@ void printDirNames(Dir *dir, std::ofstream &out, std::string path = "") {
 }
 
 void bubbleSortFiles(File **head) {
-
     unsigned int count = 0;
     File *start = *head;
 
@@ -117,24 +116,25 @@ int main() {
     Dir *head = &headVal;
     Dir **headPtr = &head;
 
-    std::cout << "Saving to 'unsorted.bin'... " << std::flush;
-    f.saveFile(**headPtr, "unsorted.bin");
-    std::cout << "Done!" << std::endl;
+//    std::cout << "Saving to 'unsorted.bin'... " << std::flush;
+//    f.saveFile(**headPtr, "unsorted.bin");
+//    std::cout << "Done!" << std::endl;
 
-    std::ofstream unsortedfile("unsorted.txt");
-    printDirNames(*headPtr, unsortedfile);
-    unsortedfile.close();
+//    std::ofstream unsortedfile("unsorted.txt");
+//    printDirNames(*headPtr, unsortedfile);
+//    unsortedfile.close();
 
     std::cout << "Applying bubble sort... " << std::flush;
     bubbleSortDirs(headPtr);
     std::cout << "Done!" << std::endl;
 
-    std::ofstream sortedfile("sorted.txt");
-    printDirNames(*headPtr, sortedfile);
+//    std::ofstream sortedfile("sorted.txt");
+//    sortedfile << head->toString(false);
+    
     sortedfile.close();
 
     std::cout << "Saving to 'sorted.bin'... " << std::flush;
-    f.saveFile(**headPtr, "sorted.bin");
+    f.saveFile(headVal, "sorted.bin");
     std::cout << "Done!" << std::endl;
 
     return 0;
