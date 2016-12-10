@@ -1,27 +1,47 @@
 #include <iostream>
-#include <fstream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "FileStructure.h"
-//#include "BubbleSort.h"
-//#include "MergeSort.h"
-#include "MSMultiThreaded.h"
+#include "MergeSortFiles.h"
+#include "MergeSortDirs.h"
+
+/**
+ * Sorts the supplied linked directory list and all of its containing linked directory lists
+ * and linked file lists.
+ *
+ * @param headRef pointer to the linked directory list to sort
+ */
+void mergeSortRecursive(Dir **headRef) {
+    if (*headRef != NULL) {
+
+        // Sort the supplied linked directory list.
+        mergeSort(headRef);
+        Dir *start = *headRef;
+
+        // Sort the sub-dirs and files contained in each dir of the linked list.
+        while (start != NULL) {
+
+            // Sort the sub-dirs, making sure to set the first subdir to the new first one.
+            Dir *firstSubdir = start->getFirstSubdir();
+            Dir **firstSubDirPtr = &firstSubdir;
+            mergeSortRecursive(firstSubDirPtr);
+            start->setFirstSubdir(*firstSubDirPtr);
+
+            // Sort the containing files, making sure to set the first file to the new first one.
+            File *firstFile = start->getFirstFile();
+            File **firstFilePtr = &firstFile;
+            mergeSort(firstFilePtr);
+            start->setFirstFile(*firstFilePtr);
+
+            // Go to the next dir.
+            start = start->getNext();
+        }
+    }
+}
 
 int main() {
     FileStructure f;
     Dir headVal;
 
-    /*Dir headVal = Dir("dicks");
-    Dir* next1 = new Dir("cocks");
-    Dir* next2 = new Dir("balls");
-    headVal.setNext(next1);
-    next1->setNext(next2);
-    File* f1 = new File("dicks.txt");
-    File* f2 = new File("cocks.jpg");
-    next2->setFirstFile(f1);
-    f1->setNext(f2);*/
-
+    // Load the unsorted data from disk.
     std::cout << "Loading 'data/gibberish.bin'... " << std::flush;
     f.loadFile("data/gibberish.bin", headVal);
     std::cout << "Done!" << std::endl;
@@ -29,32 +49,18 @@ int main() {
     Dir *head = &headVal;
     Dir **headPtr = &head;
 
-//    std::cout << "Saving to 'unsorted.bin'... " << std::flush;
-//    f.saveFile(**headPtr, "unsorted.bin");
-//    std::cout << "Done!" << std::endl;
-
-    //std::ofstream unsortedfile("unsorted.txt");
-    //unsortedfile << (**headPtr).toString(false);
-    //unsortedfile.close();
-
+    // Sort the unsorted data.
     std::cout << "Applying sort... " << std::flush;
-    timespec ts_beg, ts_end;
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts_beg);;
-
-    //bubbleSortDirs(headPtr);
-    mergeSortDirsAndSubDirs(headPtr);
-
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts_end);
+    mergeSortRecursive(headPtr);
     std::cout << "Done!" << std::endl;
-    std::cout << (ts_end.tv_sec - ts_beg.tv_sec) + (ts_end.tv_nsec - ts_beg.tv_nsec) / 1e9 << " sec" << std::endl;
 
-    std::ofstream sortedfile("sorted.txt");
-    sortedfile << (**headPtr).toString(false);
-    sortedfile.close();
-
+    // Save the sorted data on disk.
     std::cout << "Saving to 'sorted.bin'... " << std::flush;
     f.saveFile(**headPtr, "sorted.bin");
     std::cout << "Done!" << std::endl;
+
+    // Optional: print the resulting sorted linked list.
+    //std::cout << (**headPtr).toString(false) << std::endl;
 
     return 0;
 }
