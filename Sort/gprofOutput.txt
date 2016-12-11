@@ -1,0 +1,483 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 19.15      1.04     1.04   463287     0.00     0.01  Dir::addFile(std::string)
+ 17.68      2.00     0.96 299301834     0.00     0.00  __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+ 17.31      2.94     0.94 284504342     0.00     0.00  bool Dir::nameIsEqual<File>(File*, std::string) const
+ 12.89      3.64     0.70        2   350.00   350.00  FileStructure::crypt(char*, unsigned int) const
+ 12.15      4.30     0.66 582341688     0.00     0.00  File::getNext()
+  9.39      4.81     0.51 293813394     0.00     0.00  File::getName() const
+  4.42      5.05     0.24  1853640     0.00     0.00  FileStructure::getNextWord(char const*, char**, unsigned int) const
+  2.30      5.17     0.12  4646368     0.00     0.00  Dir* Dir::find<Dir>(Dir*, std::string) const
+  1.84      5.28     0.10   432110     0.00     0.00  sortedMerge(File*, File*)
+  0.64      5.31     0.04 21917136     0.00     0.00  std::char_traits<char>::compare(char const*, char const*, unsigned int)
+  0.55      5.34     0.03 13178354     0.00     0.00  Dir::getName() const
+  0.37      5.36     0.02     1896     0.01     0.08  mergeSort(File**)
+  0.18      5.37     0.01 11091628     0.00     0.00  Dir::getNext()
+  0.18      5.38     0.01  2555073     0.00     0.00  Dir::isPathToHigherDir(std::string) const
+  0.18      5.39     0.01  1298378     0.00     0.00  std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  0.18      5.40     0.01   432584     0.00     0.00  File::toString(std::string, bool) const
+  0.18      5.41     0.01   432584     0.00     0.00  std::char_traits<char>::length(char const*)
+  0.18      5.42     0.01     2226     0.00     0.01  File* Dir::find<File>(File*, std::string) const
+  0.18      5.43     0.01                             FileStructure::loadFile(std::string, Dir&)
+  0.00      5.43     0.00  4708549     0.00     0.00  File::setNext(File*)
+  0.00      5.43     0.00  4140847     0.00     0.00  bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+  0.00      5.43     0.00  2287208     0.00     0.00  bool std::operator!=<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+  0.00      5.43     0.00   865659     0.00     0.00  std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+  0.00      5.43     0.00   432584     0.00     0.00  File::setContent(std::string)
+  0.00      5.43     0.00   432584     0.00     0.00  File::File(std::string)
+  0.00      5.43     0.00   432584     0.00     0.00  File::~File()
+  0.00      5.43     0.00   432584     0.00     0.00  File::~File()
+  0.00      5.43     0.00   432584     0.00     0.00  std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  0.00      5.43     0.00     1340     0.00     0.00  Dir::setNext(Dir*)
+  0.00      5.43     0.00      848     0.00     0.00  Dir::getFirstSubdir()
+  0.00      5.43     0.00      492     0.00     0.00  Dir::getFirstFile()
+  0.00      5.43     0.00      492     0.00     0.00  Dir::setFirstFile(File*)
+  0.00      5.43     0.00      492     0.00     0.00  Dir::setFirstSubdir(Dir*)
+  0.00      5.43     0.00      491     0.00     0.04  Dir::addDir(std::string)
+  0.00      5.43     0.00      491     0.00     0.00  Dir::Dir(std::string)
+  0.00      5.43     0.00      491     0.00     0.00  Dir::~Dir()
+  0.00      5.43     0.00      491     0.00     0.00  Dir::~Dir()
+  0.00      5.43     0.00      356     0.00     0.00  sortedMerge(Dir*, Dir*)
+  0.00      5.43     0.00      136     0.00     0.00  mergeSort(Dir**)
+  0.00      5.43     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z11sortedMergeP4FileS0_
+  0.00      5.43     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13FileStructureC2Ev
+  0.00      5.43     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN3DirC2Ev
+  0.00      5.43     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN4FileC2ESs
+  0.00      5.43     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      5.43     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      5.43     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      5.43     0.00        1     0.00   350.00  FileStructure::decrypt(char*, unsigned int) const
+  0.00      5.43     0.00        1     0.00    30.49  Dir::toString(std::string, bool) const
+  0.00      5.43     0.00        1     0.00    30.49  Dir::toString(bool) const
+  0.00      5.43     0.00        1     0.00     0.00  std::fpos<__mbstate_t>::operator long long() const
+  0.00      5.43     0.00        1     0.00     0.00  std::operator|(std::_Ios_Openmode, std::_Ios_Openmode)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.18% of 5.43 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     90.3    0.01    4.89                 FileStructure::loadFile(std::string, Dir&) [1]
+                1.04    3.24  463287/463287      Dir::addFile(std::string) [2]
+                0.00    0.35       1/1           FileStructure::decrypt(char*, unsigned int) const [9]
+                0.24    0.00 1853640/1853640     FileStructure::getNextWord(char const*, char**, unsigned int) const [10]
+                0.00    0.02     491/491         Dir::addDir(std::string) [20]
+                0.00    0.00 1853640/2287208     bool std::operator!=<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [40]
+                0.00    0.00 1853639/4140847     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [39]
+                0.00    0.00  432584/432584      File::setContent(std::string) [42]
+                0.00    0.00       1/1           std::operator|(std::_Ios_Openmode, std::_Ios_Openmode) [61]
+                0.00    0.00       1/1           std::fpos<__mbstate_t>::operator long long() const [60]
+-----------------------------------------------
+                             2089560             Dir::addFile(std::string) [2]
+                1.04    3.24  463287/463287      FileStructure::loadFile(std::string, Dir&) [1]
+[2]     78.9    1.04    3.24  463287+2089560 Dir::addFile(std::string) [2]
+                0.94    1.44 284504342/284504342     bool Dir::nameIsEqual<File>(File*, std::string) const [3]
+                0.64    0.00 568021652/582341688     File::getNext() [6]
+                0.12    0.08 4642407/4646368     Dir* Dir::find<Dir>(Dir*, std::string) const [11]
+                0.01    0.00 2552847/2555073     Dir::isPathToHigherDir(std::string) const [23]
+                0.00    0.00  432584/432584      File::File(std::string) [43]
+                0.00    0.00  432110/4708549     File::setNext(File*) [38]
+                             2089560             Dir::addFile(std::string) [2]
+-----------------------------------------------
+                0.94    1.44 284504342/284504342     Dir::addFile(std::string) [2]
+[3]     43.8    0.94    1.44 284504342         bool Dir::nameIsEqual<File>(File*, std::string) const [3]
+                0.91    0.03 284504342/299301834     __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [4]
+                0.49    0.00 284504342/293813394     File::getName() const [7]
+-----------------------------------------------
+                0.01    0.00 1620394/299301834     File* Dir::find<File>(File*, std::string) const [21]
+                0.04    0.00 13177098/299301834     Dir* Dir::find<Dir>(Dir*, std::string) const [11]
+                0.91    0.03 284504342/299301834     bool Dir::nameIsEqual<File>(File*, std::string) const [3]
+[4]     18.3    0.96    0.04 299301834         __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [4]
+                0.04    0.00 21917136/21917136     std::char_traits<char>::compare(char const*, char const*, unsigned int) [15]
+-----------------------------------------------
+                0.35    0.00       1/2           FileStructure::saveFile(Dir&, std::string) const [8]
+                0.35    0.00       1/2           FileStructure::decrypt(char*, unsigned int) const [9]
+[5]     12.9    0.70    0.00       2         FileStructure::crypt(char*, unsigned int) const [5]
+-----------------------------------------------
+                0.00    0.00  432584/582341688     Dir::~Dir() <cycle 1> [28]
+                0.00    0.00  432584/582341688     Dir::toString(std::string, bool) const [16]
+                0.00    0.00 1300945/582341688     mergeSortRecursive(Dir**) [12]
+                0.00    0.00 1620394/582341688     File* Dir::find<File>(File*, std::string) const [21]
+                0.00    0.00 3844329/582341688     sortedMerge(File*, File*) [14]
+                0.01    0.00 6689200/582341688     mergeSort(File**) [13]
+                0.64    0.00 568021652/582341688     Dir::addFile(std::string) [2]
+[6]     12.2    0.66    0.00 582341688         File::getNext() [6]
+-----------------------------------------------
+                0.00    0.00 1620394/293813394     File* Dir::find<File>(File*, std::string) const [21]
+                0.01    0.00 7688658/293813394     sortedMerge(File*, File*) [14]
+                0.49    0.00 284504342/293813394     bool Dir::nameIsEqual<File>(File*, std::string) const [3]
+[7]      9.4    0.51    0.00 293813394         File::getName() const [7]
+-----------------------------------------------
+                                                 <spontaneous>
+[8]      7.0    0.00    0.38                 FileStructure::saveFile(Dir&, std::string) const [8]
+                0.35    0.00       1/2           FileStructure::crypt(char*, unsigned int) const [5]
+                0.00    0.03       1/1           Dir::toString(bool) const [17]
+-----------------------------------------------
+                0.00    0.35       1/1           FileStructure::loadFile(std::string, Dir&) [1]
+[9]      6.4    0.00    0.35       1         FileStructure::decrypt(char*, unsigned int) const [9]
+                0.35    0.00       1/2           FileStructure::crypt(char*, unsigned int) const [5]
+-----------------------------------------------
+                0.24    0.00 1853640/1853640     FileStructure::loadFile(std::string, Dir&) [1]
+[10]     4.4    0.24    0.00 1853640         FileStructure::getNextWord(char const*, char**, unsigned int) const [10]
+-----------------------------------------------
+                0.00    0.00    3961/4646368     Dir::addDir(std::string) [20]
+                0.12    0.08 4642407/4646368     Dir::addFile(std::string) [2]
+[11]     3.8    0.12    0.08 4646368         Dir* Dir::find<Dir>(Dir*, std::string) const [11]
+                0.04    0.00 13177098/299301834     __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [4]
+                0.03    0.00 13177098/13178354     Dir::getName() const [18]
+                0.01    0.00 11085803/11091628     Dir::getNext() [22]
+-----------------------------------------------
+                                 492             mergeSortRecursive(Dir**) [12]
+[12]     2.7    0.00    0.15       0+492     mergeSortRecursive(Dir**) [12]
+                0.02    0.12    1896/1896        mergeSort(File**) [13]
+                0.00    0.00 1300945/582341688     File::getNext() [6]
+                0.00    0.00    1422/432110      sortedMerge(File*, File*) [14]
+                0.00    0.00     136/136         mergeSort(Dir**) [29]
+                0.00    0.00     492/11091628     Dir::getNext() [22]
+                0.00    0.00    1422/4708549     File::setNext(File*) [38]
+                0.00    0.00     492/848         Dir::getFirstSubdir() [47]
+                0.00    0.00     492/492         Dir::setFirstSubdir(Dir*) [50]
+                0.00    0.00     492/492         Dir::getFirstFile() [48]
+                0.00    0.00     492/492         Dir::setFirstFile(File*) [49]
+                                 492             mergeSortRecursive(Dir**) [12]
+-----------------------------------------------
+                              861376             mergeSort(File**) [13]
+                0.02    0.12    1896/1896        mergeSortRecursive(Dir**) [12]
+[13]     2.7    0.02    0.12    1896+861376  mergeSort(File**) [13]
+                0.10    0.02  430688/432110      sortedMerge(File*, File*) [14]
+                0.01    0.00 6689200/582341688     File::getNext() [6]
+                0.00    0.00  430688/4708549     File::setNext(File*) [38]
+                              861376             mergeSort(File**) [13]
+-----------------------------------------------
+                             3844329             sortedMerge(File*, File*) [14]
+                0.00    0.00    1422/432110      mergeSortRecursive(Dir**) [12]
+                0.10    0.02  430688/432110      mergeSort(File**) [13]
+[14]     2.2    0.10    0.02  432110+3844329 sortedMerge(File*, File*) [14]
+                0.01    0.00 7688658/293813394     File::getName() const [7]
+                0.00    0.00 3844329/582341688     File::getNext() [6]
+                0.00    0.00 3844329/4708549     File::setNext(File*) [38]
+                             3844329             sortedMerge(File*, File*) [14]
+-----------------------------------------------
+                0.04    0.00 21917136/21917136     __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [4]
+[15]     0.6    0.04    0.00 21917136         std::char_traits<char>::compare(char const*, char const*, unsigned int) [15]
+-----------------------------------------------
+                                 491             Dir::toString(std::string, bool) const [16]
+                0.00    0.03       1/1           Dir::toString(bool) const [17]
+[16]     0.6    0.00    0.03       1+491     Dir::toString(std::string, bool) const [16]
+                0.01    0.02  432584/432584      File::toString(std::string, bool) const [19]
+                0.00    0.00  433210/1298378     std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [24]
+                0.00    0.00  432584/582341688     File::getNext() [6]
+                0.00    0.00  433568/2287208     bool std::operator!=<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [40]
+                0.00    0.00     491/865659      std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [41]
+                                 491             Dir::toString(std::string, bool) const [16]
+-----------------------------------------------
+                0.00    0.03       1/1           FileStructure::saveFile(Dir&, std::string) const [8]
+[17]     0.6    0.00    0.03       1         Dir::toString(bool) const [17]
+                0.00    0.03       1/1           Dir::toString(std::string, bool) const [16]
+-----------------------------------------------
+                0.00    0.00    1256/13178354     sortedMerge(Dir*, Dir*) [30]
+                0.03    0.00 13177098/13178354     Dir* Dir::find<Dir>(Dir*, std::string) const [11]
+[18]     0.6    0.03    0.00 13178354         Dir::getName() const [18]
+-----------------------------------------------
+                0.01    0.02  432584/432584      Dir::toString(std::string, bool) const [16]
+[19]     0.5    0.01    0.02  432584         File::toString(std::string, bool) const [19]
+                0.00    0.01  432584/432584      std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [26]
+                0.01    0.00  865168/1298378     std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [24]
+                0.00    0.00  865168/865659      std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [41]
+-----------------------------------------------
+                                1735             Dir::addDir(std::string) [20]
+                0.00    0.02     491/491         FileStructure::loadFile(std::string, Dir&) [1]
+[20]     0.4    0.00    0.02     491+1735    Dir::addDir(std::string) [20]
+                0.01    0.01    2226/2226        File* Dir::find<File>(File*, std::string) const [21]
+                0.00    0.00    3961/4646368     Dir* Dir::find<Dir>(Dir*, std::string) const [11]
+                0.00    0.00    2226/2555073     Dir::isPathToHigherDir(std::string) const [23]
+                0.00    0.00    1856/11091628     Dir::getNext() [22]
+                0.00    0.00     491/491         Dir::Dir(std::string) [51]
+                0.00    0.00     356/848         Dir::getFirstSubdir() [47]
+                0.00    0.00     356/1340        Dir::setNext(Dir*) [46]
+                                1735             Dir::addDir(std::string) [20]
+-----------------------------------------------
+                0.01    0.01    2226/2226        Dir::addDir(std::string) [20]
+[21]     0.4    0.01    0.01    2226         File* Dir::find<File>(File*, std::string) const [21]
+                0.01    0.00 1620394/299301834     __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [4]
+                0.00    0.00 1620394/293813394     File::getName() const [7]
+                0.00    0.00 1620394/582341688     File::getNext() [6]
+-----------------------------------------------
+                0.00    0.00     492/11091628     mergeSortRecursive(Dir**) [12]
+                0.00    0.00     628/11091628     sortedMerge(Dir*, Dir*) [30]
+                0.00    0.00    1856/11091628     Dir::addDir(std::string) [20]
+                0.00    0.00    2849/11091628     mergeSort(Dir**) [29]
+                0.01    0.00 11085803/11091628     Dir* Dir::find<Dir>(Dir*, std::string) const [11]
+[22]     0.2    0.01    0.00 11091628         Dir::getNext() [22]
+-----------------------------------------------
+                0.00    0.00    2226/2555073     Dir::addDir(std::string) [20]
+                0.01    0.00 2552847/2555073     Dir::addFile(std::string) [2]
+[23]     0.2    0.01    0.00 2555073         Dir::isPathToHigherDir(std::string) const [23]
+-----------------------------------------------
+                0.00    0.00  433210/1298378     Dir::toString(std::string, bool) const [16]
+                0.01    0.00  865168/1298378     File::toString(std::string, bool) const [19]
+[24]     0.2    0.01    0.00 1298378         std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [24]
+-----------------------------------------------
+                0.01    0.00  432584/432584      std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [26]
+[25]     0.2    0.01    0.00  432584         std::char_traits<char>::length(char const*) [25]
+-----------------------------------------------
+                0.00    0.01  432584/432584      File::toString(std::string, bool) const [19]
+[26]     0.2    0.00    0.01  432584         std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [26]
+                0.01    0.00  432584/432584      std::char_traits<char>::length(char const*) [25]
+-----------------------------------------------
+                                 491             Dir::~Dir() <cycle 1> [52]
+[28]     0.0    0.00    0.00     491         Dir::~Dir() <cycle 1> [28]
+                0.00    0.00  432584/582341688     File::getNext() [6]
+                0.00    0.00  432584/432584      File::~File() [44]
+                                 491             Dir::~Dir() <cycle 1> [52]
+-----------------------------------------------
+                                 712             mergeSort(Dir**) [29]
+                0.00    0.00     136/136         mergeSortRecursive(Dir**) [12]
+[29]     0.0    0.00    0.00     136+712     mergeSort(Dir**) [29]
+                0.00    0.00     356/356         sortedMerge(Dir*, Dir*) [30]
+                0.00    0.00    2849/11091628     Dir::getNext() [22]
+                0.00    0.00     356/1340        Dir::setNext(Dir*) [46]
+                                 712             mergeSort(Dir**) [29]
+-----------------------------------------------
+                                 628             sortedMerge(Dir*, Dir*) [30]
+                0.00    0.00     356/356         mergeSort(Dir**) [29]
+[30]     0.0    0.00    0.00     356+628     sortedMerge(Dir*, Dir*) [30]
+                0.00    0.00    1256/13178354     Dir::getName() const [18]
+                0.00    0.00     628/11091628     Dir::getNext() [22]
+                0.00    0.00     628/1340        Dir::setNext(Dir*) [46]
+                                 628             sortedMerge(Dir*, Dir*) [30]
+-----------------------------------------------
+                0.00    0.00    1422/4708549     mergeSortRecursive(Dir**) [12]
+                0.00    0.00  430688/4708549     mergeSort(File**) [13]
+                0.00    0.00  432110/4708549     Dir::addFile(std::string) [2]
+                0.00    0.00 3844329/4708549     sortedMerge(File*, File*) [14]
+[38]     0.0    0.00    0.00 4708549         File::setNext(File*) [38]
+-----------------------------------------------
+                0.00    0.00 1853639/4140847     FileStructure::loadFile(std::string, Dir&) [1]
+                0.00    0.00 2287208/4140847     bool std::operator!=<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [40]
+[39]     0.0    0.00    0.00 4140847         bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [39]
+-----------------------------------------------
+                0.00    0.00  433568/2287208     Dir::toString(std::string, bool) const [16]
+                0.00    0.00 1853640/2287208     FileStructure::loadFile(std::string, Dir&) [1]
+[40]     0.0    0.00    0.00 2287208         bool std::operator!=<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [40]
+                0.00    0.00 2287208/4140847     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [39]
+-----------------------------------------------
+                0.00    0.00     491/865659      Dir::toString(std::string, bool) const [16]
+                0.00    0.00  865168/865659      File::toString(std::string, bool) const [19]
+[41]     0.0    0.00    0.00  865659         std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [41]
+-----------------------------------------------
+                0.00    0.00  432584/432584      FileStructure::loadFile(std::string, Dir&) [1]
+[42]     0.0    0.00    0.00  432584         File::setContent(std::string) [42]
+-----------------------------------------------
+                0.00    0.00  432584/432584      Dir::addFile(std::string) [2]
+[43]     0.0    0.00    0.00  432584         File::File(std::string) [43]
+-----------------------------------------------
+                0.00    0.00  432584/432584      Dir::~Dir() <cycle 1> [28]
+[44]     0.0    0.00    0.00  432584         File::~File() [44]
+                0.00    0.00  432584/432584      File::~File() [45]
+-----------------------------------------------
+                0.00    0.00  432584/432584      File::~File() [44]
+[45]     0.0    0.00    0.00  432584         File::~File() [45]
+-----------------------------------------------
+                0.00    0.00     356/1340        mergeSort(Dir**) [29]
+                0.00    0.00     356/1340        Dir::addDir(std::string) [20]
+                0.00    0.00     628/1340        sortedMerge(Dir*, Dir*) [30]
+[46]     0.0    0.00    0.00    1340         Dir::setNext(Dir*) [46]
+-----------------------------------------------
+                0.00    0.00     356/848         Dir::addDir(std::string) [20]
+                0.00    0.00     492/848         mergeSortRecursive(Dir**) [12]
+[47]     0.0    0.00    0.00     848         Dir::getFirstSubdir() [47]
+-----------------------------------------------
+                0.00    0.00     492/492         mergeSortRecursive(Dir**) [12]
+[48]     0.0    0.00    0.00     492         Dir::getFirstFile() [48]
+-----------------------------------------------
+                0.00    0.00     492/492         mergeSortRecursive(Dir**) [12]
+[49]     0.0    0.00    0.00     492         Dir::setFirstFile(File*) [49]
+-----------------------------------------------
+                0.00    0.00     492/492         mergeSortRecursive(Dir**) [12]
+[50]     0.0    0.00    0.00     492         Dir::setFirstSubdir(Dir*) [50]
+-----------------------------------------------
+                0.00    0.00     491/491         Dir::addDir(std::string) [20]
+[51]     0.0    0.00    0.00     491         Dir::Dir(std::string) [51]
+-----------------------------------------------
+                                 491             Dir::~Dir() <cycle 1> [28]
+[52]     0.0    0.00    0.00     491         Dir::~Dir() <cycle 1> [52]
+                                 491             Dir::~Dir() <cycle 1> [28]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [78]
+[53]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z11sortedMergeP4FileS0_ [53]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [78]
+[54]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13FileStructureC2Ev [54]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [57]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [78]
+[55]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN3DirC2Ev [55]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [58]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [78]
+[56]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN4FileC2ESs [56]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [59]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN13FileStructureC2Ev [54]
+[57]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [57]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN3DirC2Ev [55]
+[58]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [58]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN4FileC2ESs [56]
+[59]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [59]
+-----------------------------------------------
+                0.00    0.00       1/1           FileStructure::loadFile(std::string, Dir&) [1]
+[60]     0.0    0.00    0.00       1         std::fpos<__mbstate_t>::operator long long() const [60]
+-----------------------------------------------
+                0.00    0.00       1/1           FileStructure::loadFile(std::string, Dir&) [1]
+[61]     0.0    0.00    0.00       1         std::operator|(std::_Ios_Openmode, std::_Ios_Openmode) [61]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [53] _GLOBAL__sub_I__Z11sortedMergeP4FileS0_ [22] Dir::getNext() [18] Dir::getName() const
+  [54] _GLOBAL__sub_I__ZN13FileStructureC2Ev (FileStructure.cpp) [46] Dir::setNext(Dir*) [16] Dir::toString(std::string, bool) const
+  [55] _GLOBAL__sub_I__ZN3DirC2Ev (Dir.cpp) [51] Dir::Dir(std::string) [17] Dir::toString(bool) const
+  [56] _GLOBAL__sub_I__ZN4FileC2ESs (File.cpp) [52] Dir::~Dir() [7] File::getName() const
+  [30] sortedMerge(Dir*, Dir*) [28] Dir::~Dir()           [19] File::toString(std::string, bool) const
+  [14] sortedMerge(File*, File*) [42] File::setContent(std::string) [60] std::fpos<__mbstate_t>::operator long long() const
+  [57] __static_initialization_and_destruction_0(int, int) (FileStructure.cpp) [6] File::getNext() [25] std::char_traits<char>::length(char const*)
+  [58] __static_initialization_and_destruction_0(int, int) (Dir.cpp) [38] File::setNext(File*) [15] std::char_traits<char>::compare(char const*, char const*, unsigned int)
+  [59] __static_initialization_and_destruction_0(int, int) (File.cpp) [43] File::File(std::string) [4] __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  [29] mergeSort(Dir**)       [44] File::~File()          [39] bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+  [13] mergeSort(File**)      [45] File::~File()          [40] bool std::operator!=<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+   [1] FileStructure::loadFile(std::string, Dir&) [10] FileStructure::getNextWord(char const*, char**, unsigned int) const [61] std::operator|(std::_Ios_Openmode, std::_Ios_Openmode)
+  [48] Dir::getFirstFile()     [5] FileStructure::crypt(char*, unsigned int) const [26] std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  [49] Dir::setFirstFile(File*) [9] FileStructure::decrypt(char*, unsigned int) const [41] std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+  [47] Dir::getFirstSubdir()   [3] bool Dir::nameIsEqual<File>(File*, std::string) const [24] std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  [50] Dir::setFirstSubdir(Dir*) [23] Dir::isPathToHigherDir(std::string) const (27) <cycle 1>
+  [20] Dir::addDir(std::string) [21] File* Dir::find<File>(File*, std::string) const
+   [2] Dir::addFile(std::string) [11] Dir* Dir::find<Dir>(Dir*, std::string) const
