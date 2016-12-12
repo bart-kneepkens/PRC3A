@@ -3,47 +3,169 @@
 
 #include <string>
 
-enum DoorState {
-    Locked,
-    Closed,
-    Open,
-    Closing,
-    Opening,
-    Stopped,
-    MotorDamage
-};
+namespace Command {
+    enum Command {
+        GetDoor,
+        GetDoorLock,
+        GetTrafficLight,
+        GetWaterLevel,
+        SetDoor,
+        SetDoorLock,
+        SetTrafficLight
+    };
 
-DoorState toDoorState(std::string value);
+    /**
+    * Parses the supplied Command to a string.
+    *
+    * @param command
+    * @return
+    */
+    std::string toString(Command command);
+}
 
-enum DoorSide {
-    Left,
-    Right
-};
+namespace DoorParameter {
+    enum DoorParameter {
+        Open,
+        Close,
+        Stop
+    };
 
-DoorSide toDoorSide(std::string value);
+    /**
+    * Parses the supplied DoorParameter to a string.
+    *
+    * @param parameter
+    * @return
+    */
+    std::string toString(DoorParameter parameter);
+}
 
-enum TrafficLightState {
-    Red,
-    Green
-};
+namespace DoorState {
+    enum DoorState {
+        Locked,
+        Closed,
+        Open,
+        Closing,
+        Opening,
+        Stopped,
+        MotorDamage
+    };
 
-TrafficLightState toTrafficLightState(std::string value);
+    /**
+    * Tries parsing the supplied string to a DoorState. If parsing failed, returns DoorState.Locked.
+    *
+    * @param value
+    * @return
+    */
+    DoorState toDoorState(std::string value);
+}
 
-enum WaterLevel {
-    Low,
-    BelowValve2,
-    AboveValve2,
-    AboveValve3,
-    High
-};
+namespace DoorSide {
+    enum DoorSide {
+        Left,
+        Right
+    };
 
-WaterLevel toWaterLevel(std::string value);
+    /**
+    * Parses the supplied DoorSide to a string.
+    *
+    * @param parameter
+    * @return
+    */
+    std::string toString(DoorSide parameter);
+}
 
-enum LockState {
-    Working,
-    Damaged
-};
+namespace LockState {
+    enum LockState {
+        Working,
+        Damaged
+    };
 
-LockState toLockState(std::string value);
+    /**
+    * Tries parsing the supplied string to a LockState. If parsing failed, returns LockState.Damaged.
+    *
+    * @param value
+    * @return
+    */
+    LockState toLockState(std::string value);
+}
+
+namespace Power {
+    enum Power {
+        On,
+        Off
+    };
+
+    /**
+    * Tries parsing the supplied string to a Power. If parsing failed, returns Power.Off.
+    *
+    * @param value
+    * @return
+    */
+    Power toPowerState(std::string value);
+
+    /**
+    * Parses the supplied Power to a string.
+    *
+    * @param state
+    * @return
+    */
+    std::string toString(Power state);
+}
+
+namespace TrafficLightState {
+    enum TrafficLightState {
+        Red,
+        Green
+    };
+
+    /**
+    * Parses the supplied TrafficLightState to a string.
+    *
+    * @param parameter
+    * @return
+    */
+    std::string toString(TrafficLightState parameter);
+}
+
+namespace ValveState {
+    enum ValveState {
+        Open,
+        Closed
+    };
+
+    /**
+    * Tries parsing the supplied string to a ValveState. If parsing failed, returns ValveState.Closed.
+    *
+    * @param value
+    * @return
+    */
+    ValveState toValveState(std::string value);
+
+    /**
+    * Parses the supplied ValveState to a string.
+    *
+    * @param state
+    * @return
+    */
+    std::string toString(ValveState state);
+}
+
+namespace WaterLevel {
+    enum WaterLevel {
+        Low,
+        BelowValve2,
+        AboveValve2,
+        AboveValve3,
+        High
+    };
+
+    /**
+    * Tries parsing the supplied string to a WaterLevel. If parsing failed, returns WaterLevel.High.
+    *
+    * @param value
+    * @return
+    */
+    WaterLevel toWaterLevel(std::string value);
+}
 
 #endif  // SLUIS_ENUMERATORS_HPP
