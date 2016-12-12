@@ -1,19 +1,19 @@
 #include "Valve.hpp"
 
-Valve::Valve(DoorSide::DoorSide side, unsigned int index) : side(side), index(index) { };
+Valve::Valve(unsigned int port, DoorSide::DoorSide side, unsigned int index) : port(port), side(side), index(index) { };
 
 Valve::~Valve() { };
 
 void Valve::Open() const {
-    SetValve(side, index, ValveState::Open);
+    SetValve(port, side, index, ValveState::Open);
 }
 
 void Valve::Close() const {
-    SetValve(side, index, ValveState::Closed);
+    SetValve(port, side, index, ValveState::Closed);
 }
 
 ValveState::ValveState Valve::GetState() const {
-    return GetValveState(side, index);
+    return GetValveState(port, side, index);
 };
 
 

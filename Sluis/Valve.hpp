@@ -5,10 +5,11 @@
 
 class Valve {
 private:
+    const unsigned int port;
     const DoorSide::DoorSide side;
     const unsigned int index;
 public:
-    Valve(DoorSide::DoorSide side, unsigned int index);
+    Valve(unsigned int port, DoorSide::DoorSide side, unsigned int index);
     ~Valve();
 
     void Open() const;

@@ -5,15 +5,15 @@
 
 class SluiceComplex {
 private:
-    Sluice sluiceA;
-    Sluice sluiceB;
-    Sluice sluiceC;
-    Sluice sluiceD;
+    const Sluice sluiceA = Sluice(5555);
+    const Sluice sluiceB = Sluice(5556);
+    const Sluice sluiceC = Sluice(5557, DoorType::Timed);
+    const Sluice sluiceD = Sluice(5558, DoorType::NeedsNewMotors);
 public:
     SluiceComplex();
     ~SluiceComplex();
 
-    Sluice GetSluice(int index) const;
+    Sluice const& GetSluice(int index) const;
 };
 
 #endif  // SLUIS_SLUICECOMPLEX_HPP

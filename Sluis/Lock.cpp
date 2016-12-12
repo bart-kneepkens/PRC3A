@@ -1,20 +1,20 @@
 #include "Lock.hpp"
 
-Lock::Lock(DoorSide::DoorSide side) : side(side) { }
+Lock::Lock(unsigned int port, DoorSide::DoorSide side) : port(port), side(side) { }
 
 Lock::~Lock() { }
 
 void Lock::SetLocked(bool locked) const {
     if (locked) {
-        SetLockPower(side, Power::On);
+        SetLockPower(port, side, Power::On);
     }
     else {
-        SetLockPower(side, Power::Off);
+        SetLockPower(port, side, Power::Off);
     }
 }
 
 LockState::LockState Lock::GetLockState() const {
-    return GetDoorLockState(side);
+    return GetDoorLockState(port, side);
 }
 
 

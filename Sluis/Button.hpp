@@ -3,7 +3,7 @@
 
 class Button {
 private:
-    int state;
+    int state = 0;
 public:
     Button();
     ~Button();

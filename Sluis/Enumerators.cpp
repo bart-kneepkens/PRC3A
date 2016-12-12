@@ -12,7 +12,7 @@ namespace Command {
             return "GetTrafficLight";
         }
         if (command == Command::GetWaterLevel) {
-            return "GetWaterLevel";
+            return "GetSluiceWaterLevel";
         }
         if (command == Command::SetDoor) {
             return "SetDoor";
@@ -94,9 +94,9 @@ namespace Power {
     }
 }
 
-namespace TrafficLightState {
-    std::string ToString(TrafficLightState parameter) {
-        if (parameter == TrafficLightState::Green) {
+namespace TrafficLightColor {
+    std::string ToString(TrafficLightColor parameter) {
+        if (parameter == TrafficLightColor::Green) {
             return "Green";
         }
         return "Red";

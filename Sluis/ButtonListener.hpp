@@ -6,7 +6,7 @@
 
 class ButtonListener {
 private:
-    Button button;
+    Button& button;
     ISluiceController& sluiceController;
 public:
     ButtonListener(Button& button, ISluiceController& sluiceController);

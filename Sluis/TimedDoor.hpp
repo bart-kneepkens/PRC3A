@@ -6,10 +6,10 @@
 
 class TimedDoor : public Door {
 public:
-    TimedDoor(DoorSide::DoorSide side);
+    TimedDoor(unsigned int port, DoorSide::DoorSide side);
     ~TimedDoor();
 private:
-    const int interval;
+    const unsigned int interval;
     const Lock lock;
 };
 

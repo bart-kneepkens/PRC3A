@@ -1,23 +1,24 @@
 #include "Door.hpp"
 
-Door::Door(DoorSide::DoorSide side) : side(side), valveLow(Valve(side, 1)), valveMiddle(Valve(side, 2)), valveHigh(Valve(side, 3)) {}
+Door::Door(unsigned int port, DoorSide::DoorSide side) : port(port), side(side), valveLow(Valve(port, side, 1)),
+    valveMiddle(Valve(port, side, 2)), valveHigh(Valve(port, side, 3)) {}
 
 Door::~Door() {}
 
 void Door::Open() const {
-    SetDoor(side, DoorParameter::Open);
+    SetDoor(port, side, DoorParameter::Open);
 }
 
 void Door::Close() const {
-    SetDoor(side, DoorParameter::Close);
+    SetDoor(port, side, DoorParameter::Close);
 }
 
 void Door::Stop() const {
-    SetDoor(side, DoorParameter::Stop);
+    SetDoor(port, side, DoorParameter::Stop);
 }
 
 DoorState::DoorState Door::GetState() const {
-    return GetDoorState(side);
+    return GetDoorState(port, side);
 }
 
 void Door::OpenValves() const {

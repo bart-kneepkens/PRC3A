@@ -1,17 +1,18 @@
 #ifndef SLUIS_TRAFFICLIGHT_HPP
 #define SLUIS_TRAFFICLIGHT_HPP
 
-#include "Enumerators.hpp"
+#include "SluiceSocketClient.hpp"
 
 class TrafficLight {
 private:
-    TrafficLightState::TrafficLightState state;
+    const unsigned int port;
+    const unsigned int index;
 public:
-    TrafficLight();
+    TrafficLight(unsigned int port, unsigned int index);
     ~TrafficLight();
 
-    TrafficLightState::TrafficLightState GetState() const;
-    void SetState(TrafficLightState::TrafficLightState state);
+    Power::Power GetPower(TrafficLightColor::TrafficLightColor color) const;
+    void SetPower(TrafficLightColor::TrafficLightColor color, Power::Power power) const;
 };
 
 #endif  // SLUIS_TRAFFICLIGHT_HPP

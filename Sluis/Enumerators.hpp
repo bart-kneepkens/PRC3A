@@ -116,19 +116,27 @@ namespace Power {
     std::string ToString(Power state);
 }
 
-namespace TrafficLightState {
-    enum TrafficLightState {
+namespace DoorType {
+    enum DoorType {
+        Normal,
+        NeedsNewMotors,
+        Timed
+    };
+}
+
+namespace TrafficLightColor {
+    enum TrafficLightColor {
         Red,
         Green
     };
 
     /**
-    * Parses the supplied TrafficLightState to a string.
+    * Parses the supplied TrafficLightColor to a string.
     *
     * @param parameter
     * @return
     */
-    std::string ToString(TrafficLightState parameter);
+    std::string ToString(TrafficLightColor parameter);
 }
 
 namespace ValveState {

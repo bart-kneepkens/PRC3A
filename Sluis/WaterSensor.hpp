@@ -1,11 +1,13 @@
 #ifndef SLUIS_WATERSENSOR_HPP
 #define SLUIS_WATERSENSOR_HPP
 
-#include "Enumerators.hpp"
+#include "SluiceSocketClient.hpp"
 
 class WaterSensor {
+private:
+    const unsigned int port;
 public:
-    WaterSensor();
+    WaterSensor(unsigned int port);
     ~WaterSensor();
 
     WaterLevel::WaterLevel GetWaterLevel() const;

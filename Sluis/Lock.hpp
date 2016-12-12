@@ -5,9 +5,10 @@
 
 class Lock {
 private:
+    const unsigned int port;
     const DoorSide::DoorSide side;
 public:
-    Lock(DoorSide::DoorSide side);
+    Lock(unsigned int port, DoorSide::DoorSide side);
     ~Lock();
 
     void SetLocked(bool locked) const;

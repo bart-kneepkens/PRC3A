@@ -1,32 +1,33 @@
 #ifndef SLUIS_SLUICE_HPP
 #define SLUIS_SLUICE_HPP
 
-#include "Door.hpp"
+#include "DoorThatNeedsNewMotors.hpp"
 #include "ISluiceController.hpp"
+#include "TimedDoor.hpp"
 #include "TrafficLight.hpp"
 #include "WaterSensor.hpp"
 
 class Sluice : public ISluiceController {
 private:
-    WaterSensor waterSensor;
+    const WaterSensor waterSensor;
 
-    Door frontDoor;
-    Door backDoor;
+    const Door* frontDoor;
+    const Door* backDoor;
 
-    TrafficLight frontInLight;
-    TrafficLight frontOutLight;
-    TrafficLight backInLight;
-    TrafficLight backOutLight;
+    const TrafficLight frontInLight;
+    const TrafficLight frontOutLight;
+    const TrafficLight backInLight;
+    const TrafficLight backOutLight;
 public:
-    Sluice();
+    Sluice(unsigned int port, DoorType::DoorType doorType = DoorType::Normal);
     ~Sluice();
 
-    Door GetDoor(DoorSide::DoorSide side) const;
-    void AlarmButtonPressed();
-    void ReleaseInButtonPressed();
-    void ReleaseOutButtonPressed();
-    void RestoreButtonPressed();
-    void StartButtonPressed();
+    const Door* GetDoor(DoorSide::DoorSide side) const;
+    void AlarmButtonPressed() const;
+    void ReleaseInButtonPressed() const;
+    void ReleaseOutButtonPressed() const;
+    void RestoreButtonPressed() const;
+    void StartButtonPressed() const;
 };
 
 #endif  // SLUIS_SLUICE_HPP
