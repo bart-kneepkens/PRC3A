@@ -5,7 +5,7 @@
 
 class Lock {
 private:
-    LockState state;
+    LockState::LockState state;
     bool locked;
 public:
     Lock();
@@ -13,7 +13,7 @@ public:
 
     void SetLocked(bool locked);
     bool GetLocked() const;
-    LockState GetLockState() const;
+    LockState::LockState GetLockState() const;
 };
 
 #endif  // SLUIS_LOCK_HPP

@@ -10,6 +10,7 @@ public:
     ~TimedDoor();
 private:
     int interval;
+    Lock lock;
 };
 
 #endif  // SLUIS_TIMEDDOOR_HPP

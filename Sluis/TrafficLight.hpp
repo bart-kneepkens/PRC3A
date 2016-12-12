@@ -5,13 +5,13 @@
 
 class TrafficLight {
 private:
-    TrafficLightState state;
+    TrafficLightState::TrafficLightState state;
 public:
     TrafficLight();
     ~TrafficLight();
 
-    TrafficLightState GetState() const;
-    void SetState(TrafficLightState state);
+    TrafficLightState::TrafficLightState GetState() const;
+    void SetState(TrafficLightState::TrafficLightState state);
 };
 
 #endif  // SLUIS_TRAFFICLIGHT_HPP

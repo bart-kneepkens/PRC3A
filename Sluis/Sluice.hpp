@@ -1,20 +1,16 @@
 #ifndef SLUIS_SLUICE_HPP
 #define SLUIS_SLUICE_HPP
 
-#include "ButtonListener.hpp"
 #include "Door.hpp"
+#include "ISluiceController.hpp"
 #include "Network.hpp"
 #include "TrafficLight.hpp"
+#include "WaterSensor.hpp"
 
-class Sluice {
+class Sluice : public ISluiceController {
 private:
-    ButtonListener startListener;
-    ButtonListener alarmListener;
-    ButtonListener restoreListener;
-    ButtonListener releaseInListener;
-    ButtonListener releaseOutListener;
-
     Network network;
+    WaterSensor waterSensor;
 
     Door frontDoor;
     Door backDoor;
@@ -27,7 +23,7 @@ public:
     Sluice();
     ~Sluice();
 
-    Door GetDoor(DoorSide side) const;
+    Door GetDoor(DoorSide::DoorSide side) const;
     void AlarmButtonPressed();
     void ReleaseInButtonPressed();
     void ReleaseOutButtonPressed();

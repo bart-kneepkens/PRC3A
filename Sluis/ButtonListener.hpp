@@ -2,12 +2,14 @@
 #define SLUIS_BUTTONLISTENER_HPP
 
 #include "Button.hpp"
+#include "ISluiceController.hpp"
 
 class ButtonListener {
 private:
     Button button;
+    ISluiceController& sluiceController;
 public:
-    ButtonListener(Button& button);
+    ButtonListener(Button& button, ISluiceController& sluiceController);
     ~ButtonListener();
 
     void OnButtonPress();

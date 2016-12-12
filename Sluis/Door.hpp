@@ -2,17 +2,11 @@
 #define SLUIS_DOOR_HPP
 
 #include "Enumerators.hpp"
-#include "Lock.hpp"
 #include "Valve.hpp"
-#include "WaterSensor.hpp"
 
 class Door {
 private:
-    DoorState state;
-    Lock lock;
-
-    WaterSensor sensorLeft;
-    WaterSensor sensorRight;
+    DoorState::DoorState state;
 
     Valve valveLow;
     Valve valveMiddle;
@@ -24,7 +18,7 @@ public:
     void Open();
     void Close();
     void Stop();
-    DoorState GetState() const;
+    DoorState::DoorState GetState() const;
     void OpenValves();
     void CloseValves();
 };

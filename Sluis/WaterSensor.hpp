@@ -8,7 +8,7 @@ public:
     WaterSensor();
     ~WaterSensor();
 
-    WaterLevel GetWaterLevel() const;
+    WaterLevel::WaterLevel GetWaterLevel() const;
 };
 
 #endif  // SLUIS_WATERSENSOR_HPP

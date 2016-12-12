@@ -9,6 +9,7 @@ public:
     ~Button();
 
     int GetState() const;
+    void SetState(int state);
 };
 
 #endif  // SLUIS_BUTTON_HPP
