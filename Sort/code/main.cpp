@@ -42,22 +42,22 @@ int main() {
     Dir headVal;
 
     // Load the unsorted data from disk.
-    std::cout << "Loading 'data/gibberish.bin'... " << std::flush;
+    //std::cout << "Loading 'data/gibberish.bin'... " << std::flush;
     f.loadFile("data/gibberish.bin", headVal);
-    std::cout << "Done!" << std::endl;
+    //std::cout << "Done!" << std::endl;
 
     Dir *head = &headVal;
     Dir **headPtr = &head;
 
     // Sort the unsorted data.
-    std::cout << "Applying sort... " << std::flush;
+    //std::cout << "Applying sort... " << std::flush;
     mergeSortRecursive(headPtr);
-    std::cout << "Done!" << std::endl;
+    //std::cout << "Done!" << std::endl;
 
     // Save the sorted data on disk.
-    std::cout << "Saving to 'sorted.bin'... " << std::flush;
+    //std::cout << "Saving to 'sorted.bin'... " << std::flush;
     f.saveFile(**headPtr, "sorted.bin");
-    std::cout << "Done!" << std::endl;
+    //std::cout << "Done!" << std::endl;
 
     // Optional: print the resulting sorted linked list.
     //std::cout << (**headPtr).toString(false) << std::endl;
