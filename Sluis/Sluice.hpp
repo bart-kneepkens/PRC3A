@@ -3,13 +3,11 @@
 
 #include "Door.hpp"
 #include "ISluiceController.hpp"
-#include "Network.hpp"
 #include "TrafficLight.hpp"
 #include "WaterSensor.hpp"
 
 class Sluice : public ISluiceController {
 private:
-    Network network;
     WaterSensor waterSensor;
 
     Door frontDoor;

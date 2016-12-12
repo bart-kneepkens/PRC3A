@@ -42,3 +42,8 @@ Sort/sorted.bin
 Sort/sorted.txt
 Sort/unsorted.bin
 Sort/unsorted.txt
+Sluis/CMakeCache.txt
+Sluis/CMakeFiles/
+Sluis/Makefile
+Sluis/Sluis
+Sluis/cmake_install.cmake
