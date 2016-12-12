@@ -1,26 +1,26 @@
 #ifndef SLUIS_DOOR_HPP
 #define SLUIS_DOOR_HPP
 
-#include "Enumerators.hpp"
+#include "SluiceSocketClient.hpp"
 #include "Valve.hpp"
 
 class Door {
 private:
-    DoorState::DoorState state;
-
-    Valve valveLow;
-    Valve valveMiddle;
-    Valve valveHigh;
+    const Valve valveLow;
+    const Valve valveMiddle;
+    const Valve valveHigh;
+protected:
+    const DoorSide::DoorSide side;
 public:
-    Door();
+    Door(DoorSide::DoorSide side);
     virtual ~Door();
 
-    void Open();
-    void Close();
-    void Stop();
+    void Open() const;
+    void Close() const;
+    void Stop() const;
     DoorState::DoorState GetState() const;
-    void OpenValves();
-    void CloseValves();
+    void OpenValves() const;
+    void CloseValves() const;
 };
 
 #endif  // SLUIS_DOOR_HPP

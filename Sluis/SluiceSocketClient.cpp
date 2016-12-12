@@ -60,7 +60,7 @@ WaterLevel::WaterLevel GetWaterLevel() {
     return WaterLevel::High;
 }
 
-LockState::LockState GetLockState(DoorSide::DoorSide side) {
+LockState::LockState GetDoorLockState(DoorSide::DoorSide side) {
     const std::string command = Command::ToString(Command::GetDoorLock) + DoorSide::ToString(side);
     std::cout << command << std::endl;
     return LockState::Damaged;

@@ -1,3 +1,7 @@
+/**
+ * Exposes several enumerators and convenience methods for parsing them to and from strings.
+ */
+
 #ifndef SLUIS_ENUMERATORS_HPP
 #define SLUIS_ENUMERATORS_HPP
 

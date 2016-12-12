@@ -6,11 +6,11 @@
 
 class TimedDoor : public Door {
 public:
-    TimedDoor();
+    TimedDoor(DoorSide::DoorSide side);
     ~TimedDoor();
 private:
-    int interval;
-    Lock lock;
+    const int interval;
+    const Lock lock;
 };
 
 #endif  // SLUIS_TIMEDDOOR_HPP

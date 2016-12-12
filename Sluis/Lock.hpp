@@ -1,18 +1,16 @@
 #ifndef SLUIS_LOCK_HPP
 #define SLUIS_LOCK_HPP
 
-#include "Enumerators.hpp"
+#include "SluiceSocketClient.hpp"
 
 class Lock {
 private:
-    LockState::LockState state;
-    bool locked;
+    const DoorSide::DoorSide side;
 public:
-    Lock();
+    Lock(DoorSide::DoorSide side);
     ~Lock();
 
-    void SetLocked(bool locked);
-    bool GetLocked() const;
+    void SetLocked(bool locked) const;
     LockState::LockState GetLockState() const;
 };
 

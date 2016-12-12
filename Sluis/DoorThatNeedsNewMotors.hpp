@@ -5,10 +5,10 @@
 
 class DoorThatNeedsNewMotors : public Door {
 public:
-    DoorThatNeedsNewMotors();
+    DoorThatNeedsNewMotors(DoorSide::DoorSide side);
     ~DoorThatNeedsNewMotors();
 private:
-    int needsRebootMotorAfter;
+    const int needsRebootMotorAfter;
 };
 
 #endif  // SLUIS_DOORTHATNEEDSNEWMOTORS_HPP
