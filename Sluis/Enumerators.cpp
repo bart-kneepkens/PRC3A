@@ -1,12 +1,12 @@
 #include "Enumerators.hpp"
 
 namespace Command {
-    std::string toString(Command command) {
+    std::string ToString(Command command) {
         if (command == Command::GetDoor) {
             return "GetDoor";
         }
         if (command == Command::GetDoorLock) {
-            return "GetDoorLock";
+            return "GetDoorLockState";
         }
         if (command == Command::GetTrafficLight) {
             return "GetTrafficLight";
@@ -25,7 +25,7 @@ namespace Command {
 }
 
 namespace DoorParameter {
-    std::string toString(DoorParameter parameter) {
+    std::string ToString(DoorParameter parameter) {
         if (parameter == DoorParameter::Open) {
             return "open";
         }
@@ -37,7 +37,7 @@ namespace DoorParameter {
 }
 
 namespace DoorState {
-    DoorState toDoorState(std::string value) {
+    DoorState ToDoorState(std::string value) {
         if (value == "Closed" || value == "doorClosed") {
             return DoorState::Closed;
         }
@@ -61,7 +61,7 @@ namespace DoorState {
 }
 
 namespace DoorSide {
-    std::string toString(DoorSide parameter) {
+    std::string ToString(DoorSide parameter) {
         if (parameter == DoorSide::Left) {
             return "Left";
         }
@@ -70,7 +70,7 @@ namespace DoorSide {
 }
 
 namespace LockState {
-    LockState toLockState(std::string value) {
+    LockState ToLockState(std::string value) {
         if (value == "Working" || value == "lockWorking") {
             return LockState::Working;
         }
@@ -79,14 +79,14 @@ namespace LockState {
 }
 
 namespace Power {
-    Power toPowerState(std::string value) {
+    Power ToPowerState(std::string value) {
         if (value == "on") {
             return Power::On;
         }
         return Power::Off;
     }
 
-    std::string toString(Power state) {
+    std::string ToString(Power state) {
         if (state == Power::On) {
             return "on";
         }
@@ -95,7 +95,7 @@ namespace Power {
 }
 
 namespace TrafficLightState {
-    std::string toString(TrafficLightState parameter) {
+    std::string ToString(TrafficLightState parameter) {
         if (parameter == TrafficLightState::Green) {
             return "Green";
         }
@@ -104,14 +104,14 @@ namespace TrafficLightState {
 }
 
 namespace ValveState {
-    ValveState toValveState(std::string value) {
+    ValveState ToValveState(std::string value) {
         if (value == "Open" || value == "open") {
             return ValveState::Open;
         }
         return ValveState::Closed;
     }
 
-    std::string toString(ValveState state) {
+    std::string ToString(ValveState state) {
         if (state == ValveState::Open) {
             return "open";
         }
@@ -120,7 +120,7 @@ namespace ValveState {
 }
 
 namespace WaterLevel {
-    WaterLevel toWaterLevel(std::string value) {
+    WaterLevel ToWaterLevel(std::string value) {
         if (value == "Low" || value == "low") {
             return WaterLevel::Low;
         }

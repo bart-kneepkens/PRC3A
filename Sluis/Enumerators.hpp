@@ -20,7 +20,7 @@ namespace Command {
     * @param command
     * @return
     */
-    std::string toString(Command command);
+    std::string ToString(Command command);
 }
 
 namespace DoorParameter {
@@ -36,7 +36,7 @@ namespace DoorParameter {
     * @param parameter
     * @return
     */
-    std::string toString(DoorParameter parameter);
+    std::string ToString(DoorParameter parameter);
 }
 
 namespace DoorState {
@@ -56,7 +56,7 @@ namespace DoorState {
     * @param value
     * @return
     */
-    DoorState toDoorState(std::string value);
+    DoorState ToDoorState(std::string value);
 }
 
 namespace DoorSide {
@@ -71,7 +71,7 @@ namespace DoorSide {
     * @param parameter
     * @return
     */
-    std::string toString(DoorSide parameter);
+    std::string ToString(DoorSide parameter);
 }
 
 namespace LockState {
@@ -86,7 +86,7 @@ namespace LockState {
     * @param value
     * @return
     */
-    LockState toLockState(std::string value);
+    LockState ToLockState(std::string value);
 }
 
 namespace Power {
@@ -101,7 +101,7 @@ namespace Power {
     * @param value
     * @return
     */
-    Power toPowerState(std::string value);
+    Power ToPowerState(std::string value);
 
     /**
     * Parses the supplied Power to a string.
@@ -109,7 +109,7 @@ namespace Power {
     * @param state
     * @return
     */
-    std::string toString(Power state);
+    std::string ToString(Power state);
 }
 
 namespace TrafficLightState {
@@ -124,7 +124,7 @@ namespace TrafficLightState {
     * @param parameter
     * @return
     */
-    std::string toString(TrafficLightState parameter);
+    std::string ToString(TrafficLightState parameter);
 }
 
 namespace ValveState {
@@ -139,7 +139,7 @@ namespace ValveState {
     * @param value
     * @return
     */
-    ValveState toValveState(std::string value);
+    ValveState ToValveState(std::string value);
 
     /**
     * Parses the supplied ValveState to a string.
@@ -147,7 +147,7 @@ namespace ValveState {
     * @param state
     * @return
     */
-    std::string toString(ValveState state);
+    std::string ToString(ValveState state);
 }
 
 namespace WaterLevel {
@@ -165,7 +165,7 @@ namespace WaterLevel {
     * @param value
     * @return
     */
-    WaterLevel toWaterLevel(std::string value);
+    WaterLevel ToWaterLevel(std::string value);
 }
 
 #endif  // SLUIS_ENUMERATORS_HPP
