@@ -4,10 +4,8 @@
 #include "SluiceSocketClient.hpp"
 
 class WaterSensor {
-private:
-    const unsigned int port;
 public:
-    WaterSensor(unsigned int port);
+    WaterSensor();
     ~WaterSensor();
 
     WaterLevel::WaterLevel GetWaterLevel() const;

@@ -1,24 +1,24 @@
 #include "Sluice.hpp"
 
-Sluice::Sluice(unsigned int port, DoorType::DoorType doorType) :
-        frontInLight(TrafficLight(port, 1)),
-        frontOutLight(TrafficLight(port, 2)),
-        backInLight(TrafficLight(port, 3)),
-        backOutLight(TrafficLight(port, 4)),
-        waterSensor(WaterSensor(port)) {
+Sluice::Sluice(DoorType::DoorType doorType) :
+        frontInLight(TrafficLight(1)),
+        frontOutLight(TrafficLight(2)),
+        backInLight(TrafficLight(3)),
+        backOutLight(TrafficLight(4)),
+        waterSensor(WaterSensor()) {
 
     switch (doorType) {
         case DoorType::Timed:
-            frontDoor = new TimedDoor(port, DoorSide::Left);
-            backDoor = new TimedDoor(port, DoorSide::Right);
+            frontDoor = new TimedDoor(DoorSide::Left);
+            backDoor = new TimedDoor(DoorSide::Right);
             break;
         case DoorType::NeedsNewMotors:
-            frontDoor = new DoorThatNeedsNewMotors(port, DoorSide::Left);
-            backDoor = new DoorThatNeedsNewMotors(port, DoorSide::Right);
+            frontDoor = new DoorThatNeedsNewMotors(DoorSide::Left);
+            backDoor = new DoorThatNeedsNewMotors(DoorSide::Right);
             break;
         default:
-            frontDoor = new Door(port, DoorSide::Left);
-            backDoor = new Door(port, DoorSide::Right);
+            frontDoor = new Door(DoorSide::Left);
+            backDoor = new Door(DoorSide::Right);
             break;
     }
 }

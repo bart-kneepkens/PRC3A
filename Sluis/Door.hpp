@@ -6,14 +6,13 @@
 
 class Door {
 private:
-    const unsigned int port;
     const Valve valveLow;
     const Valve valveMiddle;
     const Valve valveHigh;
 protected:
     const DoorSide::DoorSide side;
 public:
-    Door(unsigned int port, DoorSide::DoorSide side);
+    Door(DoorSide::DoorSide side);
     virtual ~Door();
 
     void Open() const;

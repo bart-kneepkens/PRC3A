@@ -29,12 +29,17 @@
 *.app
 
 # Other
+.idea/
+
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
 Assignment 4/Excercise 2/CarTest
 Assignment 4/Excercise 2/TruckTest
 Assignment 7.2/scanListTest
 Assignment 7.2/scanTest
-Sluis/.idea
-Sort/.idea
+
 Sort/data
 Sort/objects
 Sort/sort
@@ -42,8 +47,5 @@ Sort/sorted.bin
 Sort/sorted.txt
 Sort/unsorted.bin
 Sort/unsorted.txt
-Sluis/CMakeCache.txt
-Sluis/CMakeFiles/
-Sluis/Makefile
+
 Sluis/Sluis
-Sluis/cmake_install.cmake

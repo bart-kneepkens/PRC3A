@@ -19,7 +19,7 @@ private:
     const TrafficLight backInLight;
     const TrafficLight backOutLight;
 public:
-    Sluice(unsigned int port, DoorType::DoorType doorType = DoorType::Normal);
+    Sluice(DoorType::DoorType doorType = DoorType::Normal);
     ~Sluice();
 
     const Door* GetDoor(DoorSide::DoorSide side) const;

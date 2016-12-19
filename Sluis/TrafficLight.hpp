@@ -5,10 +5,9 @@
 
 class TrafficLight {
 private:
-    const unsigned int port;
     const unsigned int index;
 public:
-    TrafficLight(unsigned int port, unsigned int index);
+    TrafficLight(unsigned int index);
     ~TrafficLight();
 
     Power::Power GetPower(TrafficLightColor::TrafficLightColor color) const;

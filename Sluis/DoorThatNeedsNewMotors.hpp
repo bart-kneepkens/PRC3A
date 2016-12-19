@@ -5,7 +5,7 @@
 
 class DoorThatNeedsNewMotors : public Door {
 public:
-    DoorThatNeedsNewMotors(unsigned int port, DoorSide::DoorSide side);
+    DoorThatNeedsNewMotors(DoorSide::DoorSide side);
     ~DoorThatNeedsNewMotors();
 private:
     const int needsRebootMotorAfter;

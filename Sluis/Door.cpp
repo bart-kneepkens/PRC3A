@@ -1,24 +1,24 @@
 #include "Door.hpp"
 
-Door::Door(unsigned int port, DoorSide::DoorSide side) : port(port), side(side), valveLow(Valve(port, side, 1)),
-    valveMiddle(Valve(port, side, 2)), valveHigh(Valve(port, side, 3)) {}
+Door::Door(DoorSide::DoorSide side) : side(side), valveLow(Valve(side, 1)),
+    valveMiddle(Valve(side, 2)), valveHigh(Valve(side, 3)) {}
 
 Door::~Door() {}
 
 void Door::Open() const {
-    SetDoor(port, side, DoorParameter::Open);
+    sluice_client::SetDoor(side, DoorParameter::Open);
 }
 
 void Door::Close() const {
-    SetDoor(port, side, DoorParameter::Close);
+    sluice_client::SetDoor(side, DoorParameter::Close);
 }
 
 void Door::Stop() const {
-    SetDoor(port, side, DoorParameter::Stop);
+    sluice_client::SetDoor(side, DoorParameter::Stop);
 }
 
 DoorState::DoorState Door::GetState() const {
-    return GetDoorState(port, side);
+    return sluice_client::GetDoorState(side);
 }
 
 void Door::OpenValves() const {

@@ -1,11 +1,11 @@
 #include "WaterSensor.hpp"
 
-WaterSensor::WaterSensor(unsigned int port) : port(port) {}
+WaterSensor::WaterSensor() {}
 
 WaterSensor::~WaterSensor() {}
 
 WaterLevel::WaterLevel WaterSensor::GetWaterLevel() const {
-    return GetSluiceWaterLevel(port);
+    return sluice_client::GetSluiceWaterLevel();
 }
 
 
