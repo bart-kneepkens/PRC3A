@@ -3,11 +3,31 @@
 namespace sluice_client {
 
     namespace {
+
+        const char DELIMITER = ';';
+
         std::string UIntToString(unsigned int integer) {
             std::stringstream ss;
             ss << integer;
             return ss.str();
         }
+    }
+
+    int SluiceClient::SendMsg(char buffer[]) {
+        const int n = write(socketId, buffer, strlen(buffer));
+        if (n < 0) {
+            perror("[ERROR] Error while writing to socket");
+        }
+        return n;
+    }
+
+    int SluiceClient::ReceiveMsg(char buffer[], unsigned int bufferSize) {
+        bzero(buffer, bufferSize);
+        const int n = read(socketId, buffer, bufferSize - 1);
+        if (n < 0) {
+            perror("[ERROR] Error while reading from socket");
+        }
+        return n;
     }
 
     SluiceClient::SluiceClient(char *serverName, unsigned int port) : serverName(serverName), port(port) {}
@@ -91,10 +111,32 @@ namespace sluice_client {
         return true;
     }
 
-    DoorState::DoorState SluiceClient::GetDoorState(DoorSide::DoorSide side) const {
-        const std::string command = Command::ToString(Command::GetDoor) + DoorSide::ToString(side);
-        //std::cout << command << std::endl;
-        return DoorState::Closed;
+    DoorState::DoorState SluiceClient::GetDoorState(DoorSide::DoorSide side) {
+        // Build command string.
+        const std::string command = Command::ToString(Command::GetDoor) + DoorSide::ToString(side) + DELIMITER;
+
+        // Convert string to char array, then send it to server. If sending fails, close and exit.
+        char sendBuffer[command.length()];
+        strcpy(sendBuffer, command.c_str());
+        if (SendMsg(sendBuffer) < 0) {
+            CloseConnection();
+            exit(1);
+        }
+        std::cout << "[INFO] Sent message to server: '" << sendBuffer << "'." << std::endl;
+
+        // Retrieve reply from server. If receiving fails, close and exit.
+        char replyBuffer[12];
+        if (ReceiveMsg(replyBuffer, 12) < 0) {
+            CloseConnection();
+            exit(1);
+        }
+        std::cout << "[INFO] Received reply from server: '" << replyBuffer << "'." << std::endl;
+
+        // Try translate the reply to a DoorState, and then return it.
+        std::string replyString(replyBuffer);
+        replyString.erase(replyString.size() - 1);  // Remove trailing delimiter character.
+        DoorState::DoorState state = DoorState::ToDoorState(replyString);
+        return state;
     }
 
     ValveState::ValveState SluiceClient::GetValveState(DoorSide::DoorSide side, unsigned int valveIndex) const {

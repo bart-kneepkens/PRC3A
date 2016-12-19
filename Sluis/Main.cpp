@@ -43,6 +43,7 @@ int main (int argc, char* argv[]) {
         exit(1);
     }
 
+    sluice_client::CLIENT->GetDoorState(DoorSide::Left);
 
     // Close the socket client.
     sluice_client::CLIENT->CloseConnection();

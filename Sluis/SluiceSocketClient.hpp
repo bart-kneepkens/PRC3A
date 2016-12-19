@@ -18,6 +18,11 @@ namespace sluice_client {
 
     namespace {
         /**
+         * Delimiter for incoming and outgoing messages.
+         */
+        extern const char DELIMITER;
+
+        /**
         * Convenience function for parsing an unsigned integer to a string.
         *
         * @param integer
@@ -31,6 +36,25 @@ namespace sluice_client {
         const char *serverName;
         const unsigned int port;
         int socketId = -1;
+
+        /**
+        * Sends the specified message in 'buffer' through the socket. The socket should already be open before
+        * this function is called.
+        *
+        * @param buffer
+        * @return
+        */
+        int SendMsg(char buffer[]);
+
+        /**
+        * Receives a message of the specified size through the socket and places it in 'buffer'.
+        * The socket should already be open before this function is called.
+        *
+        * @param buffer
+        * @param bufferSize
+        * @return
+        */
+        int ReceiveMsg(char buffer[], unsigned int bufferSize);
     public:
         SluiceClient(char *serverName, unsigned int port);
 
@@ -87,7 +111,7 @@ namespace sluice_client {
         * @param side
         * @return
         */
-        DoorState::DoorState GetDoorState(DoorSide::DoorSide side) const;
+        DoorState::DoorState GetDoorState(DoorSide::DoorSide side);
 
         /**
         * Returns the valve state of the specified valve of the specified door.
