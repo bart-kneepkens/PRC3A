@@ -6,19 +6,19 @@ Door::Door(DoorSide::DoorSide side) : side(side), valveLow(Valve(side, 1)),
 Door::~Door() {}
 
 void Door::Open() const {
-    sluice_client::SetDoor(side, DoorParameter::Open);
+    sluice_client::CLIENT->SetDoor(side, DoorParameter::Open);
 }
 
 void Door::Close() const {
-    sluice_client::SetDoor(side, DoorParameter::Close);
+    sluice_client::CLIENT->SetDoor(side, DoorParameter::Close);
 }
 
 void Door::Stop() const {
-    sluice_client::SetDoor(side, DoorParameter::Stop);
+    sluice_client::CLIENT->SetDoor(side, DoorParameter::Stop);
 }
 
 DoorState::DoorState Door::GetState() const {
-    return sluice_client::GetDoorState(side);
+    return sluice_client::CLIENT->GetDoorState(side);
 }
 
 void Door::OpenValves() const {

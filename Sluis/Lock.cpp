@@ -6,15 +6,15 @@ Lock::~Lock() { }
 
 void Lock::SetLocked(bool locked) const {
     if (locked) {
-        sluice_client::SetLockPower(side, Power::On);
+        sluice_client::CLIENT->SetLockPower(side, Power::On);
     }
     else {
-        sluice_client::SetLockPower(side, Power::Off);
+        sluice_client::CLIENT->SetLockPower(side, Power::Off);
     }
 }
 
 LockState::LockState Lock::GetLockState() const {
-    return sluice_client::GetDoorLockState(side);
+    return sluice_client::CLIENT->GetDoorLockState(side);
 }
 
 
