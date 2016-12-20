@@ -50,7 +50,40 @@ void Sluice::RestoreButtonPressed() const {
 
 void Sluice::StartButtonPressed() const {
     // Close both doors and wait until they're closed.
+    this->leftDoor->Close();
+    this->rightDoor->Close();
+    while (this->leftDoor->GetState() != DoorState::Closed) {}
+    while (this->rightDoor->GetState() != DoorState::Closed) {}
 
+    // According to current water level, decide which components to operate on.
+    WaterLevel::WaterLevel waterLevel = this->waterSensor.GetWaterLevel();
+    if (waterLevel != WaterLevel::High && waterLevel != WaterLevel::Low) {
+        throw std::runtime_error("[ERROR] WaterLevel was neither Low nor High when start button was pressed");
+    }
+    WaterLevel::WaterLevel desiredWaterLevel = waterLevel == WaterLevel::Low ? WaterLevel::High : WaterLevel::Low;
+    const Door* doorWhoseValvesToOpen = waterLevel == WaterLevel::Low ? this->rightDoor : this->leftDoor;
+
+    // Open valves.
+    doorWhoseValvesToOpen->valveLow.Open();
+    doorWhoseValvesToOpen->valveMiddle.Open();
+    doorWhoseValvesToOpen->valveHigh.Open();
+
+    // Wait until water level has risen sufficiently.
+    while (this->waterSensor.GetWaterLevel() != desiredWaterLevel) {}
+
+    // Close valves.
+    doorWhoseValvesToOpen->valveLow.Close();
+    doorWhoseValvesToOpen->valveMiddle.Close();
+    doorWhoseValvesToOpen->valveHigh.Close();
+
+    // Wait until the valves have closed.
+    while (doorWhoseValvesToOpen->valveLow.GetState() != ValveState::Closed) {}
+    while (doorWhoseValvesToOpen->valveMiddle.GetState() != ValveState::Closed) {}
+    while (doorWhoseValvesToOpen->valveHigh.GetState() != ValveState::Closed) {}
+
+    // Open the correct door and wait until it's opened.
+    doorWhoseValvesToOpen->Open();
+    while (doorWhoseValvesToOpen->GetState() != DoorState::Open) {}
 }
 
 

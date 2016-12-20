@@ -1,5 +1,5 @@
 #include "SluiceSocketClient.hpp"
-
+#include <iostream>
 namespace sluice_client {
 
     namespace {
@@ -27,7 +27,7 @@ namespace sluice_client {
             CloseConnection();
             exit(1);
         }
-        std::cout << "[INFO] Sent message to server: '" << sendBuffer << "'." << std::endl;
+        //std::cout << "[INFO] Sent message to server: '" << sendBuffer << "'." << std::endl;
 
         // Retrieve reply from server. If receiving fails, close and exit.
         char replyBuffer[BUFFER_SIZE];
@@ -37,7 +37,7 @@ namespace sluice_client {
             CloseConnection();
             exit(1);
         }
-        std::cout << "[INFO] Received reply from server: '" << replyBuffer << "'." << std::endl;
+        //std::cout << "[INFO] Received reply from server: '" << replyBuffer << "'." << std::endl;
 
         // Parse buffer to string and return it.
         std::string replyString(replyBuffer);
@@ -62,7 +62,7 @@ namespace sluice_client {
             perror("[ERROR] Error while creating client-side socket");
             return 1;
         }
-        std::cout << "[INFO] Created client-side socket." << std::endl;
+        //std::cout << "[INFO] Created client-side socket." << std::endl;
 
         // Check if server exists. If not, throw warning and exit.
         const hostent *server = gethostbyname(serverName);
@@ -73,7 +73,7 @@ namespace sluice_client {
             CloseConnection();
             return 1;
         }
-        std::cout << "[INFO] Found server with hostname '" << serverName << "'." << std::endl;
+        //std::cout << "[INFO] Found server with hostname '" << serverName << "'." << std::endl;
 
         // Bind the socket to the port.
         sockaddr_in serv_addr;
@@ -88,12 +88,12 @@ namespace sluice_client {
             CloseConnection();
             return 1;
         }
-        std::cout << "[INFO] Connected to server." << std::endl;
+        //std::cout << "[INFO] Connected to server." << std::endl;
     }
 
     int SluiceClient::CloseConnection() const {
         close(socketId);
-        std::cout << "[INFO] Closed client-side socket." << std::endl;
+        //std::cout << "[INFO] Closed client-side socket." << std::endl;
     }
 
     bool SluiceClient::SetDoor(DoorSide::DoorSide side, DoorParameter::DoorParameter parameter) {

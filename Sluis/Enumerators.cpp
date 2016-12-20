@@ -12,7 +12,7 @@ namespace Command {
             return "GetTrafficLight";
         }
         if (command == Command::GetWaterLevel) {
-            return "GetSluiceWaterLevel";
+            return "GetWaterLevel";
         }
         if (command == Command::SetDoor) {
             return "SetDoor";

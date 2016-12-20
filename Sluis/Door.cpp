@@ -21,14 +21,6 @@ DoorState::DoorState Door::GetState() const {
     return sluice_client::CLIENT->GetDoorState(side);
 }
 
-void Door::OpenValves() const {
-    throw "Not implemented!";   // Do we need this function?
-}
-
-void Door::CloseValves() const {
-    throw "Not implemented!";   // Do we need this function?
-}
-
 
 
 
