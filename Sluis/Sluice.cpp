@@ -1,35 +1,35 @@
 #include "Sluice.hpp"
 
 Sluice::Sluice(DoorType::DoorType doorType) :
-        frontInLight(TrafficLight(1)),
-        frontOutLight(TrafficLight(2)),
-        backInLight(TrafficLight(3)),
-        backOutLight(TrafficLight(4)),
+        leftInLight(TrafficLight(1)),
+        leftOutLight(TrafficLight(2)),
+        rightInLight(TrafficLight(4)),
+        rightOutLight(TrafficLight(3)),
         waterSensor(WaterSensor()) {
 
     switch (doorType) {
         case DoorType::Timed:
-            frontDoor = new TimedDoor(DoorSide::Left);
-            backDoor = new TimedDoor(DoorSide::Right);
+            leftDoor = new TimedDoor(DoorSide::Left);
+            rightDoor = new TimedDoor(DoorSide::Right);
             break;
         case DoorType::NeedsNewMotors:
-            frontDoor = new DoorThatNeedsNewMotors(DoorSide::Left);
-            backDoor = new DoorThatNeedsNewMotors(DoorSide::Right);
+            leftDoor = new DoorThatNeedsNewMotors(DoorSide::Left);
+            rightDoor = new DoorThatNeedsNewMotors(DoorSide::Right);
             break;
         default:
-            frontDoor = new Door(DoorSide::Left);
-            backDoor = new Door(DoorSide::Right);
+            leftDoor = new Door(DoorSide::Left);
+            rightDoor = new Door(DoorSide::Right);
             break;
     }
 }
 
 Sluice::~Sluice() {
-    delete frontDoor;
-    delete backDoor;
+    delete leftDoor;
+    delete rightDoor;
 }
 
 const Door* Sluice::GetDoor(DoorSide::DoorSide side) const {
-    return (side == DoorSide::Left) ? frontDoor : backDoor;
+    return (side == DoorSide::Left) ? leftDoor : rightDoor;
 }
 
 void Sluice::AlarmButtonPressed() const {
@@ -49,7 +49,8 @@ void Sluice::RestoreButtonPressed() const {
 }
 
 void Sluice::StartButtonPressed() const {
-    //throw "Not yet implemented!";
+    // Close both doors and wait until they're closed.
+
 }
 
 

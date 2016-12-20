@@ -11,13 +11,13 @@ class Sluice : public ISluiceController {
 private:
     const WaterSensor waterSensor;
 
-    const Door* frontDoor;
-    const Door* backDoor;
+    const Door* leftDoor;
+    const Door* rightDoor;
 
-    const TrafficLight frontInLight;
-    const TrafficLight frontOutLight;
-    const TrafficLight backInLight;
-    const TrafficLight backOutLight;
+    const TrafficLight leftInLight;
+    const TrafficLight leftOutLight;
+    const TrafficLight rightInLight;
+    const TrafficLight rightOutLight;
 public:
     Sluice(DoorType::DoorType doorType = DoorType::Normal);
     ~Sluice();
