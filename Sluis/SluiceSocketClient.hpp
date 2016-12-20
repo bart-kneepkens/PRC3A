@@ -23,6 +23,11 @@ namespace sluice_client {
         extern const char DELIMITER;
 
         /**
+         * Default size for socket reading buffers.
+         */
+        extern unsigned int BUFFER_SIZE;
+
+        /**
         * Convenience function for parsing an unsigned integer to a string.
         *
         * @param integer
@@ -38,23 +43,13 @@ namespace sluice_client {
         int socketId = -1;
 
         /**
-        * Sends the specified message in 'buffer' through the socket. The socket should already be open before
-        * this function is called.
-        *
-        * @param buffer
-        * @return
-        */
-        int SendMsg(char buffer[]);
-
-        /**
-        * Receives a message of the specified size through the socket and places it in 'buffer'.
-        * The socket should already be open before this function is called.
-        *
-        * @param buffer
-        * @param bufferSize
-        * @return
-        */
-        int ReceiveMsg(char buffer[], unsigned int bufferSize);
+         * Sends the supplied message through the socket, and returns any retrieved reply. The socket should already be
+         * open before this function is called. Blocks until a reply is received.
+         *
+         * @param msg
+         * @return
+         */
+        std::string SendMsgAndGetReply(std::string msg);
     public:
         SluiceClient(char *serverName, unsigned int port);
 
