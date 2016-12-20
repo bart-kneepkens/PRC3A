@@ -11,7 +11,7 @@
 /**
  * The sluice control used by this program.
  */
-ISluiceController* control;
+ISluiceController *control;
 
 /**
  * Expects the following two arguments:
@@ -29,15 +29,16 @@ ISluiceController* control;
  * @param argv
  * @return
  */
-int main (int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     // Make sure we have enough arguments supplied.
     if (argc < 4) {
-        std::cerr << "[ERROR] Not enough arguments supplied! Required: 3 (hostname, port, and doors type)." << std::endl;
+        std::cerr << "[ERROR] Not enough arguments supplied! Required: 3 (hostname, port, and doors type)."
+                  << std::endl;
         exit(1);
     }
 
     // Obtain arguments.
-    char* hostName = argv[1];
+    char *hostName = argv[1];
     const int port = atoi(argv[2]);
     const std::string doorsTypeStr(argv[3]);
     std::cout << "[INFO] Captured arguments: hostname='" << hostName << "', port='" << port << "', doorsType='"
@@ -56,6 +57,55 @@ int main (int argc, char* argv[]) {
     sluice_client::CLIENT = new sluice_client::SluiceClient(hostName, port);
     if (sluice_client::CLIENT->OpenConnection() < 0) {
         exit(1);
+    }
+
+    // For as long as the user does not quit the program, keep looping to capture user input.
+    bool exit = false;
+    while (!exit) {
+        // Present user with options.
+        std::cout << "\n########################\n";
+        std::cout << "[ CHOOSE AN ACTION ]\n";
+        std::cout << "1: Press alarm button;\n";
+        std::cout << "2: Press release in button;\n";
+        std::cout << "3: Press release out button;\n";
+        std::cout << "4: Press restore button;\n";
+        std::cout << "5: Press start button;\n";
+        std::cout << "6: Exit program.\n";
+        std::cout << "########################\n\n";
+        std::cout << "[INPUT] " << std::flush;
+
+        // Capture user input and take action accordingly.
+        char input;
+        std::cin >> input;
+        switch (input) {
+            case '1':
+                std::cout << "[INFO] Pressed alarm button." << std::endl;
+                control->AlarmButtonPressed();
+                break;
+            case '2':
+                std::cout << "[INFO] Pressed release in button." << std::endl;
+                control->ReleaseInButtonPressed();
+                break;
+            case '3':
+                std::cout << "[INFO] Pressed release out button." << std::endl;
+                control->ReleaseOutButtonPressed();
+                break;
+            case '4':
+                std::cout << "[INFO] Pressed restore button." << std::endl;
+                control->RestoreButtonPressed();
+                break;
+            case '5':
+                std::cout << "[INFO] Pressed start button." << std::endl;
+                control->StartButtonPressed();
+                break;
+            case '6':
+                std::cout << "[INFO] Exiting program..." << std::endl;
+                exit = true;
+                break;
+            default:
+                std::cerr << "[WARNING] Not a valid action!" << std::endl;
+                break;
+        }
     }
 
     // Close the socket client.

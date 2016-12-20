@@ -33,23 +33,23 @@ const Door* Sluice::GetDoor(DoorSide::DoorSide side) const {
 }
 
 void Sluice::AlarmButtonPressed() const {
-    throw "Not yet implemented!";
+    //throw "Not yet implemented!";
 }
 
 void Sluice::ReleaseInButtonPressed() const {
-    throw "Not yet implemented!";
+    //throw "Not yet implemented!";
 }
 
 void Sluice::ReleaseOutButtonPressed() const {
-    throw "Not yet implemented!";
+    //throw "Not yet implemented!";
 }
 
 void Sluice::RestoreButtonPressed() const {
-    throw "Not yet implemented!";
+    //throw "Not yet implemented!";
 }
 
 void Sluice::StartButtonPressed() const {
-    throw "Not yet implemented!";
+    //throw "Not yet implemented!";
 }
 
 
