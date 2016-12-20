@@ -1,6 +1,7 @@
 #include "Sluice.hpp"
 
 Sluice::Sluice(DoorType::DoorType doorType) :
+        doorType(doorType),
         leftInLight(TrafficLight(1)),
         leftOutLight(TrafficLight(2)),
         rightInLight(TrafficLight(4)),
@@ -26,10 +27,6 @@ Sluice::Sluice(DoorType::DoorType doorType) :
 Sluice::~Sluice() {
     delete leftDoor;
     delete rightDoor;
-}
-
-const Door* Sluice::GetDoor(DoorSide::DoorSide side) const {
-    return (side == DoorSide::Left) ? leftDoor : rightDoor;
 }
 
 void Sluice::AlarmButtonPressed() const {
@@ -83,15 +80,23 @@ void Sluice::StartButtonPressed() const {
     this->rightOutLight.SetPower(TrafficLightColor::Red, Power::On);
     this->rightOutLight.SetPower(TrafficLightColor::Green, Power::Off);
 
-    // Close both doors and wait until they're closed.
-    this->leftDoor->Close();
-    this->rightDoor->Close();
-    while (this->leftDoor->GetState() != DoorState::Closed) {}
-    while (this->rightDoor->GetState() != DoorState::Closed) {}
-
     // According to current water level, decide which components to operate on.
     WaterLevel::WaterLevel desiredWaterLevel = waterLevel == WaterLevel::Low ? WaterLevel::High : WaterLevel::Low;
+    const Door* doorToClose = waterLevel == WaterLevel::Low ? this->leftDoor : this->rightDoor;
     const Door* doorWhoseValvesToOpen = waterLevel == WaterLevel::Low ? this->rightDoor : this->leftDoor;
+
+    // Check whether the correct door is closed/locked yet. If not...
+    DoorState::DoorState doorToCloseState = doorToClose->GetState();
+    if (doorToCloseState != DoorState::Closed && doorToCloseState != DoorState::Locked) {
+        // Close the correct door and wait until it's fully closed.
+        doorToClose->Close();
+        while (doorToClose->GetState() != DoorState::Closed) {}
+
+        // Before continuing, check to make sure the door needn't be locked. If so, lock it.
+        if (this->doorType == DoorType::Timed) {
+            ((TimedDoor *) doorToClose)->lock.SetLocked(true);
+        }
+    }
 
     // Open bottom valve.
     doorWhoseValvesToOpen->valveLow.Open();
@@ -118,6 +123,11 @@ void Sluice::StartButtonPressed() const {
     while (doorWhoseValvesToOpen->valveLow.GetState() != ValveState::Closed) {}
     while (doorWhoseValvesToOpen->valveMiddle.GetState() != ValveState::Closed) {}
     while (doorWhoseValvesToOpen->valveHigh.GetState() != ValveState::Closed) {}
+
+    // Before opening the correct door, check to make sure it needn't be unlocked first. If so, first unlock it.
+    if (doorWhoseValvesToOpen->GetState() == DoorState::Locked) {
+        ((TimedDoor*) doorWhoseValvesToOpen)->lock.SetLocked(false);
+    }
 
     // Open the correct door and wait until it's opened.
     doorWhoseValvesToOpen->Open();

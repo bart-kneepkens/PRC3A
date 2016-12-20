@@ -8,8 +8,6 @@ class TimedDoor : public Door {
 public:
     TimedDoor(DoorSide::DoorSide side);
     ~TimedDoor();
-private:
-    const unsigned int interval;
     const Lock lock;
 };
 

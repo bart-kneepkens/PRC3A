@@ -18,11 +18,12 @@ private:
     const TrafficLight leftOutLight;
     const TrafficLight rightInLight;
     const TrafficLight rightOutLight;
+
+    const DoorType::DoorType doorType;
 public:
     Sluice(DoorType::DoorType doorType = DoorType::Normal);
     ~Sluice();
 
-    const Door* GetDoor(DoorSide::DoorSide side) const;
     void AlarmButtonPressed() const;
     void ReleaseInButtonPressed() const;
     void ReleaseOutButtonPressed() const;
