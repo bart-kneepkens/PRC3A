@@ -64,11 +64,11 @@ namespace sluice_client {
         sockaddr_in serv_addr;
         bzero((char *) &serv_addr, sizeof(serv_addr));
         serv_addr.sin_family = AF_INET;
-        bcopy(server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
+        bcopy(server->h_addr, (char *) &serv_addr.sin_addr.s_addr, server->h_length);
         serv_addr.sin_port = htons(port);
 
         // Connect to the server, throwing an error if it failed.
-        if (connect(socketId, (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) {
+        if (connect(socketId, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
             perror("[ERROR] Error while connecting to server");
             CloseConnection();
             return 1;
@@ -81,14 +81,15 @@ namespace sluice_client {
         std::cout << "[INFO] Closed client-side socket." << std::endl;
     }
 
-    bool SluiceClient::SetDoor(DoorSide::DoorSide side, DoorParameter::DoorParameter parameter) const {
+    bool SluiceClient::SetDoor(DoorSide::DoorSide side, DoorParameter::DoorParameter parameter) {
         const std::string command = Command::ToString(Command::SetDoor) +
                                     DoorSide::ToString(side) + ":" + DoorParameter::ToString(parameter);
         //std::cout << command << std::endl;
         return true;
     }
 
-    bool SluiceClient::SetValve(DoorSide::DoorSide side, unsigned int valveIndex, ValveState::ValveState valveState) const {
+    bool
+    SluiceClient::SetValve(DoorSide::DoorSide side, unsigned int valveIndex, ValveState::ValveState valveState) {
         const std::string command = Command::ToString(Command::SetDoor) +
                                     DoorSide::ToString(side) + "Valve" + UIntToString(valveIndex) + ":" +
                                     ValveState::ToString(valveState);
@@ -97,14 +98,15 @@ namespace sluice_client {
     }
 
     bool
-    SluiceClient::SetTrafficLight(unsigned int trafficLightIndex, TrafficLightColor::TrafficLightColor color, Power::Power power) const {
+    SluiceClient::SetTrafficLight(unsigned int trafficLightIndex, TrafficLightColor::TrafficLightColor color,
+                                  Power::Power power) {
         const std::string command = Command::ToString(Command::SetTrafficLight) + UIntToString(trafficLightIndex) +
                                     TrafficLightColor::ToString(color) + ":" + Power::ToString(power);
         //std::cout << command << std::endl;
         return true;
     }
 
-    bool SluiceClient::SetLockPower(DoorSide::DoorSide side, Power::Power power) const {
+    bool SluiceClient::SetLockPower(DoorSide::DoorSide side, Power::Power power) {
         const std::string command = Command::ToString(Command::SetDoorLock) + DoorSide::ToString(side) +
                                     ":" + Power::ToString(power);
         //std::cout << command << std::endl;
@@ -139,32 +141,33 @@ namespace sluice_client {
         return state;
     }
 
-    ValveState::ValveState SluiceClient::GetValveState(DoorSide::DoorSide side, unsigned int valveIndex) const {
+    ValveState::ValveState SluiceClient::GetValveState(DoorSide::DoorSide side, unsigned int valveIndex) {
         const std::string command = Command::ToString(Command::GetDoor) + DoorSide::ToString(side) +
                                     "Valve" + UIntToString(valveIndex);
         //std::cout << command << std::endl;
         return ValveState::Closed;
     }
 
-    Power::Power SluiceClient::GetTrafficLightPower(unsigned int trafficLightIndex, TrafficLightColor::TrafficLightColor color) const {
+    Power::Power SluiceClient::GetTrafficLightPower(unsigned int trafficLightIndex,
+                                                    TrafficLightColor::TrafficLightColor color) {
         const std::string command = Command::ToString(Command::GetTrafficLight) + UIntToString(trafficLightIndex) +
                                     TrafficLightColor::ToString(color);
         //std::cout << command << std::endl;
         return Power::Off;
     }
 
-    WaterLevel::WaterLevel SluiceClient::GetSluiceWaterLevel() const {
+    WaterLevel::WaterLevel SluiceClient::GetSluiceWaterLevel() {
         const std::string command = Command::ToString(Command::GetWaterLevel);
         //std::cout << command << std::endl;
         return WaterLevel::High;
     }
 
-    LockState::LockState SluiceClient::GetDoorLockState(DoorSide::DoorSide side) const {
+    LockState::LockState SluiceClient::GetDoorLockState(DoorSide::DoorSide side) {
         const std::string command = Command::ToString(Command::GetDoorLock) + DoorSide::ToString(side);
         //std::cout << command << std::endl;
         return LockState::Damaged;
     }
 
-    SluiceClient* CLIENT = NULL;
+    SluiceClient *CLIENT = NULL;
 }
 

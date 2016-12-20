@@ -71,9 +71,9 @@ namespace sluice_client {
         *
         * @param side
         * @param parameter
-        * @return whether this was done succesfully
+        * @return whether this was done succesfully (an 'ack' was received from the server)
         */
-        bool SetDoor(DoorSide::DoorSide side, DoorParameter::DoorParameter parameter) const;
+        bool SetDoor(DoorSide::DoorSide side, DoorParameter::DoorParameter parameter);
 
         /**
         * Instructs the specified valve of the specified door to open or close.
@@ -81,9 +81,9 @@ namespace sluice_client {
         * @param side
         * @param valveIndex
         * @param valveState
-        * @return whether this was done succesfully
+        * @return whether this was done succesfully (an 'ack' was received from the server)
         */
-        bool SetValve(DoorSide::DoorSide side, unsigned int valveIndex, ValveState::ValveState valveState) const;
+        bool SetValve(DoorSide::DoorSide side, unsigned int valveIndex, ValveState::ValveState valveState);
 
         /**
         * Instructs the specified colored light of the specified traffic light to turn on or off.
@@ -91,23 +91,24 @@ namespace sluice_client {
         * @param trafficLightIndex
         * @param color
         * @param power
-        * @return whether this was done succesfully
+        * @return whether this was done succesfully (an 'ack' was received from the server)
         */
         bool
-        SetTrafficLight(unsigned int trafficLightIndex, TrafficLightColor::TrafficLightColor color, Power::Power power) const;
+        SetTrafficLight(unsigned int trafficLightIndex, TrafficLightColor::TrafficLightColor color, Power::Power power);
 
         /**
         * Instructs the lock of the specified door to turn on or off.
         *
         * @param side
         * @param power
-        * @return whether this was done succesfully
+        * @return whether this was done succesfully (an 'ack' was received from the server)
         */
-        bool SetLockPower(DoorSide::DoorSide side, Power::Power power) const;
+        bool SetLockPower(DoorSide::DoorSide side, Power::Power power);
 
         /**
         * Retrieves the door state of the specified door.
         *
+        * @throws invalid_argument if the received reply could not be parsed to the enum.
         * @param side
         * @return
         */
@@ -116,35 +117,39 @@ namespace sluice_client {
         /**
         * Returns the valve state of the specified valve of the specified door.
         *
+        * @throws invalid_argument if the received reply could not be parsed to the enum.
         * @param side
         * @param valveIndex
         * @return
         */
-        ValveState::ValveState GetValveState(DoorSide::DoorSide side, unsigned int valveIndex) const;
+        ValveState::ValveState GetValveState(DoorSide::DoorSide side, unsigned int valveIndex);
 
         /**
         * Returns the power status of the specified light color of the specified traffic light.
         *
+        * @throws invalid_argument if the received reply could not be parsed to the enum.
         * @param trafficLightIndex
         * @param color
         * @return
         */
-        Power::Power GetTrafficLightPower(unsigned int trafficLightIndex, TrafficLightColor::TrafficLightColor color) const;
+        Power::Power GetTrafficLightPower(unsigned int trafficLightIndex, TrafficLightColor::TrafficLightColor color);
 
         /**
         * Returns the current water level.
         *
+        * @throws invalid_argument if the received reply could not be parsed to the enum.
         * @return
         */
-        WaterLevel::WaterLevel GetSluiceWaterLevel() const;
+        WaterLevel::WaterLevel GetSluiceWaterLevel();
 
         /**
         * Returns the current lock state of the specified door.
         *
+        * @throws invalid_argument if the received reply could not be parsed to the enum.
         * @param side
         * @return
         */
-        LockState::LockState GetDoorLockState(DoorSide::DoorSide side) const;
+        LockState::LockState GetDoorLockState(DoorSide::DoorSide side);
     };
 
     /**
