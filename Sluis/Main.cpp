@@ -6,6 +6,12 @@
 #include <iostream>
 
 #include "SluiceSocketClient.hpp"
+#include "Sluice.hpp"
+
+/**
+ * The sluice control used by this program.
+ */
+ISluiceController* control;
 
 /**
  * Expects the following two arguments:
@@ -33,9 +39,18 @@ int main (int argc, char* argv[]) {
     // Obtain arguments.
     char* hostName = argv[1];
     const int port = atoi(argv[2]);
-    const std::string doorsType(argv[3]);
+    const std::string doorsTypeStr(argv[3]);
     std::cout << "[INFO] Captured arguments: hostname='" << hostName << "', port='" << port << "', doorsType='"
-              << doorsType << "'." << std::endl;
+              << doorsTypeStr << "'." << std::endl;
+
+    // Determine what kind of doors the sluice control should have, and then instantiate it. Throw error if fails.
+    try {
+        DoorType::DoorType doorsType = DoorType::toDoorType(doorsTypeStr);
+        control = new Sluice(doorsType);
+    } catch (std::invalid_argument ex) {
+        std::cerr << ex.what() << std::endl;
+        exit(1);
+    }
 
     // Instantiate the socket client and open it, quitting if it fails.
     sluice_client::CLIENT = new sluice_client::SluiceClient(hostName, port);
@@ -43,31 +58,7 @@ int main (int argc, char* argv[]) {
         exit(1);
     }
 
-    DoorState::DoorState state = sluice_client::CLIENT->GetDoorState(DoorSide::Left);
-    std::cout << "Current DoorState: " << state << std::endl;
-    std::cout << "Set DoorState to open: " << sluice_client::CLIENT->SetDoor(DoorSide::Left, DoorParameter::Close) << std::endl;
-    std::cout << "Current DoorState: " << state << std::endl;
-
-
     // Close the socket client.
     sluice_client::CLIENT->CloseConnection();
-
-
-
-
-    /*SetDoor(DoorSide::Left, DoorParameter::Close);
-    SetValve(DoorSide::Left, 1, ValveState::Closed);
-    SetTrafficLight(1, TrafficLightColor::Green, Power::Off);
-    SetLockPower(DoorSide::Left, Power::Off);
-    GetDoorState(DoorSide::Left);
-    GetValveState(DoorSide::Left, 1);
-    GetTrafficLightPower(1, TrafficLightColor::Green);
-    GetSluiceWaterLevel();
-    GetDoorLockState(DoorSide::Left);*/
-
-    //SluiceComplex complex = SluiceComplex();
-
-    //std::cout << complex.GetSluice(0).GetDoor(DoorSide::Left)->GetState() << std::endl;
-
     return 0;
 }

@@ -59,7 +59,7 @@ namespace DoorState {
         if (value == "MotorDamage" || value == "motorDamage") {
             return DoorState::MotorDamage;
         }
-        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'DoorState'.");
+        throw std::invalid_argument("[ERROR] Could not parse string '" + value + "' to enum type 'DoorState'.");
     }
 }
 
@@ -80,7 +80,7 @@ namespace LockState {
         if (value == "Damaged" || value == "lockDamaged") {
             return LockState::Damaged;
         }
-        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'LockState'.");
+        throw std::invalid_argument("[ERROR] Could not parse string '" + value + "' to enum type 'LockState'.");
     }
 }
 
@@ -92,7 +92,7 @@ namespace Power {
         if (value == "off") {
             return Power::Off;
         }
-        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'Power'.");
+        throw std::invalid_argument("[ERROR] Could not parse string '" + value + "' to enum type 'Power'.");
     }
 
     std::string ToString(Power state) {
@@ -100,6 +100,21 @@ namespace Power {
             return "on";
         }
         return "off";
+    }
+}
+
+namespace DoorType {
+    DoorType toDoorType(std::string value) {
+        if (value == "normal" || value == "Normal") {
+            return DoorType::Normal;
+        }
+        if (value == "timed" || value == "Timed") {
+            return DoorType::Timed;
+        }
+        if (value == "needsNewMotors" || value == "NeedsNewMotors") {
+            return DoorType::NeedsNewMotors;
+        }
+        throw std::invalid_argument("[ERROR] Could not parse string '" + value + "' to enum type 'DoorType'.");
     }
 }
 
@@ -120,7 +135,7 @@ namespace ValveState {
         if (value == "Closed" || value == "closed" || value == "Close" || value == "close") {
             return ValveState::Closed;
         }
-        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'ValveState'.");
+        throw std::invalid_argument("[ERROR] Could not parse string '" + value + "' to enum type 'ValveState'.");
     }
 
     std::string ToString(ValveState state) {
@@ -148,6 +163,6 @@ namespace WaterLevel {
         if (value == "High" || value == "high") {
             return WaterLevel::High;
         }
-        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'WaterLevel'.");
+        throw std::invalid_argument("[ERROR] Could not parse string '" + value + "' to enum type 'WaterLevel'.");
     }
 }

@@ -126,6 +126,15 @@ namespace DoorType {
         NeedsNewMotors,
         Timed
     };
+
+    /**
+    * Tries parsing the supplied string to a DoorType.
+    *
+    * @throws invalid_argument if the string could not be parsed.
+    * @param value
+    * @return
+    */
+    DoorType toDoorType(std::string value);
 }
 
 namespace TrafficLightColor {

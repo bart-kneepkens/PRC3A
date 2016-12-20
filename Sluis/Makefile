@@ -124,36 +124,6 @@ Sluis/fast:
 .PHONY : Sluis/fast
 
 # target to build an object file
-Button.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Button.o
-.PHONY : Button.o
-
-# target to preprocess a source file
-Button.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Button.i
-.PHONY : Button.i
-
-# target to generate assembly for a file
-Button.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Button.s
-.PHONY : Button.s
-
-# target to build an object file
-ButtonListener.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/ButtonListener.o
-.PHONY : ButtonListener.o
-
-# target to preprocess a source file
-ButtonListener.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/ButtonListener.i
-.PHONY : ButtonListener.i
-
-# target to generate assembly for a file
-ButtonListener.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/ButtonListener.s
-.PHONY : ButtonListener.s
-
-# target to build an object file
 Door.o:
 	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Door.o
 .PHONY : Door.o
@@ -327,12 +297,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Sluis"
-	@echo "... Button.o"
-	@echo "... Button.i"
-	@echo "... Button.s"
-	@echo "... ButtonListener.o"
-	@echo "... ButtonListener.i"
-	@echo "... ButtonListener.s"
 	@echo "... Door.o"
 	@echo "... Door.i"
 	@echo "... Door.s"
