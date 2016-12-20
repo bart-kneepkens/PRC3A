@@ -38,6 +38,9 @@ namespace DoorParameter {
 
 namespace DoorState {
     DoorState ToDoorState(std::string value) {
+        if (value == "Locked" || value == "doorLocked") {
+            return DoorState::Locked;
+        }
         if (value == "Closed" || value == "doorClosed") {
             return DoorState::Closed;
         }
@@ -56,7 +59,7 @@ namespace DoorState {
         if (value == "MotorDamage" || value == "motorDamage") {
             return DoorState::MotorDamage;
         }
-        return DoorState::Locked;
+        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'DoorState'.");
     }
 }
 
@@ -74,7 +77,10 @@ namespace LockState {
         if (value == "Working" || value == "lockWorking") {
             return LockState::Working;
         }
-        return LockState::Damaged;
+        if (value == "Damaged" || value == "lockDamaged") {
+            return LockState::Damaged;
+        }
+        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'LockState'.");
     }
 }
 
@@ -83,7 +89,10 @@ namespace Power {
         if (value == "on") {
             return Power::On;
         }
-        return Power::Off;
+        if (value == "off") {
+            return Power::Off;
+        }
+        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'Power'.");
     }
 
     std::string ToString(Power state) {
@@ -108,7 +117,10 @@ namespace ValveState {
         if (value == "Open" || value == "open") {
             return ValveState::Open;
         }
-        return ValveState::Closed;
+        if (value == "Closed" || value == "closed" || value == "Close" || value == "close") {
+            return ValveState::Closed;
+        }
+        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'ValveState'.");
     }
 
     std::string ToString(ValveState state) {
@@ -133,6 +145,9 @@ namespace WaterLevel {
         if (value == "AboveValve3" || value == "aboveValve3") {
             return WaterLevel::AboveValve3;
         }
-        return WaterLevel::High;
+        if (value == "High" || value == "high") {
+            return WaterLevel::High;
+        }
+        throw std::invalid_argument("Could not parse string '" + value + "' to enum type 'WaterLevel'.");
     }
 }

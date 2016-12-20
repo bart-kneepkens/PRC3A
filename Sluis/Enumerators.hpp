@@ -6,6 +6,7 @@
 #define SLUIS_ENUMERATORS_HPP
 
 #include <string>
+#include <stdexcept>
 
 namespace Command {
     enum Command {
@@ -55,8 +56,9 @@ namespace DoorState {
     };
 
     /**
-    * Tries parsing the supplied string to a DoorState. If parsing failed, returns DoorState.Locked.
+    * Tries parsing the supplied string to a DoorState.
     *
+    * @throws invalid_argument if the string could not be parsed.
     * @param value
     * @return
     */
@@ -85,8 +87,9 @@ namespace LockState {
     };
 
     /**
-    * Tries parsing the supplied string to a LockState. If parsing failed, returns LockState.Damaged.
+    * Tries parsing the supplied string to a LockState.
     *
+    * @throws invalid_argument if the string could not be parsed.
     * @param value
     * @return
     */
@@ -100,8 +103,9 @@ namespace Power {
     };
 
     /**
-    * Tries parsing the supplied string to a Power. If parsing failed, returns Power.Off.
+    * Tries parsing the supplied string to a Power.
     *
+    * @throws invalid_argument if the string could not be parsed.
     * @param value
     * @return
     */
@@ -146,8 +150,9 @@ namespace ValveState {
     };
 
     /**
-    * Tries parsing the supplied string to a ValveState. If parsing failed, returns ValveState.Closed.
+    * Tries parsing the supplied string to a ValveState.
     *
+    * @throws invalid_argument if the string could not be parsed.
     * @param value
     * @return
     */
@@ -172,8 +177,9 @@ namespace WaterLevel {
     };
 
     /**
-    * Tries parsing the supplied string to a WaterLevel. If parsing failed, returns WaterLevel.High.
+    * Tries parsing the supplied string to a WaterLevel.
     *
+    * @throws invalid_argument if the string could not be parsed.
     * @param value
     * @return
     */
