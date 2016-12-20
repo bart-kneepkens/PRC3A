@@ -43,8 +43,11 @@ int main (int argc, char* argv[]) {
         exit(1);
     }
 
-    //DoorState::DoorState state = sluice_client::CLIENT->GetDoorState(DoorSide::Left);
-    //std::cout << "Doorstate: " << state << std::endl;
+    DoorState::DoorState state = sluice_client::CLIENT->GetDoorState(DoorSide::Left);
+    std::cout << "Current DoorState: " << state << std::endl;
+    std::cout << "Set DoorState to open: " << sluice_client::CLIENT->SetDoor(DoorSide::Left, DoorParameter::Close) << std::endl;
+    std::cout << "Current DoorState: " << state << std::endl;
+
 
     // Close the socket client.
     sluice_client::CLIENT->CloseConnection();

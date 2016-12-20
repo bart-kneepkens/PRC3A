@@ -25,7 +25,12 @@ namespace sluice_client {
         /**
          * Default size for socket reading buffers.
          */
-        extern unsigned int BUFFER_SIZE;
+        extern const unsigned int BUFFER_SIZE;
+
+        /**
+         * Ack message expected back from the server from certain calls.
+         */
+        extern const std::string ACK_MSG;
 
         /**
         * Convenience function for parsing an unsigned integer to a string.
