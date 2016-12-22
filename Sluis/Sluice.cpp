@@ -37,7 +37,7 @@ void Sluice::ReleaseInButtonPressed() const {
     // Make sure we're in the correct state to start, e.g. a door is currently open.
     DoorState::DoorState leftDoorState = leftDoor->GetState();
     if (leftDoorState != DoorState::Open && rightDoor->GetState() != DoorState::Open) {
-        throw std::runtime_error("[ERROR] Neither the left nor the right door was open when release in button was pressed");
+        throw std::runtime_error("[WARNING] It is not allowed to signal ships to leave the sluice at this time.");
     }
 
     // Identify what traffic light to set to green, and then do so.
@@ -50,7 +50,7 @@ void Sluice::ReleaseOutButtonPressed() const {
     // Make sure we're in the correct state to start, e.g. a door is currently open.
     DoorState::DoorState leftDoorState = leftDoor->GetState();
     if (leftDoorState != DoorState::Open && rightDoor->GetState() != DoorState::Open) {
-        throw std::runtime_error("[ERROR] Neither the left nor the right door was open when release out button was pressed");
+        throw std::runtime_error("[WARNING] It is not allowed to signal ships to enter the sluice at this time.");
     }
 
     // Identify what traffic light to set to green, and then do so.
@@ -67,7 +67,7 @@ void Sluice::StartButtonPressed() const {
     // Make sure we're in the correct state to start, e.g. the water level is either high or low.
     WaterLevel::WaterLevel waterLevel = this->waterSensor.GetWaterLevel();
     if (waterLevel != WaterLevel::High && waterLevel != WaterLevel::Low) {
-        throw std::runtime_error("[ERROR] WaterLevel was neither Low nor High when start button was pressed");
+        throw std::runtime_error("[WARNING] It is not allowed to (re)start the sluice process at this time.");
     }
 
     // Set all red lights on and all green lights off.
@@ -88,13 +88,25 @@ void Sluice::StartButtonPressed() const {
     // Check whether the correct door is closed/locked yet. If not...
     DoorState::DoorState doorToCloseState = doorToClose->GetState();
     if (doorToCloseState != DoorState::Closed && doorToCloseState != DoorState::Locked) {
-        // Close the correct door and wait until it's fully closed.
+        // Close the correct door.
         doorToClose->Close();
-        while (doorToClose->GetState() != DoorState::Closed) {}
 
-        // Before continuing, check to make sure the door needn't be locked. If so, lock it.
+        // If this is a timed door, make sure to lock it after closing.
         if (this->doorType == DoorType::Timed) {
+            while (doorToClose->GetState() != DoorState::Closed) {}
             ((TimedDoor *) doorToClose)->lock.SetLocked(true);
+        }
+        // If this is a door with defunct motors, make sure to continuously restart it.
+        else if (this->doorType == DoorType::NeedsNewMotors) {
+            while ((doorToCloseState = doorToClose->GetState()) != DoorState::Closed) {
+                if (doorToCloseState != DoorState::Closing) {
+                    doorToClose->Close();
+                }
+            }
+        }
+        // If this is a normal or any other type of door, just wait until it's closed.
+        else {
+            while (doorToClose->GetState() != DoorState::Closed) {}
         }
     }
 
@@ -124,14 +136,27 @@ void Sluice::StartButtonPressed() const {
     while (doorWhoseValvesToOpen->valveMiddle.GetState() != ValveState::Closed) {}
     while (doorWhoseValvesToOpen->valveHigh.GetState() != ValveState::Closed) {}
 
-    // Before opening the correct door, check to make sure it needn't be unlocked first. If so, first unlock it.
-    if (doorWhoseValvesToOpen->GetState() == DoorState::Locked) {
+    // If this is a timed door, make sure to unlock it before opening.
+    DoorState::DoorState doorWhoseValvesToOpenState = doorWhoseValvesToOpen->GetState();
+    if (doorWhoseValvesToOpenState == DoorState::Locked) {
         ((TimedDoor*) doorWhoseValvesToOpen)->lock.SetLocked(false);
+        doorWhoseValvesToOpen->Open();
+        while (doorWhoseValvesToOpen->GetState() != DoorState::Open) {}
     }
-
-    // Open the correct door and wait until it's opened.
-    doorWhoseValvesToOpen->Open();
-    while (doorWhoseValvesToOpen->GetState() != DoorState::Open) {}
+    // If this is a door with defunct motors, make sure to continuously restart it while opening.
+    else if (this->doorType == DoorType::NeedsNewMotors) {
+        doorWhoseValvesToOpen->Open();
+        while ((doorWhoseValvesToOpenState = doorWhoseValvesToOpen->GetState()) != DoorState::Open) {
+            if (doorWhoseValvesToOpenState != DoorState::Opening) {
+                doorWhoseValvesToOpen->Open();
+            }
+        }
+    }
+    // If this is a normal or any other type of door, just wait until it's opened.
+    else {
+        doorWhoseValvesToOpen->Open();
+        while (doorWhoseValvesToOpen->GetState() != DoorState::Open) {}
+    }
 }
 
 

@@ -89,10 +89,11 @@ namespace sluice_client {
             return 1;
         }
         //std::cout << "[INFO] Connected to server." << std::endl;
+        return 0;
     }
 
     int SluiceClient::CloseConnection() const {
-        close(socketId);
+        return close(socketId);
         //std::cout << "[INFO] Closed client-side socket." << std::endl;
     }
 

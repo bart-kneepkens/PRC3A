@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
 
     // Instantiate the socket client and open it, quitting if it fails.
     sluice_client::CLIENT = new sluice_client::SluiceClient(hostName, port);
-    if (sluice_client::CLIENT->OpenConnection() < 0) {
+    if (sluice_client::CLIENT->OpenConnection() != 0) {
         exit(1);
     }
 
