@@ -16,6 +16,9 @@ namespace sluice_client {
     }
 
     std::string SluiceClient::SendMsgAndGetReply(std::string msg) {
+        // Make sure only one message-and-reply-operation is done at a time.
+        mutex.lock();
+
         // Append delimiter to msg.
         msg += DELIMITER;
 
@@ -23,7 +26,7 @@ namespace sluice_client {
         char sendBuffer[msg.length()];
         strcpy(sendBuffer, msg.c_str());
         if (write(socketId, sendBuffer, strlen(sendBuffer)) < 0) {
-            perror("[ERROR] Error while writing to socket");
+            //perror("[ERROR] Error while writing to socket");
             CloseConnection();
             exit(1);
         }
@@ -33,7 +36,7 @@ namespace sluice_client {
         char replyBuffer[BUFFER_SIZE];
         bzero(replyBuffer, BUFFER_SIZE);
         if (read(socketId, replyBuffer, BUFFER_SIZE - 1) < 0) {
-            perror("[ERROR] Error while reading from socket");
+            //perror("[ERROR] Error while reading from socket");
             CloseConnection();
             exit(1);
         }
@@ -42,6 +45,7 @@ namespace sluice_client {
         // Parse buffer to string and return it.
         std::string replyString(replyBuffer);
         replyString.erase(replyString.size() - 1);  // Remove trailing delimiter character.
+        mutex.unlock();
         return replyString;
     }
 
@@ -59,7 +63,7 @@ namespace sluice_client {
         // Open up the client-side socket. If it fails, print error and exit.
         this->socketId = socket(AF_INET, SOCK_STREAM, 0);
         if (socketId < 0) {
-            perror("[ERROR] Error while creating client-side socket");
+            //perror("[ERROR] Error while creating client-side socket");
             return 1;
         }
         //std::cout << "[INFO] Created client-side socket." << std::endl;
@@ -67,9 +71,9 @@ namespace sluice_client {
         // Check if server exists. If not, throw warning and exit.
         const hostent *server = gethostbyname(serverName);
         if (server == NULL) {
-            const std::string serverNameStr(serverName);
-            const std::string errorMsg = "[ERROR] Error while finding server with hostname '" + serverNameStr + "'";
-            perror(errorMsg.c_str());
+            //const std::string serverNameStr(serverName);
+            //const std::string errorMsg = "[ERROR] Error while finding server with hostname '" + serverNameStr + "'";
+            //perror(errorMsg.c_str());
             CloseConnection();
             return 1;
         }
@@ -84,7 +88,7 @@ namespace sluice_client {
 
         // Connect to the server, throwing an error if it failed.
         if (connect(socketId, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
-            perror("[ERROR] Error while connecting to server");
+            //perror("[ERROR] Error while connecting to server");
             CloseConnection();
             return 1;
         }

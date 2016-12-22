@@ -111,181 +111,181 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Sluis
+# Target rules for targets named Sluice
 
 # Build rule for target.
-Sluis: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Sluis
-.PHONY : Sluis
+Sluice: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Sluice
+.PHONY : Sluice
 
 # fast build rule for target.
-Sluis/fast:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/build
-.PHONY : Sluis/fast
+Sluice/fast:
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/build
+.PHONY : Sluice/fast
 
 # target to build an object file
 Door.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Door.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Door.o
 .PHONY : Door.o
 
 # target to preprocess a source file
 Door.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Door.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Door.i
 .PHONY : Door.i
 
 # target to generate assembly for a file
 Door.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Door.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Door.s
 .PHONY : Door.s
 
 # target to build an object file
 DoorThatNeedsNewMotors.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/DoorThatNeedsNewMotors.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/DoorThatNeedsNewMotors.o
 .PHONY : DoorThatNeedsNewMotors.o
 
 # target to preprocess a source file
 DoorThatNeedsNewMotors.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/DoorThatNeedsNewMotors.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/DoorThatNeedsNewMotors.i
 .PHONY : DoorThatNeedsNewMotors.i
 
 # target to generate assembly for a file
 DoorThatNeedsNewMotors.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/DoorThatNeedsNewMotors.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/DoorThatNeedsNewMotors.s
 .PHONY : DoorThatNeedsNewMotors.s
 
 # target to build an object file
 Enumerators.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Enumerators.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Enumerators.o
 .PHONY : Enumerators.o
 
 # target to preprocess a source file
 Enumerators.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Enumerators.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Enumerators.i
 .PHONY : Enumerators.i
 
 # target to generate assembly for a file
 Enumerators.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Enumerators.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Enumerators.s
 .PHONY : Enumerators.s
 
 # target to build an object file
 Lock.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Lock.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Lock.o
 .PHONY : Lock.o
 
 # target to preprocess a source file
 Lock.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Lock.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Lock.i
 .PHONY : Lock.i
 
 # target to generate assembly for a file
 Lock.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Lock.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Lock.s
 .PHONY : Lock.s
 
 # target to build an object file
 Main.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Main.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Main.o
 .PHONY : Main.o
 
 # target to preprocess a source file
 Main.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Main.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Main.i
 .PHONY : Main.i
 
 # target to generate assembly for a file
 Main.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Main.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Main.s
 .PHONY : Main.s
 
 # target to build an object file
 Sluice.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Sluice.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Sluice.o
 .PHONY : Sluice.o
 
 # target to preprocess a source file
 Sluice.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Sluice.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Sluice.i
 .PHONY : Sluice.i
 
 # target to generate assembly for a file
 Sluice.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Sluice.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Sluice.s
 .PHONY : Sluice.s
 
 # target to build an object file
 SluiceSocketClient.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/SluiceSocketClient.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/SluiceSocketClient.o
 .PHONY : SluiceSocketClient.o
 
 # target to preprocess a source file
 SluiceSocketClient.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/SluiceSocketClient.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/SluiceSocketClient.i
 .PHONY : SluiceSocketClient.i
 
 # target to generate assembly for a file
 SluiceSocketClient.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/SluiceSocketClient.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/SluiceSocketClient.s
 .PHONY : SluiceSocketClient.s
 
 # target to build an object file
 TimedDoor.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/TimedDoor.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/TimedDoor.o
 .PHONY : TimedDoor.o
 
 # target to preprocess a source file
 TimedDoor.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/TimedDoor.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/TimedDoor.i
 .PHONY : TimedDoor.i
 
 # target to generate assembly for a file
 TimedDoor.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/TimedDoor.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/TimedDoor.s
 .PHONY : TimedDoor.s
 
 # target to build an object file
 TrafficLight.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/TrafficLight.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/TrafficLight.o
 .PHONY : TrafficLight.o
 
 # target to preprocess a source file
 TrafficLight.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/TrafficLight.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/TrafficLight.i
 .PHONY : TrafficLight.i
 
 # target to generate assembly for a file
 TrafficLight.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/TrafficLight.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/TrafficLight.s
 .PHONY : TrafficLight.s
 
 # target to build an object file
 Valve.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Valve.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Valve.o
 .PHONY : Valve.o
 
 # target to preprocess a source file
 Valve.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Valve.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Valve.i
 .PHONY : Valve.i
 
 # target to generate assembly for a file
 Valve.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/Valve.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/Valve.s
 .PHONY : Valve.s
 
 # target to build an object file
 WaterSensor.o:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/WaterSensor.o
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/WaterSensor.o
 .PHONY : WaterSensor.o
 
 # target to preprocess a source file
 WaterSensor.i:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/WaterSensor.i
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/WaterSensor.i
 .PHONY : WaterSensor.i
 
 # target to generate assembly for a file
 WaterSensor.s:
-	$(MAKE) -f CMakeFiles/Sluis.dir/build.make CMakeFiles/Sluis.dir/WaterSensor.s
+	$(MAKE) -f CMakeFiles/Sluice.dir/build.make CMakeFiles/Sluice.dir/WaterSensor.s
 .PHONY : WaterSensor.s
 
 # Help Target
@@ -296,7 +296,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Sluis"
+	@echo "... Sluice"
 	@echo "... Door.o"
 	@echo "... Door.i"
 	@echo "... Door.s"

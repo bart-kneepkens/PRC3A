@@ -29,46 +29,46 @@ Sluice::~Sluice() {
     delete rightDoor;
 }
 
-void Sluice::AlarmButtonPressed() const {
-    //throw "Not yet implemented!";
+void Sluice::AlarmButtonPressed() {
+    throw "Not yet implemented!";
 }
 
-void Sluice::ReleaseInButtonPressed() const {
+void Sluice::ReleaseInButtonPressed() {
     // Make sure we're in the correct state to start, e.g. a door is currently open.
-    DoorState::DoorState leftDoorState = leftDoor->GetState();
-    if (leftDoorState != DoorState::Open && rightDoor->GetState() != DoorState::Open) {
+    if (this->GetSluiceState() != SluiceState::Idle || (leftDoor->GetState() != DoorState::Open && rightDoor->GetState() != DoorState::Open)) {
         throw std::runtime_error("[WARNING] It is not allowed to signal ships to leave the sluice at this time.");
     }
 
     // Identify what traffic light to set to green, and then do so.
-    const TrafficLight trafficLight = leftDoorState == DoorState::Open ? leftInLight : rightInLight;
+    const TrafficLight trafficLight = leftDoor->GetState() == DoorState::Open ? leftInLight : rightInLight;
     trafficLight.SetPower(TrafficLightColor::Red, Power::Off);
     trafficLight.SetPower(TrafficLightColor::Green, Power::On);
 }
 
-void Sluice::ReleaseOutButtonPressed() const {
+void Sluice::ReleaseOutButtonPressed() {
     // Make sure we're in the correct state to start, e.g. a door is currently open.
-    DoorState::DoorState leftDoorState = leftDoor->GetState();
-    if (leftDoorState != DoorState::Open && rightDoor->GetState() != DoorState::Open) {
+    if (this->GetSluiceState() != SluiceState::Idle || (leftDoor->GetState() != DoorState::Open && rightDoor->GetState() != DoorState::Open)) {
         throw std::runtime_error("[WARNING] It is not allowed to signal ships to enter the sluice at this time.");
     }
 
     // Identify what traffic light to set to green, and then do so.
-    const TrafficLight trafficLight = leftDoorState == DoorState::Open ? leftOutLight : rightOutLight;
+    const TrafficLight trafficLight = leftDoor->GetState() == DoorState::Open ? leftOutLight : rightOutLight;
     trafficLight.SetPower(TrafficLightColor::Red, Power::Off);
     trafficLight.SetPower(TrafficLightColor::Green, Power::On);
 }
 
-void Sluice::RestoreButtonPressed() const {
-    //throw "Not yet implemented!";
+void Sluice::RestoreButtonPressed() {
+    throw "Not yet implemented!";
 }
 
-void Sluice::StartButtonPressed() const {
-    // Make sure we're in the correct state to start, e.g. the water level is either high or low.
-    WaterLevel::WaterLevel waterLevel = this->waterSensor.GetWaterLevel();
-    if (waterLevel != WaterLevel::High && waterLevel != WaterLevel::Low) {
-        throw std::runtime_error("[WARNING] It is not allowed to (re)start the sluice process at this time.");
+void Sluice::StartButtonPressed() {
+    // Make sure we're in the correct state to start.
+    if (this->GetSluiceState()!= SluiceState::Idle) {
+        throw std::runtime_error("[WARNING] It is not allowed to start the sluice process at this time.");
     }
+
+    // Set our state.
+    this->SetSluiceState(SluiceState::Started);
 
     // Set all red lights on and all green lights off.
     this->leftInLight.SetPower(TrafficLightColor::Red, Power::On);
@@ -81,6 +81,7 @@ void Sluice::StartButtonPressed() const {
     this->rightOutLight.SetPower(TrafficLightColor::Green, Power::Off);
 
     // According to current water level, decide which components to operate on.
+    WaterLevel::WaterLevel waterLevel = this->waterSensor.GetWaterLevel();
     WaterLevel::WaterLevel desiredWaterLevel = waterLevel == WaterLevel::Low ? WaterLevel::High : WaterLevel::Low;
     const Door* doorToClose = waterLevel == WaterLevel::Low ? this->leftDoor : this->rightDoor;
     const Door* doorWhoseValvesToOpen = waterLevel == WaterLevel::Low ? this->rightDoor : this->leftDoor;
@@ -157,6 +158,22 @@ void Sluice::StartButtonPressed() const {
         doorWhoseValvesToOpen->Open();
         while (doorWhoseValvesToOpen->GetState() != DoorState::Open) {}
     }
+
+    // Set our state.
+    this->SetSluiceState(SluiceState::Idle);
+}
+
+SluiceState::SluiceState Sluice::GetSluiceState() {
+    sluiceStateMutex.lock();
+    SluiceState::SluiceState state = this->sluiceState;
+    sluiceStateMutex.unlock();
+    return state;
+}
+
+void Sluice::SetSluiceState(SluiceState::SluiceState state) {
+    sluiceStateMutex.lock();
+    this->sluiceState = state;
+    sluiceStateMutex.unlock();
 }
 
 

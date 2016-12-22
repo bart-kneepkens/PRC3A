@@ -8,6 +8,14 @@
 #include <string>
 #include <stdexcept>
 
+namespace SluiceState {
+    enum SluiceState {
+        Idle,
+        Started,
+        Emergency
+    };
+}
+
 namespace Command {
     enum Command {
         GetDoor,

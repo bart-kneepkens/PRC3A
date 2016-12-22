@@ -2,6 +2,7 @@
  * Main entry point for the Sluice program.
  */
 
+#include <pthread.h>
 #include <string>
 #include <iostream>
 
@@ -12,6 +13,61 @@
  * The sluice control used by this program.
  */
 ISluiceController *control;
+
+void* ReleaseInButtonThread(void* threadArgs) {
+    try {
+        control->ReleaseInButtonPressed();
+    }
+    catch (const std::exception &ex) {
+        //std::cerr << ex.what() << std::endl;
+        // Pretend we log this to a file or something.
+    }
+    return NULL;
+}
+
+void* StartButtonThread(void* threadArgs) {
+    try {
+        control->StartButtonPressed();
+    }
+    catch (const std::exception &ex) {
+        //std::cerr << ex.what() << std::endl;
+        // Pretend we log this to a file or something.
+    }
+    return NULL;
+}
+
+void* ReleaseOutButtonThread(void* threadArgs) {
+    try {
+        control->ReleaseOutButtonPressed();
+    }
+    catch (const std::exception &ex) {
+        //std::cerr << ex.what() << std::endl;
+        // Pretend we log this to a file or something.
+    }
+    return NULL;
+}
+
+void* AlarmButtonThread(void* threadArgs) {
+    try {
+        control->AlarmButtonPressed();
+    }
+    catch (const std::exception &ex) {
+        //std::cerr << ex.what() << std::endl;
+        // Pretend we log this to a file or something.
+    }
+    return NULL;
+}
+
+void* RestoreButtonThread(void* threadArgs) {
+    try {
+        control->RestoreButtonPressed();
+    }
+    catch (const std::exception &ex) {
+        //std::cerr << ex.what() << std::endl;
+        // Pretend we log this to a file or something.
+    }
+    return NULL;
+}
 
 /**
  * Expects the following two arguments:
@@ -41,8 +97,8 @@ int main(int argc, char *argv[]) {
     char *hostName = argv[1];
     const int port = atoi(argv[2]);
     const std::string doorsTypeStr(argv[3]);
-    std::cout << "[INFO] Captured arguments: hostname='" << hostName << "', port='" << port << "', doorsType='"
-              << doorsTypeStr << "'." << std::endl;
+    //std::cout << "[INFO] Captured arguments: hostname='" << hostName << "', port='" << port << "', doorsType='"
+    //          << doorsTypeStr << "'." << std::endl;
 
     // Determine what kind of doors the sluice control should have, and then instantiate it. Throw error if fails.
     try {
@@ -65,45 +121,43 @@ int main(int argc, char *argv[]) {
         // Present user with options.
         std::cout << "\n########################\n";
         std::cout << "[ CHOOSE AN ACTION ]\n";
-        std::cout << "1: Press alarm button;\n";
-        std::cout << "2: Press release in button;\n";
-        std::cout << "3: Press release out button;\n";
-        std::cout << "4: Press restore button;\n";
-        std::cout << "5: Press start button;\n";
+        std::cout << "1: Signal ships may enter sluice;\n";
+        std::cout << "2: Start sluice process;\n";
+        std::cout << "3: Signal ships may leave sluice;\n";
+        std::cout << "4: Emergency stop;\n";
+        std::cout << "5: Continue after emergency stop;\n";
         std::cout << "6: Exit program.\n";
         std::cout << "########################\n\n";
         std::cout << "[INPUT] " << std::flush;
 
-        // Capture user input and take action accordingly.
+        // Capture user input.
         char input;
         std::cin >> input;
+        pthread_t threadID;
+
+        // Instantiate correct thread / take proper acction according to input.
         switch (input) {
             case '1':
-                std::cout << "[INFO] Pressed alarm button." << std::endl;
-                control->AlarmButtonPressed();
+                pthread_create(&threadID, NULL, ReleaseInButtonThread, NULL);
                 break;
             case '2':
-                std::cout << "[INFO] Pressed release in button." << std::endl;
-                control->ReleaseInButtonPressed();
+                pthread_create(&threadID, NULL, StartButtonThread, NULL);
                 break;
             case '3':
-                std::cout << "[INFO] Pressed release out button." << std::endl;
-                control->ReleaseOutButtonPressed();
+                pthread_create(&threadID, NULL, ReleaseOutButtonThread, NULL);
                 break;
             case '4':
-                std::cout << "[INFO] Pressed restore button." << std::endl;
-                control->RestoreButtonPressed();
+                pthread_create(&threadID, NULL, AlarmButtonThread, NULL);
                 break;
             case '5':
-                std::cout << "[INFO] Pressed start button." << std::endl;
-                control->StartButtonPressed();
+                pthread_create(&threadID, NULL, RestoreButtonThread, NULL);
                 break;
             case '6':
-                std::cout << "[INFO] Exiting program..." << std::endl;
+                //std::cout << "[INFO] Exiting program..." << std::endl;
                 exit = true;
                 break;
             default:
-                std::cerr << "[WARNING] Not a valid action!" << std::endl;
+                //std::cerr << "[WARNING] Not a valid action!" << std::endl;
                 break;
         }
     }
