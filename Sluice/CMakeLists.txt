@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 2.5)
 project(Sluice)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -std=c++98")
 
 
 # All source files required by executables.

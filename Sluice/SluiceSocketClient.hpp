@@ -11,7 +11,7 @@
 #include <netdb.h>
 #include <unistd.h>
 #include <cstring>
-#include <mutex>
+#include <stdlib.h>
 
 #include "Enumerators.hpp"
 
@@ -46,8 +46,8 @@ namespace sluice_client {
     private:
         const char *serverName;
         const unsigned int port;
-        int socketId = -1;
-        std::mutex mutex;
+        int socketId;
+        pthread_mutex_t sendMsgMutex;
 
         /**
          * Sends the supplied message through the socket, and returns any retrieved reply. The socket should already be

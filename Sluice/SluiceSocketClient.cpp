@@ -17,7 +17,7 @@ namespace sluice_client {
 
     std::string SluiceClient::SendMsgAndGetReply(std::string msg) {
         // Make sure only one message-and-reply-operation is done at a time.
-        mutex.lock();
+        pthread_mutex_lock(&sendMsgMutex);
 
         // Append delimiter to msg.
         msg += DELIMITER;
@@ -45,7 +45,7 @@ namespace sluice_client {
         // Parse buffer to string and return it.
         std::string replyString(replyBuffer);
         replyString.erase(replyString.size() - 1);  // Remove trailing delimiter character.
-        mutex.unlock();
+        pthread_mutex_unlock(&sendMsgMutex);
         return replyString;
     }
 

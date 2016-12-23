@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <string>
 #include <iostream>
+#include <stdlib.h>
 
 #include "SluiceSocketClient.hpp"
 #include "Sluice.hpp"
@@ -162,7 +163,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Close the socket client.
-    sluice_client::CLIENT->CloseConnection();
+    // Close and delete the socket client.
+    delete control;
     return 0;
 }

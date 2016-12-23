@@ -1,8 +1,6 @@
 #ifndef SLUIS_SLUICE_HPP
 #define SLUIS_SLUICE_HPP
 
-#include <mutex>
-
 #include "DoorThatNeedsNewMotors.hpp"
 #include "ISluiceController.hpp"
 #include "TimedDoor.hpp"
@@ -23,8 +21,8 @@ private:
 
     const DoorType::DoorType doorType;
 
-    SluiceState::SluiceState sluiceState = SluiceState::Idle;
-    std::mutex sluiceStateMutex;
+    SluiceState::SluiceState sluiceState;
+    pthread_mutex_t sluiceStateMutex;
 
     SluiceState::SluiceState GetSluiceState();
     void SetSluiceState(SluiceState::SluiceState state);

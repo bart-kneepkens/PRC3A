@@ -1,6 +1,7 @@
 #include "Sluice.hpp"
 
 Sluice::Sluice(DoorType::DoorType doorType) :
+        sluiceState(SluiceState::Idle),
         doorType(doorType),
         leftInLight(TrafficLight(1)),
         leftOutLight(TrafficLight(2)),
@@ -164,16 +165,16 @@ void Sluice::StartButtonPressed() {
 }
 
 SluiceState::SluiceState Sluice::GetSluiceState() {
-    sluiceStateMutex.lock();
+    pthread_mutex_lock(&sluiceStateMutex);
     SluiceState::SluiceState state = this->sluiceState;
-    sluiceStateMutex.unlock();
+    pthread_mutex_unlock(&sluiceStateMutex);
     return state;
 }
 
 void Sluice::SetSluiceState(SluiceState::SluiceState state) {
-    sluiceStateMutex.lock();
+    pthread_mutex_lock(&sluiceStateMutex);
     this->sluiceState = state;
-    sluiceStateMutex.unlock();
+    pthread_mutex_unlock(&sluiceStateMutex);
 }
 
 
