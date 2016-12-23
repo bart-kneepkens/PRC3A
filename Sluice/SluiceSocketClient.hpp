@@ -44,9 +44,13 @@ namespace sluice_client {
 
     class SluiceClient {
     private:
+        /** Hostname of the server this client is connecting to. */
         const char *serverName;
+        /** Port on the server this client is connecting through. */
         const unsigned int port;
+        /** Id of the client-side socket. */
         int socketId;
+        /** Mutex for enforcing only one reply-response sequence is done at a time. */
         pthread_mutex_t sendMsgMutex;
 
         /**
@@ -62,10 +66,16 @@ namespace sluice_client {
 
         ~SluiceClient();
 
-        int GetSocketId() const;
-
+        /**
+         * Opens the connection to the server, returning 0 if it succeeded or something else otherwise.
+         * @return
+         */
         int OpenConnection();
 
+        /**
+         * Closes the connection to the server, returning 0 if it succeeded or something else otherwise.
+         * @return
+         */
         int CloseConnection() const;
 
         /**

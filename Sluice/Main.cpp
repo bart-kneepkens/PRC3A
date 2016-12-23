@@ -15,6 +15,11 @@
  */
 ISluiceController *control;
 
+/**
+ * Thread for when the release in button was pressed.
+ * @param threadArgs
+ * @return
+ */
 void* ReleaseInButtonThread(void* threadArgs) {
     try {
         control->ReleaseInButtonPressed();
@@ -26,6 +31,11 @@ void* ReleaseInButtonThread(void* threadArgs) {
     return NULL;
 }
 
+/**
+ * Thread for when the start button was pressed.
+ * @param threadArgs
+ * @return
+ */
 void* StartButtonThread(void* threadArgs) {
     try {
         control->StartButtonPressed();
@@ -37,6 +47,11 @@ void* StartButtonThread(void* threadArgs) {
     return NULL;
 }
 
+/**
+ * Thread for when the release out button was pressed.
+ * @param threadArgs
+ * @return
+ */
 void* ReleaseOutButtonThread(void* threadArgs) {
     try {
         control->ReleaseOutButtonPressed();
@@ -48,6 +63,11 @@ void* ReleaseOutButtonThread(void* threadArgs) {
     return NULL;
 }
 
+/**
+ * Thread for when the alarm/emergency button was pressed.
+ * @param threadArgs
+ * @return
+ */
 void* AlarmButtonThread(void* threadArgs) {
     try {
         control->AlarmButtonPressed();
@@ -59,6 +79,11 @@ void* AlarmButtonThread(void* threadArgs) {
     return NULL;
 }
 
+/**
+ * Thread for when the restore/recover button was pressed.
+ * @param threadArgs
+ * @return
+ */
 void* RestoreButtonThread(void* threadArgs) {
     try {
         control->RestoreButtonPressed();
@@ -96,7 +121,7 @@ int main(int argc, char *argv[]) {
 
     // Obtain arguments.
     char *hostName = argv[1];
-    const int port = atoi(argv[2]);
+    const unsigned int port = atoi(argv[2]);
     const std::string doorsTypeStr(argv[3]);
     //std::cout << "[INFO] Captured arguments: hostname='" << hostName << "', port='" << port << "', doorsType='"
     //          << doorsTypeStr << "'." << std::endl;
@@ -136,7 +161,7 @@ int main(int argc, char *argv[]) {
         std::cin >> input;
         pthread_t threadID;
 
-        // Instantiate correct thread / take proper acction according to input.
+        // Instantiate correct thread / take proper action according to input.
         switch (input) {
             case '1':
                 pthread_create(&threadID, NULL, ReleaseInButtonThread, NULL);

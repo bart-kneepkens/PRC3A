@@ -36,26 +36,20 @@ void Sluice::AlarmButtonPressed() {
 
 void Sluice::ReleaseInButtonPressed() {
     // Make sure we're in the correct state to start, e.g. a door is currently open.
-    if (this->GetSluiceState() != SluiceState::Idle || (leftDoor->GetState() != DoorState::Open && rightDoor->GetState() != DoorState::Open)) {
-        throw std::runtime_error("[WARNING] It is not allowed to signal ships to leave the sluice at this time.");
+    if (MayToggleLights()) {
+        // Identify what traffic light to toggle, and then do so.
+        const TrafficLight trafficLight = leftDoor->GetState() == DoorState::Open ? leftInLight : rightInLight;
+        trafficLight.ToggleLights();
     }
-
-    // Identify what traffic light to set to green, and then do so.
-    const TrafficLight trafficLight = leftDoor->GetState() == DoorState::Open ? leftInLight : rightInLight;
-    trafficLight.SetPower(TrafficLightColor::Red, Power::Off);
-    trafficLight.SetPower(TrafficLightColor::Green, Power::On);
 }
 
 void Sluice::ReleaseOutButtonPressed() {
     // Make sure we're in the correct state to start, e.g. a door is currently open.
-    if (this->GetSluiceState() != SluiceState::Idle || (leftDoor->GetState() != DoorState::Open && rightDoor->GetState() != DoorState::Open)) {
-        throw std::runtime_error("[WARNING] It is not allowed to signal ships to enter the sluice at this time.");
+    if (MayToggleLights()) {
+        // Identify what traffic light to toggle, and then do so.
+        const TrafficLight trafficLight = leftDoor->GetState() == DoorState::Open ? leftOutLight : rightOutLight;
+        trafficLight.ToggleLights();
     }
-
-    // Identify what traffic light to set to green, and then do so.
-    const TrafficLight trafficLight = leftDoor->GetState() == DoorState::Open ? leftOutLight : rightOutLight;
-    trafficLight.SetPower(TrafficLightColor::Red, Power::Off);
-    trafficLight.SetPower(TrafficLightColor::Green, Power::On);
 }
 
 void Sluice::RestoreButtonPressed() {
@@ -72,14 +66,10 @@ void Sluice::StartButtonPressed() {
     this->SetSluiceState(SluiceState::Started);
 
     // Set all red lights on and all green lights off.
-    this->leftInLight.SetPower(TrafficLightColor::Red, Power::On);
-    this->leftInLight.SetPower(TrafficLightColor::Green, Power::Off);
-    this->leftOutLight.SetPower(TrafficLightColor::Red, Power::On);
-    this->leftOutLight.SetPower(TrafficLightColor::Green, Power::Off);
-    this->rightInLight.SetPower(TrafficLightColor::Red, Power::On);
-    this->rightInLight.SetPower(TrafficLightColor::Green, Power::Off);
-    this->rightOutLight.SetPower(TrafficLightColor::Red, Power::On);
-    this->rightOutLight.SetPower(TrafficLightColor::Green, Power::Off);
+    this->leftInLight.SwitchToRedLights();
+    this->leftOutLight.SwitchToRedLights();
+    this->rightInLight.SwitchToRedLights();
+    this->rightOutLight.SwitchToRedLights();
 
     // According to current water level, decide which components to operate on.
     WaterLevel::WaterLevel waterLevel = this->waterSensor.GetWaterLevel();
@@ -177,6 +167,10 @@ void Sluice::SetSluiceState(SluiceState::SluiceState state) {
     pthread_mutex_unlock(&sluiceStateMutex);
 }
 
+bool Sluice::MayToggleLights() {
+    return this->GetSluiceState() == SluiceState::Idle &&
+            (leftDoor->GetState() == DoorState::Open || rightDoor->GetState() == DoorState::Open);
+}
 
 
 

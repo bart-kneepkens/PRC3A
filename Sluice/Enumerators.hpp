@@ -9,6 +9,7 @@
 #include <stdexcept>
 
 namespace SluiceState {
+    /** The possible states for the sluice. */
     enum SluiceState {
         Idle,
         Started,
@@ -17,6 +18,7 @@ namespace SluiceState {
 }
 
 namespace Command {
+    /** A variety of commands that can be sent to the simulator / physical sluice. */
     enum Command {
         GetDoor,
         GetDoorLock,
@@ -37,6 +39,7 @@ namespace Command {
 }
 
 namespace DoorParameter {
+    /** Available command parameters for sluice doors. */
     enum DoorParameter {
         Open,
         Close,
@@ -53,6 +56,7 @@ namespace DoorParameter {
 }
 
 namespace DoorState {
+    /** Available states for sluice doors. */
     enum DoorState {
         Locked,
         Closed,
@@ -74,6 +78,7 @@ namespace DoorState {
 }
 
 namespace DoorSide {
+    /** Simple enumerator for what side a door is on. */
     enum DoorSide {
         Left,
         Right
@@ -89,6 +94,7 @@ namespace DoorSide {
 }
 
 namespace LockState {
+    /** Simple enumerator for the state a lock is in. */
     enum LockState {
         Working,
         Damaged
@@ -105,6 +111,7 @@ namespace LockState {
 }
 
 namespace Power {
+    /** Simple enumerator for the power state / command parameter. */
     enum Power {
         On,
         Off
@@ -129,6 +136,7 @@ namespace Power {
 }
 
 namespace DoorType {
+    /** The available types of doors. Corresponds with the Door class and its child classes. */
     enum DoorType {
         Normal,
         NeedsNewMotors,
@@ -146,6 +154,7 @@ namespace DoorType {
 }
 
 namespace TrafficLightColor {
+    /** The available traffic light colors. */
     enum TrafficLightColor {
         Red,
         Green
@@ -161,6 +170,7 @@ namespace TrafficLightColor {
 }
 
 namespace ValveState {
+    /** The available states / command parameters for valves. */
     enum ValveState {
         Open,
         Closed
@@ -185,6 +195,7 @@ namespace ValveState {
 }
 
 namespace WaterLevel {
+    /** The available water levels. */
     enum WaterLevel {
         Low,
         BelowValve2,

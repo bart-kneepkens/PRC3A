@@ -12,6 +12,22 @@ void TrafficLight::SetPower(TrafficLightColor::TrafficLightColor color, Power::P
     sluice_client::CLIENT->SetTrafficLight(index, color, power);
 }
 
+void TrafficLight::ToggleLights() const {
+    if (GetPower(TrafficLightColor::Green) == Power::On) {
+        SetPower(TrafficLightColor::Green, Power::Off);
+        SetPower(TrafficLightColor::Red, Power::On);
+    }
+    else {
+        SetPower(TrafficLightColor::Red, Power::Off);
+        SetPower(TrafficLightColor::Green, Power::On);
+    }
+}
+
+void TrafficLight::SwitchToRedLights() const {
+    SetPower(TrafficLightColor::Green, Power::Off);
+    SetPower(TrafficLightColor::Red, Power::On);
+}
+
 
 
 

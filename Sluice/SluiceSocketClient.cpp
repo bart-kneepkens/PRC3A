@@ -55,10 +55,6 @@ namespace sluice_client {
         CloseConnection();
     }
 
-    int SluiceClient::GetSocketId() const {
-        return this->socketId;
-    }
-
     int SluiceClient::OpenConnection() {
         // Open up the client-side socket. If it fails, print error and exit.
         this->socketId = socket(AF_INET, SOCK_STREAM, 0);
