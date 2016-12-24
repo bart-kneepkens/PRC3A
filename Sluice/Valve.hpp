@@ -10,14 +10,25 @@ private:
     const DoorSide::DoorSide side;
     /** This valve's index in the door. Used for building its corresponding string commands. */
     const unsigned int index;
+    /** This valve's previous state. Used for when recovering from an emergency stop. */
+    ValveState::ValveState previousState;
 public:
     Valve(DoorSide::DoorSide side, unsigned int index);
+
     ~Valve();
 
     /** Starts opening this valve. */
     void Open() const;
+
     /** Starts closing this valve. */
     void Close() const;
+
+    /** Emergency closes this valve. */
+    void EmergencyClose();
+
+    /** Continues this valve's behavior as it was before the emergency close. */
+    void RecoverFromEmergency();
+
     /**
      * Gets this valve's state.
      * @return

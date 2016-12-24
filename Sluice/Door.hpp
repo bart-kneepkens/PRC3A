@@ -11,11 +11,13 @@ protected:
     const DoorSide::DoorSide side;
 public:
     /** The lowest valve in the door. */
-    const Valve valveLow;
+    Valve valveLow;
     /** The middle valve in the door. */
-    const Valve valveMiddle;
+    Valve valveMiddle;
     /** The top valve in the door. */
-    const Valve valveHigh;
+    Valve valveHigh;
+    /** This door's previous state. Used for when recovering from an emergency stop. */
+    DoorState::DoorState previousState;
 
     Door(DoorSide::DoorSide side);
 
@@ -27,8 +29,11 @@ public:
     /** Starts closing this door. */
     void Close() const;
 
-    /** Stops the door from moving, whatever it is currently doing. */
-    void Stop() const;
+    /** Emergency stops this door and closes its valves. */
+    void EmergencyStop();
+
+    /** Continues this door's behavior as it was before the emergency stop. */
+    void RecoverFromEmergency();
 
     /**
      * Gets the current state of the door.

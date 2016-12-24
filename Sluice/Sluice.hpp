@@ -2,21 +2,20 @@
 #define SLUIS_SLUICE_HPP
 
 #include "DoorThatNeedsNewMotors.hpp"
-#include "ISluiceController.hpp"
 #include "TimedDoor.hpp"
 #include "TrafficLight.hpp"
 #include "WaterSensor.hpp"
 
 /** Controls a single sluice. */
-class Sluice : public ISluiceController {
+class Sluice {
 private:
     /** Water sensor for measuring water height. */
     const WaterSensor waterSensor;
 
     /** The sluice door on the left. */
-    const Door* leftDoor;
+    Door *leftDoor;
     /** The sluice door on the right. */
-    const Door* rightDoor;
+    Door *rightDoor;
 
     /** The left-most traffic light. */
     const TrafficLight leftInLight;
@@ -32,14 +31,11 @@ private:
 
     /** This sluice's current state. */
     SluiceState::SluiceState sluiceState;
+    /** This sluice's previous state. Used for when recovering from an emergency stop. */
+    SluiceState::SluiceState previousState;
     /** Mutex used for enforcing thread-safe getting and setting of sluiceState. */
     pthread_mutex_t sluiceStateMutex;
 
-    /**
-     * Thread-safe getter for this sluice's current state.
-     * @return
-     */
-    SluiceState::SluiceState GetSluiceState();
     /**
      * Thread-safe setter for this sluice's current state.
      * @param state
@@ -51,14 +47,37 @@ private:
      * @return
      */
     bool MayToggleLights();
+
+    /**
+     * Checks whether we're currently in the emergency state, and takes action accordingly. Will block for as long
+     * as the emergency state is active, then sets all the states back to their previous states.
+     */
+    void CheckForEmergency();
+
 public:
     Sluice(DoorType::DoorType doorType = DoorType::Normal);
+
     ~Sluice();
 
+    /**
+    * Thread-safe getter for this sluice's current state.
+    * @return
+    */
+    SluiceState::SluiceState GetSluiceState();
+
+    /** Called when the alarm/emergency button has been pressed. */
     void AlarmButtonPressed();
+
+    /** Called when ships may be signalled to enter the sluice. */
     void ReleaseInButtonPressed();
+
+    /** Called when ships may be signalled to leave the sluice. */
     void ReleaseOutButtonPressed();
+
+    /** Called to recover from an emergency state. */
     void RestoreButtonPressed();
+
+    /** Called to start the main sluice process. */
     void StartButtonPressed();
 };
 

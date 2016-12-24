@@ -15,6 +15,13 @@ namespace SluiceState {
         Started,
         Emergency
     };
+
+    /**
+     * Parses the supplied sluice state to a string.
+     * @param sluiceState
+     * @return
+     */
+    std::string ToString(SluiceState sluiceState);
 }
 
 namespace Command {

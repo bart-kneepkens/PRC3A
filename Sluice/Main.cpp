@@ -13,7 +13,7 @@
 /**
  * The sluice control used by this program.
  */
-ISluiceController *control;
+Sluice* control;
 
 /**
  * Thread for when the release in button was pressed.
@@ -146,7 +146,7 @@ int main(int argc, char *argv[]) {
     while (!exit) {
         // Present user with options.
         std::cout << "\n########################\n";
-        std::cout << "[ CHOOSE AN ACTION ]\n";
+        std::cout << "[ LAST STATE: " << SluiceState::ToString(control->GetSluiceState()) << ". CHOOSE AN ACTION ]\n";
         std::cout << "1: Signal ships may enter sluice;\n";
         std::cout << "2: Start sluice process;\n";
         std::cout << "3: Signal ships may leave sluice;\n";

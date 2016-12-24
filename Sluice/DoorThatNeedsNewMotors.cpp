@@ -1,7 +1,7 @@
 #include "DoorThatNeedsNewMotors.hpp"
 
 DoorThatNeedsNewMotors::DoorThatNeedsNewMotors(DoorSide::DoorSide side) :
-        Door(side), needsRebootMotorAfter(1000) {}
+        Door(side) {}
 
 DoorThatNeedsNewMotors::~DoorThatNeedsNewMotors() {}
 
