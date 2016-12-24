@@ -13,14 +13,14 @@
 /**
  * The sluice control used by this program.
  */
-Sluice* control;
+Sluice *control;
 
 /**
  * Thread for when the release in button was pressed.
  * @param threadArgs
  * @return
  */
-void* ReleaseInButtonThread(void* threadArgs) {
+void *ReleaseInButtonThread(void *threadArgs) {
     try {
         control->ReleaseInButtonPressed();
     }
@@ -36,7 +36,7 @@ void* ReleaseInButtonThread(void* threadArgs) {
  * @param threadArgs
  * @return
  */
-void* StartButtonThread(void* threadArgs) {
+void *StartButtonThread(void *threadArgs) {
     try {
         control->StartButtonPressed();
     }
@@ -52,7 +52,7 @@ void* StartButtonThread(void* threadArgs) {
  * @param threadArgs
  * @return
  */
-void* ReleaseOutButtonThread(void* threadArgs) {
+void *ReleaseOutButtonThread(void *threadArgs) {
     try {
         control->ReleaseOutButtonPressed();
     }
@@ -68,7 +68,7 @@ void* ReleaseOutButtonThread(void* threadArgs) {
  * @param threadArgs
  * @return
  */
-void* AlarmButtonThread(void* threadArgs) {
+void *AlarmButtonThread(void *threadArgs) {
     try {
         control->AlarmButtonPressed();
     }
@@ -84,7 +84,7 @@ void* AlarmButtonThread(void* threadArgs) {
  * @param threadArgs
  * @return
  */
-void* RestoreButtonThread(void* threadArgs) {
+void *RestoreButtonThread(void *threadArgs) {
     try {
         control->RestoreButtonPressed();
     }

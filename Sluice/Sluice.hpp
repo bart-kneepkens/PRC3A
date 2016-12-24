@@ -5,10 +5,14 @@
 #include "TimedDoor.hpp"
 #include "TrafficLight.hpp"
 #include "WaterSensor.hpp"
+#include <unistd.h>
 
 /** Controls a single sluice. */
 class Sluice {
 private:
+    /** The default duration of sleeps in busy-waiting loops. */
+    static const unsigned int SLEEP_DURATION = 250;
+
     /** Water sensor for measuring water height. */
     const WaterSensor waterSensor;
 

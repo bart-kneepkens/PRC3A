@@ -8,6 +8,7 @@
 class TimedDoor : public Door {
 public:
     TimedDoor(DoorSide::DoorSide side);
+
     ~TimedDoor();
 
     /** This door's lock. */

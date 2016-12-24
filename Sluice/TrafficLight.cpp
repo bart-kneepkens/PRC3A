@@ -16,8 +16,7 @@ void TrafficLight::ToggleLights() const {
     if (GetPower(TrafficLightColor::Green) == Power::On) {
         SetPower(TrafficLightColor::Green, Power::Off);
         SetPower(TrafficLightColor::Red, Power::On);
-    }
-    else {
+    } else {
         SetPower(TrafficLightColor::Red, Power::Off);
         SetPower(TrafficLightColor::Green, Power::On);
     }

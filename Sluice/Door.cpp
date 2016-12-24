@@ -1,7 +1,7 @@
 #include "Door.hpp"
 
 Door::Door(DoorSide::DoorSide side) : side(side), valveLow(Valve(side, 1)),
-    valveMiddle(Valve(side, 2)), valveHigh(Valve(side, 3)) {}
+                                      valveMiddle(Valve(side, 2)), valveHigh(Valve(side, 3)) {}
 
 Door::~Door() {}
 
@@ -34,8 +34,7 @@ void Door::RecoverFromEmergency() {
     // Recover door state.
     if (previousState == DoorState::Opening) {
         sluice_client::CLIENT->SetDoor(side, DoorParameter::Open);
-    }
-    else if (previousState == DoorState::Closing) {
+    } else if (previousState == DoorState::Closing) {
         sluice_client::CLIENT->SetDoor(side, DoorParameter::Close);
     }
 

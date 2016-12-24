@@ -61,6 +61,7 @@ namespace sluice_client {
          * @return
          */
         std::string SendMsgAndGetReply(std::string msg);
+
     public:
         SluiceClient(char *serverName, unsigned int port);
 
@@ -167,7 +168,7 @@ namespace sluice_client {
     /**
      * Global instance of SluiceClient class. Instantiate once per program to have a single global instance of SluiceClient.
      */
-    extern SluiceClient* CLIENT;
+    extern SluiceClient *CLIENT;
 }
 
 #endif //SLUIS_SLUICESOCKETCLIENT_HPP

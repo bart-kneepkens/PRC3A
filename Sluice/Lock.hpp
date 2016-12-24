@@ -10,6 +10,7 @@ private:
     const DoorSide::DoorSide side;
 public:
     Lock(DoorSide::DoorSide side);
+
     ~Lock();
 
     /**
@@ -17,6 +18,7 @@ public:
      * @param locked
      */
     void SetLocked(bool locked) const;
+
     /**
      * Get this lock's state.
      * @return

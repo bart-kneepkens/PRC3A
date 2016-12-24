@@ -89,8 +89,8 @@ void Sluice::StartButtonPressed() {
     // According to current water level, decide which components to operate on.
     WaterLevel::WaterLevel waterLevel = this->waterSensor.GetWaterLevel();
     WaterLevel::WaterLevel desiredWaterLevel = waterLevel == WaterLevel::Low ? WaterLevel::High : WaterLevel::Low;
-    const Door* doorToClose = waterLevel == WaterLevel::Low ? this->leftDoor : this->rightDoor;
-    const Door* doorWhoseValvesToOpen = waterLevel == WaterLevel::Low ? this->rightDoor : this->leftDoor;
+    const Door *doorToClose = waterLevel == WaterLevel::Low ? this->leftDoor : this->rightDoor;
+    const Door *doorWhoseValvesToOpen = waterLevel == WaterLevel::Low ? this->rightDoor : this->leftDoor;
 
     // Check whether the correct door is closed/locked yet. If not...
     DoorState::DoorState doorToCloseState = doorToClose->GetState();
@@ -103,10 +103,11 @@ void Sluice::StartButtonPressed() {
             while (doorToClose->GetState() != DoorState::Closed) {
                 // Constantly check whether the emergency button has been pressed.
                 CheckForEmergency();
+                usleep(SLEEP_DURATION);
             }
             ((TimedDoor *) doorToClose)->lock.SetLocked(true);
         }
-        // If this is a door with defunct motors, make sure to continuously restart it.
+            // If this is a door with defunct motors, make sure to continuously restart it.
         else if (this->doorType == DoorType::NeedsNewMotors) {
             while ((doorToCloseState = doorToClose->GetState()) != DoorState::Closed) {
                 // Constantly check whether the emergency button has been pressed.
@@ -115,13 +116,15 @@ void Sluice::StartButtonPressed() {
                 if (doorToCloseState != DoorState::Closing) {
                     doorToClose->Close();
                 }
+                usleep(SLEEP_DURATION);
             }
         }
-        // If this is a normal or any other type of door, just wait until it's closed.
+            // If this is a normal or any other type of door, just wait until it's closed.
         else {
             while (doorToClose->GetState() != DoorState::Closed) {
                 // Constantly check whether the emergency button has been pressed.
                 CheckForEmergency();
+                usleep(SLEEP_DURATION);
             }
         }
     }
@@ -136,11 +139,13 @@ void Sluice::StartButtonPressed() {
         while (this->waterSensor.GetWaterLevel() != WaterLevel::AboveValve2) {
             // Constantly check whether the emergency button has been pressed.
             CheckForEmergency();
+            usleep(SLEEP_DURATION);
         }
         doorWhoseValvesToOpen->valveMiddle.Open();
         while (this->waterSensor.GetWaterLevel() != WaterLevel::AboveValve3) {
             // Constantly check whether the emergency button has been pressed.
             CheckForEmergency();
+            usleep(SLEEP_DURATION);
         }
         doorWhoseValvesToOpen->valveHigh.Open();
     }
@@ -149,6 +154,7 @@ void Sluice::StartButtonPressed() {
     while (this->waterSensor.GetWaterLevel() != desiredWaterLevel) {
         // Constantly check whether the emergency button has been pressed.
         CheckForEmergency();
+        usleep(SLEEP_DURATION);
     }
 
     // Close all valves.
@@ -160,27 +166,31 @@ void Sluice::StartButtonPressed() {
     while (doorWhoseValvesToOpen->valveLow.GetState() != ValveState::Closed) {
         // Constantly check whether the emergency button has been pressed.
         CheckForEmergency();
+        usleep(SLEEP_DURATION);
     }
     while (doorWhoseValvesToOpen->valveMiddle.GetState() != ValveState::Closed) {
         // Constantly check whether the emergency button has been pressed.
         CheckForEmergency();
+        usleep(SLEEP_DURATION);
     }
     while (doorWhoseValvesToOpen->valveHigh.GetState() != ValveState::Closed) {
         // Constantly check whether the emergency button has been pressed.
         CheckForEmergency();
+        usleep(SLEEP_DURATION);
     }
 
     // If this is a timed door, make sure to unlock it before opening.
     DoorState::DoorState doorWhoseValvesToOpenState = doorWhoseValvesToOpen->GetState();
     if (doorWhoseValvesToOpenState == DoorState::Locked) {
-        ((TimedDoor*) doorWhoseValvesToOpen)->lock.SetLocked(false);
+        ((TimedDoor *) doorWhoseValvesToOpen)->lock.SetLocked(false);
         doorWhoseValvesToOpen->Open();
         while (doorWhoseValvesToOpen->GetState() != DoorState::Open) {
             // Constantly check whether the emergency button has been pressed.
             CheckForEmergency();
+            usleep(SLEEP_DURATION);
         }
     }
-    // If this is a door with defunct motors, make sure to continuously restart it while opening.
+        // If this is a door with defunct motors, make sure to continuously restart it while opening.
     else if (this->doorType == DoorType::NeedsNewMotors) {
         doorWhoseValvesToOpen->Open();
         while ((doorWhoseValvesToOpenState = doorWhoseValvesToOpen->GetState()) != DoorState::Open) {
@@ -190,14 +200,16 @@ void Sluice::StartButtonPressed() {
             if (doorWhoseValvesToOpenState != DoorState::Opening) {
                 doorWhoseValvesToOpen->Open();
             }
+            usleep(SLEEP_DURATION);
         }
     }
-    // If this is a normal or any other type of door, just wait until it's opened.
+        // If this is a normal or any other type of door, just wait until it's opened.
     else {
         doorWhoseValvesToOpen->Open();
         while (doorWhoseValvesToOpen->GetState() != DoorState::Open) {
             // Constantly check whether the emergency button has been pressed.
             CheckForEmergency();
+            usleep(SLEEP_DURATION);
         }
     }
 
@@ -220,7 +232,7 @@ void Sluice::SetSluiceState(SluiceState::SluiceState state) {
 
 bool Sluice::MayToggleLights() {
     return this->GetSluiceState() == SluiceState::Idle &&
-            (leftDoor->GetState() == DoorState::Open || rightDoor->GetState() == DoorState::Open);
+           (leftDoor->GetState() == DoorState::Open || rightDoor->GetState() == DoorState::Open);
 }
 
 void Sluice::CheckForEmergency() {
@@ -230,7 +242,9 @@ void Sluice::CheckForEmergency() {
         rightDoor->EmergencyStop();
 
         // Block until we've left the emergency state.
-        while (this->GetSluiceState() == SluiceState::Emergency) { }
+        while (this->GetSluiceState() == SluiceState::Emergency) {
+            usleep(SLEEP_DURATION);
+        }
 
         // If we've left the emergency state, then continue the doors' previous behavior.
         leftDoor->RecoverFromEmergency();

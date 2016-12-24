@@ -7,6 +7,7 @@
 class DoorThatNeedsNewMotors : public Door {
 public:
     DoorThatNeedsNewMotors(DoorSide::DoorSide side);
+
     ~DoorThatNeedsNewMotors();
 };
 

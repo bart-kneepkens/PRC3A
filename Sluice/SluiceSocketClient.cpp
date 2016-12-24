@@ -1,5 +1,6 @@
 #include "SluiceSocketClient.hpp"
 #include <iostream>
+
 namespace sluice_client {
 
     namespace {

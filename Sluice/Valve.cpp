@@ -1,9 +1,9 @@
 #include "Valve.hpp"
 
 Valve::Valve(DoorSide::DoorSide side, unsigned int index) : side(side), index(index),
-                                                            previousState(ValveState::Closed) { };
+                                                            previousState(ValveState::Closed) {};
 
-Valve::~Valve() { };
+Valve::~Valve() {};
 
 void Valve::Open() const {
     sluice_client::CLIENT->SetValve(side, index, ValveState::Open);
