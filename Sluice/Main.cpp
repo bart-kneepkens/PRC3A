@@ -159,6 +159,7 @@ int main(int argc, char *argv[]) {
         // Capture user input.
         char input;
         std::cin >> input;
+        std::cin.ignore();
         pthread_t threadID;
 
         // Instantiate correct thread / take proper action according to input.
