@@ -145,16 +145,16 @@ int main(int argc, char *argv[]) {
     bool exit = false;
     while (!exit) {
         // Present user with options.
-        std::cout << "\n########################\n";
-        std::cout << "[ LAST STATE: " << SluiceState::ToString(control->GetSluiceState()) << ". CHOOSE AN ACTION ]\n";
-        std::cout << "1: Signal ships may enter sluice;\n";
-        std::cout << "2: Start sluice process;\n";
-        std::cout << "3: Signal ships may leave sluice;\n";
-        std::cout << "4: Emergency stop;\n";
-        std::cout << "5: Continue after emergency stop;\n";
-        std::cout << "6: Exit program.\n";
-        std::cout << "########################\n\n";
-        std::cout << "[INPUT] " << std::flush;
+        std::cout << "\n########################" << std::endl;
+        std::cout << "[ LAST STATE: " << SluiceState::ToString(control->GetSluiceState()) << ". CHOOSE AN ACTION ]" << std::endl;
+        std::cout << "1: Signal ships may enter sluice;" << std::endl;
+        std::cout << "2: Start sluice process;" << std::endl;
+        std::cout << "3: Signal ships may leave sluice;" << std::endl;
+        std::cout << "4: Emergency stop;" << std::endl;
+        std::cout << "5: Continue after emergency stop;" << std::endl;
+        std::cout << "6: Exit program." << std::endl;
+        std::cout << "########################" << std::endl << std::endl;
+        std::cout << "[INPUT] " << std::endl;
 
         // Capture user input.
         char input;
