@@ -7,51 +7,45 @@
 template<class valueType>
 
 /**
- * A sorted linked list item, containing a value and a pointer to the next item.
+ * A sorted linked list item, containing a non-null value and a pointer to the next item.
  */
 class SortedLinkedListItem {
 private:
-    /** This item's value. */
-    const valueType *const value;
+    /** This item's non-null value. */
+    valueType value;
 
-    /** The next item. */
-    const SortedLinkedListItem<valueType> *next;
+    /** The next item, which may be none (null). */
+    SortedLinkedListItem<valueType> *next;
 public:
     /** Constructor. */
-    SortedLinkedListItem(const valueType *const value) : value(value) {}
-
-    /** Destructor. */
-    virtual ~SortedLinkedListItem() {}
-
-    /**
-     * Returns whether or not this item has a succeeding item.
-     * @return true if this item has a succeeding item, otherwise false.
-     */
-    bool HasNext() const {
-        return next != 0;
+    SortedLinkedListItem(valueType value) : value(value) {
+        next = 0;
     }
+
+    /** Destructor. Not responsible for cleaning up the next item. */
+    ~SortedLinkedListItem() {}
 
     /**
      * Gets the next item.
-     * @return The next item.
+     * @return The next item, or 0 if there is no next item.
      */
-    const SortedLinkedListItem<valueType> *GetNext() const {
+    SortedLinkedListItem<valueType> *GetNext() const {
         return this->next;
     }
 
     /**
-     * Sets the next item. Note that setting this manually may result in the list becoming unsorted.
+     * Sets the next item.
      * @param next The next item.
      */
-    void SetNext(SortedLinkedListItem<valueType> const *const next) {
+    void SetNext(SortedLinkedListItem<valueType> *const next) {
         this->next = next;
     }
 
     /**
      * Gets this item's value.
-     * @return This item's value, or 0 if it has none.
+     * @return This item's value.
      */
-    const valueType *GetValue() const {
+    valueType GetValue() const {
         return this->value;
     }
 };
