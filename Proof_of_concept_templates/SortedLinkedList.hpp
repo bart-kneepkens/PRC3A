@@ -3,24 +3,63 @@
 
 #include <stdexcept>
 
-#include "SortedLinkedListItem.hpp"
-
-/**
- * The type of the contained values.
- */
-template<class valueType>
-
 /**
  * A sorted linked list. Note that altering the state of items added to this list removes the guarantee that this list
  * remains sorted.
  */
+template<class listType>
 class SortedLinkedList {
 private:
+    /**
+    * Definition for the sorted linked list item, containing a non-null value and a pointer to the next item.
+    */
+    template<class itemType>
+    class SortedLinkedListItem {
+    private:
+        /** This item's non-null value. */
+        itemType value;
+
+        /** The next item, which may be none (null). */
+        SortedLinkedListItem<itemType> *next;
+    public:
+        /** Constructor. */
+        SortedLinkedListItem(itemType value) : value(value) {
+            next = 0;
+        }
+
+        /** Destructor. Not responsible for cleaning up the next item. */
+        ~SortedLinkedListItem() {}
+
+        /**
+         * Gets the next item.
+         * @return The next item, or 0 if there is no next item.
+         */
+        SortedLinkedListItem<itemType> *GetNext() const {
+            return this->next;
+        }
+
+        /**
+         * Sets the next item.
+         * @param next The next item.
+         */
+        void SetNext(SortedLinkedListItem<itemType> *const next) {
+            this->next = next;
+        }
+
+        /**
+         * Gets this item's value.
+         * @return This item's value.
+         */
+        itemType GetValue() const {
+            return this->value;
+        }
+    };
+
     /** The root of the linked list. */
-    SortedLinkedListItem<valueType> *head;
+    SortedLinkedListItem<listType> *head;
 
     /** The iterator position over this linked list. */
-    const SortedLinkedListItem<valueType> *iterator;
+    const SortedLinkedListItem<listType> *iterator;
 public:
     /** Constructor. */
     SortedLinkedList() {
@@ -30,9 +69,9 @@ public:
 
     /** Destructor. Deletes all SortedLinkedListItems, starting with root. */
     ~SortedLinkedList() {
-        const SortedLinkedListItem<valueType> *current = head;
+        const SortedLinkedListItem<listType> *current = head;
         while (current != 0) {
-            const SortedLinkedListItem<valueType> *next = current->GetNext();
+            const SortedLinkedListItem<listType> *next = current->GetNext();
             delete current;
             current = next;
         }
@@ -42,8 +81,8 @@ public:
     * Adds the supplied value to this list.
     * @param value The value to add.
     */
-    void Add(valueType value) {
-        SortedLinkedListItem<valueType> *const item = new SortedLinkedListItem<valueType>(value);
+    void Add(listType value) {
+        SortedLinkedListItem<listType> *const item = new SortedLinkedListItem<listType>(value);
 
         // If this list is empty, simply set head to the new item.
         if (head == 0) {
@@ -60,8 +99,8 @@ public:
             return;
         }
 
-        SortedLinkedListItem<valueType> *current = head;
-        SortedLinkedListItem<valueType> *next = head->GetNext();
+        SortedLinkedListItem<listType> *current = head;
+        SortedLinkedListItem<listType> *next = head->GetNext();
 
         // Iterate until the next item is null, or the next item is greater than the new item.
         while (next != 0 && value > next->GetValue()) {
@@ -78,7 +117,7 @@ public:
      * Removes all occurences of the supplied value from this list.
      * @param value The value to remove from this list.
      */
-    void Remove(const valueType value) {
+    void Remove(const listType value) {
         // If this list is empty, simply return.
         if (head == 0) {
             return;
@@ -86,7 +125,7 @@ public:
 
         // If head contains the value, remove and replace head until we have a head that doesn't contain the value.
         while (head->GetValue() == value) {
-            SortedLinkedListItem<valueType> *newRoot = head->GetNext();
+            SortedLinkedListItem<listType> *newRoot = head->GetNext();
             delete head;
             head = newRoot;
             iterator = head;
@@ -97,8 +136,8 @@ public:
             }
         }
 
-        SortedLinkedListItem<valueType> *previous = head;
-        SortedLinkedListItem<valueType> *current = head->GetNext();
+        SortedLinkedListItem<listType> *previous = head;
+        SortedLinkedListItem<listType> *current = head->GetNext();
 
         // Iterate over the entire list, deleting all occurrences of the specified value.
         while (current != 0) {
@@ -109,7 +148,7 @@ public:
             }
                 // If it does, then remove the current.
             else {
-                SortedLinkedListItem<valueType> *newCurrent = current->GetNext();
+                SortedLinkedListItem<listType> *newCurrent = current->GetNext();
                 delete current;
                 current = newCurrent;
                 previous->SetNext(current);
@@ -137,11 +176,11 @@ public:
      * @return the value of the item currently pointed to by the iterator.
      * @throws std::out_of_range if there is no next item.
      */
-    valueType Next() {
+    listType Next() {
         if (iterator == 0) {
             throw std::out_of_range("SortedLinkedList.Next(...): There is no next item!");
         }
-        valueType value = iterator->GetValue();
+        listType value = iterator->GetValue();
         iterator = iterator->GetNext();
         return value;
     }
@@ -152,13 +191,13 @@ public:
      * @return The value at the specified index.
      * @throws std::out_of_range if the index is out of range.
      */
-    valueType At(unsigned const int index) const {
+    listType At(unsigned const int index) const {
         // If head is null, throw an exception.
         if (head == 0) {
             throw std::out_of_range("SortedLinkedList.AtIndex(...): Index is out of range!");
         }
 
-        const SortedLinkedListItem<valueType> *current = head;
+        const SortedLinkedListItem<listType> *current = head;
         unsigned int i = 0;
 
         // Iterate until the index has been reached.
@@ -186,22 +225,22 @@ public:
 
         // If the specified index is 0, remove and replace head.
         if (index == 0) {
-            SortedLinkedListItem<valueType> *newRoot = head->GetNext();
+            SortedLinkedListItem<listType> *newRoot = head->GetNext();
             delete head;
             head = newRoot;
             iterator = head;
             return;
         }
 
-        SortedLinkedListItem<valueType> *previous = head;
-        SortedLinkedListItem<valueType> *current = head->GetNext();
+        SortedLinkedListItem<listType> *previous = head;
+        SortedLinkedListItem<listType> *current = head->GetNext();
         unsigned int i = 1;
 
         // Iterate until the index has been reached.
         while (current != 0) {
             // If we've reached the index, remove the item and return.
             if (i == index) {
-                SortedLinkedListItem<valueType> *next = current->GetNext();
+                SortedLinkedListItem<listType> *next = current->GetNext();
                 delete current;
                 previous->SetNext(next);
                 return;
@@ -226,7 +265,7 @@ public:
      * @return The number of values in this list.
      */
     unsigned int Count() const {
-        const SortedLinkedListItem<valueType> *current = head;
+        const SortedLinkedListItem<listType> *current = head;
         unsigned int i = 0;
 
         // Iterate until the next item is null, counting all the way.
