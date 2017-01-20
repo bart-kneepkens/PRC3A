@@ -1,17 +1,5 @@
 #include "Enumerators.hpp"
 
-namespace SluiceState {
-    std::string ToString(SluiceState sluiceState) {
-        if (sluiceState == SluiceState::Emergency) {
-            return "Emergency";
-        }
-        if (sluiceState == SluiceState::Idle) {
-            return "Idle";
-        }
-        return "Started";
-    }
-}
-
 namespace Command {
     std::string ToString(Command command) {
         if (command == Command::GetDoor) {
@@ -77,7 +65,7 @@ namespace DoorState {
 
 namespace DoorSide {
     std::string ToString(DoorSide parameter) {
-        if (parameter == DoorSide::Left) {
+        if (parameter == DoorSide::LowWater) {
             return "Left";
         }
         return "Right";

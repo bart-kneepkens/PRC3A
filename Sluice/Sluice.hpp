@@ -1,34 +1,36 @@
 #ifndef SLUIS_SLUICE_HPP
 #define SLUIS_SLUICE_HPP
 
+#include <unistd.h>
+#include <pthread.h>
+
 #include "DoorThatNeedsNewMotors.hpp"
 #include "TimedDoor.hpp"
 #include "TrafficLight.hpp"
 #include "WaterSensor.hpp"
-#include <unistd.h>
 
 /** Controls a single sluice. */
 class Sluice {
 private:
     /** The default duration of sleeps in busy-waiting loops. */
-    static const unsigned int SLEEP_DURATION = 250;
+    // static const unsigned int SLEEP_DURATION = 250;
 
     /** Water sensor for measuring water height. */
     const WaterSensor waterSensor;
 
     /** The sluice door on the left. */
-    Door *leftDoor;
+    Door *lowWaterDoor;
     /** The sluice door on the right. */
-    Door *rightDoor;
+    Door *highWaterDoor;
 
     /** The left-most traffic light. */
-    const TrafficLight leftInLight;
+    const TrafficLight lowWaterInLight;
     /** The second-most left traffic light. */
-    const TrafficLight leftOutLight;
+    const TrafficLight lowWaterOutLight;
     /** The second-most right traffic light. */
-    const TrafficLight rightInLight;
+    const TrafficLight highWaterInLight;
     /** The right-most traffic light. */
-    const TrafficLight rightOutLight;
+    const TrafficLight highWaterOutLight;
 
     /** The type of this sluice's doors. */
     const DoorType::DoorType doorType;
@@ -40,6 +42,9 @@ private:
     /** Mutex used for enforcing thread-safe getting and setting of sluiceState. */
     pthread_mutex_t sluiceStateMutex;
 
+    /** The thread used by Run. */
+    pthread_t runningThread;
+
     /**
      * Thread-safe setter for this sluice's current state.
      * @param state
@@ -47,16 +52,11 @@ private:
     void SetSluiceState(SluiceState::SluiceState state);
 
     /**
-     * Whether or not the traffic lights may currently be toggled.
+     * Function used for the POSIX thread created and ran by non-static void Run().
+     * @param threadArgs Pointer to a Sluice instance. May not be NULL.
      * @return
      */
-    bool MayToggleLights();
-
-    /**
-     * Checks whether we're currently in the emergency state, and takes action accordingly. Will block for as long
-     * as the emergency state is active, then sets all the states back to their previous states.
-     */
-    void CheckForEmergency();
+    void static *Run(void *threadArgs);
 
 public:
     Sluice(DoorType::DoorType doorType = DoorType::Normal);
@@ -68,6 +68,12 @@ public:
     * @return
     */
     SluiceState::SluiceState GetSluiceState();
+
+    /**
+     * Starts running this sluice controller. Should only be called once.
+     * Non-blocking, as it creates and runs in a separate thread.
+     */
+    void Run();
 
     /** Called when the alarm/emergency button has been pressed. */
     void AlarmButtonPressed();

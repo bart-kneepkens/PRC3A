@@ -11,17 +11,24 @@
 namespace SluiceState {
     /** The possible states for the sluice. */
     enum SluiceState {
-        Idle,
-        Started,
-        Emergency
+        WaitingForRecovery,
+        IdlingOnHighWater,
+        ClosingHighWaterDoor,
+        OpeningLowWaterDoorLowerValve,
+        WaitingForWaterLevelLow,
+        ClosingLowWaterDoorLowerValve,
+        OpeningLowWaterDoor,
+        IdlingOnLowWater,
+        ClosingLowWaterDoor,
+        OpeningHighWaterDoorLowerValve,
+        WaitingForWaterLevelAboveMiddleValve,
+        OpeningHighWaterDoorMiddleValve,
+        WaitingForWaterLevelAboveUpperValve,
+        OpeningHighWaterDoorUpperValve,
+        WaitingForWaterLevelHigh,
+        ClosingHighWaterDoorAllValves,
+        OpeningHighWaterDoor
     };
-
-    /**
-     * Parses the supplied sluice state to a string.
-     * @param sluiceState
-     * @return
-     */
-    std::string ToString(SluiceState sluiceState);
 }
 
 namespace Command {
@@ -87,8 +94,8 @@ namespace DoorState {
 namespace DoorSide {
     /** Simple enumerator for what side a door is on. */
     enum DoorSide {
-        Left,
-        Right
+        LowWater,
+        HighWater
     };
 
     /**
