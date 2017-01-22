@@ -105,22 +105,30 @@ void Sluice::RestoreButtonPressed() {
 void Sluice::StartButtonPressed() {
     // According to our current state, check what to do.
     switch (this->GetSluiceState()) {
-        case (SluiceState::IdlingOnLowWater):
+        case (SluiceState::IdlingOnLowWater): {
             // If we're idling on low water, then set the lights to red, close the low water door,
             // and go to the next state.
-            this->lowWaterDoor->Close();
+            const DoorState::DoorState lowWaterDoorState = lowWaterDoor->GetState();
+            if (lowWaterDoorState != DoorState::Closed && lowWaterDoorState != DoorState::Locked) {
+                this->lowWaterDoor->Close();
+            }
             this->lowWaterInLight.SwitchToRedLights();
             this->lowWaterOutLight.SwitchToRedLights();
             this->SetSluiceState(SluiceState::ClosingLowWaterDoor);
             break;
-        case (SluiceState::IdlingOnHighWater):
+        }
+        case (SluiceState::IdlingOnHighWater): {
             // If we're idling on high water, then set the lights to red, close the high water door,
             // and go to the next state.
-            this->highWaterDoor->Close();
+            const DoorState::DoorState highWaterDoorState = highWaterDoor->GetState();
+            if (highWaterDoorState != DoorState::Closed && highWaterDoorState != DoorState::Locked) {
+                this->highWaterDoor->Close();
+            }
             this->highWaterInLight.SwitchToRedLights();
             this->highWaterOutLight.SwitchToRedLights();
             this->SetSluiceState(SluiceState::ClosingHighWaterDoor);
             break;
+        }
         default:
             break;
     }
@@ -160,9 +168,9 @@ void *Sluice::Run(void *threadArgs) {
             case (SluiceState::ClosingHighWaterDoor): {
                 DoorState::DoorState highWaterDoorState = sluice->highWaterDoor->GetState();
                 // If the high water door has closed...
-                if (highWaterDoorState == DoorState::Closed) {
+                if (highWaterDoorState == DoorState::Closed || highWaterDoorState == DoorState::Locked) {
                     // If this door is a lockable, then lock it.
-                    if (sluice->doorType == DoorType::Timed) {
+                    if (sluice->doorType == DoorType::Timed && highWaterDoorState != DoorState::Locked) {
                         ((TimedDoor *) sluice->highWaterDoor)->lock.SetLocked(true);
                     }
                     // Open the low water door's lower valve.
@@ -223,9 +231,9 @@ void *Sluice::Run(void *threadArgs) {
             case (SluiceState::ClosingLowWaterDoor): {
                 DoorState::DoorState lowWaterDoorState1 = sluice->lowWaterDoor->GetState();
                 // If the low water door has closed...
-                if (lowWaterDoorState1 == DoorState::Closed) {
+                if (lowWaterDoorState1 == DoorState::Closed || lowWaterDoorState1 == DoorState::Locked) {
                     // If this door is a lockable, then lock it.
-                    if (sluice->doorType == DoorType::Timed) {
+                    if (sluice->doorType == DoorType::Timed && lowWaterDoorState1 != DoorState::Locked) {
                         ((TimedDoor *) sluice->lowWaterDoor)->lock.SetLocked(true);
                     }
                     // Open the high water door's lower valve.
