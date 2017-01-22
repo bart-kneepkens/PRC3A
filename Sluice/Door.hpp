@@ -40,6 +40,26 @@ public:
      * @return
      */
     DoorState::DoorState GetState() const;
+
+    /**
+     * Special behavior to be invoked before this door is opened. Does nothing by default.
+     */
+    virtual void BeforeOpenBehavior() const;
+
+    /**
+     * Special behavior to be invoked after this door is closed. Does nothing by default.
+     */
+    virtual void AfterCloseBehavior() const;
+
+    /**
+     * Special behavior to be invoked while this door is opening. Does nothing by default.
+     */
+    virtual void DuringOpeningBehavior() const;
+
+    /**
+     * Special behavior to be invoked while this door is closing. Does nothing by default.
+     */
+    virtual void DuringClosingBehavior() const;
 };
 
 #endif  // SLUIS_DOOR_HPP

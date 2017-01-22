@@ -157,7 +157,6 @@ void *Sluice::Run(void *threadArgs) {
 
     while (loop) {
         const SluiceState::SluiceState curState = sluice->GetSluiceState();
-        //std::cout << curState << std::endl;
         switch (curState) {
             case (SluiceState::WaitingForRecovery):
                 // Do nothing, just idling.
@@ -169,18 +168,16 @@ void *Sluice::Run(void *threadArgs) {
                 DoorState::DoorState highWaterDoorState = sluice->highWaterDoor->GetState();
                 // If the high water door has closed...
                 if (highWaterDoorState == DoorState::Closed || highWaterDoorState == DoorState::Locked) {
-                    // If this door is a lockable, then lock it.
-                    if (sluice->doorType == DoorType::Timed && highWaterDoorState != DoorState::Locked) {
-                        ((TimedDoor *) sluice->highWaterDoor)->lock.SetLocked(true);
-                    }
+                    // Do after close behavior.
+                    sluice->highWaterDoor->AfterCloseBehavior();
                     // Open the low water door's lower valve.
                     sluice->lowWaterDoor->valveLow.Open();
                     // Move to the next state.
                     sluice->SetSluiceState(SluiceState::OpeningLowWaterDoorLowerValve);
                 }
-                    // Else if the high water door is the faulty type, restart it.
-                else if (sluice->doorType == DoorType::NeedsNewMotors && highWaterDoorState != DoorState::Closing) {
-                    sluice->highWaterDoor->Close();
+                // Else, do closing behavior.
+                else {
+                    sluice->highWaterDoor->DuringClosingBehavior();
                 }
                 break;
             }
@@ -204,10 +201,7 @@ void *Sluice::Run(void *threadArgs) {
                 // If the low water door's lower valve has closed, then open the low water door and
                 // move onto the next state.
                 if (sluice->lowWaterDoor->valveLow.GetState() == ValveState::Closed) {
-                    // If this door is lockable, then unlock it first.
-                    if (sluice->doorType == DoorType::Timed) {
-                        ((TimedDoor *) sluice->lowWaterDoor)->lock.SetLocked(false);
-                    }
+                    sluice->lowWaterDoor->BeforeOpenBehavior();
                     sluice->lowWaterDoor->Open();
                     sluice->SetSluiceState(SluiceState::OpeningLowWaterDoor);
                 }
@@ -219,9 +213,9 @@ void *Sluice::Run(void *threadArgs) {
                 if (lowWaterDoorState == DoorState::Open) {
                     sluice->SetSluiceState(SluiceState::IdlingOnLowWater);
                 }
-                    // Else if the low water door is the faulty type, restart it.
-                else if (sluice->doorType == DoorType::NeedsNewMotors && lowWaterDoorState != DoorState::Opening) {
-                    sluice->lowWaterDoor->Open();
+                // Else, do opening behavior.
+                else {
+                    sluice->lowWaterDoor->DuringOpeningBehavior();
                 }
                 break;
             }
@@ -232,18 +226,16 @@ void *Sluice::Run(void *threadArgs) {
                 DoorState::DoorState lowWaterDoorState1 = sluice->lowWaterDoor->GetState();
                 // If the low water door has closed...
                 if (lowWaterDoorState1 == DoorState::Closed || lowWaterDoorState1 == DoorState::Locked) {
-                    // If this door is a lockable, then lock it.
-                    if (sluice->doorType == DoorType::Timed && lowWaterDoorState1 != DoorState::Locked) {
-                        ((TimedDoor *) sluice->lowWaterDoor)->lock.SetLocked(true);
-                    }
+                    // Do after close behavior.
+                    sluice->lowWaterDoor->AfterCloseBehavior();
                     // Open the high water door's lower valve.
                     sluice->highWaterDoor->valveLow.Open();
                     // Move to the next state.
                     sluice->SetSluiceState(SluiceState::OpeningHighWaterDoorLowerValve);
                 }
-                    // Else if the low water door is the faulty type, restart it.
-                else if (sluice->doorType == DoorType::NeedsNewMotors && lowWaterDoorState1 != DoorState::Closing) {
-                    sluice->lowWaterDoor->Close();
+                // Else, do closing behavior.
+                else {
+                    sluice->lowWaterDoor->DuringClosingBehavior();
                 }
                 break;
             }
@@ -301,12 +293,9 @@ void *Sluice::Run(void *threadArgs) {
                 // If all high water door's valves have closed, then open the high water door and
                 // move to the next state.
                 if (sluice->highWaterDoor->valveHigh.GetState() == ValveState::Closed &&
-                    sluice->highWaterDoor->valveMiddle.GetState() == ValveState::Closed &&
-                    sluice->highWaterDoor->valveLow.GetState() == ValveState::Closed) {
-                    // If this door is a lockable, then unlock it first.
-                    if (sluice->doorType == DoorType::Timed) {
-                        ((TimedDoor *) sluice->highWaterDoor)->lock.SetLocked(false);
-                    }
+                        sluice->highWaterDoor->valveMiddle.GetState() == ValveState::Closed &&
+                            sluice->highWaterDoor->valveLow.GetState() == ValveState::Closed) {
+                    sluice->highWaterDoor->BeforeOpenBehavior();
                     sluice->highWaterDoor->Open();
                     sluice->SetSluiceState(SluiceState::OpeningHighWaterDoor);
                 }
@@ -318,9 +307,9 @@ void *Sluice::Run(void *threadArgs) {
                 if (highWaterDoorState1 == DoorState::Open) {
                     sluice->SetSluiceState(SluiceState::IdlingOnHighWater);
                 }
-                    // Else if the high water door is the faulty type, restart it.
-                else if (sluice->doorType == DoorType::NeedsNewMotors && highWaterDoorState1 != DoorState::Opening) {
-                    sluice->highWaterDoor->Open();
+                // Else, do opening behavior.
+                else {
+                    sluice->highWaterDoor->DuringOpeningBehavior();
                 }
                 break;
             }

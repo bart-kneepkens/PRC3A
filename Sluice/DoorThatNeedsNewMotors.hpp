@@ -9,6 +9,10 @@ public:
     DoorThatNeedsNewMotors(DoorSide::DoorSide side);
 
     ~DoorThatNeedsNewMotors();
+
+    virtual void DuringClosingBehavior() const;     // Overrides Door::DuringClosingBehavior()
+
+    virtual void DuringOpeningBehavior() const;     // Overrides Door::DuringOpeningBehavior()
 };
 
 #endif  // SLUIS_DOORTHATNEEDSNEWMOTORS_HPP

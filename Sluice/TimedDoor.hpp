@@ -13,6 +13,10 @@ public:
 
     /** This door's lock. */
     const Lock lock;
+
+    virtual void BeforeOpenBehavior() const;    // Overrides Door::BeforeOpenBehavior()
+
+    virtual void AfterCloseBehavior() const;    // Overrides Door::AfterCloseBehavior()
 };
 
 #endif  // SLUIS_TIMEDDOOR_HPP

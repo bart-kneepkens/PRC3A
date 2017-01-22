@@ -44,6 +44,14 @@ void Door::RecoverFromEmergency() {
     valveHigh.RecoverFromEmergency();
 }
 
+void Door::BeforeOpenBehavior() const { /* Does nothing by default. */ }
+
+void Door::AfterCloseBehavior() const { /* Does nothing by default. */ }
+
+void Door::DuringOpeningBehavior() const { /* Does nothing by default. */ }
+
+void Door::DuringClosingBehavior() const { /* Does nothing by default. */ }
+
 
 
 
