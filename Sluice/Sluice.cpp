@@ -1,6 +1,8 @@
 #include "Sluice.hpp"
 
-Sluice::Sluice(DoorType::DoorType doorType) :
+Sluice::Sluice(Door* lowWaterDoor, Door* highWaterDoor) :
+        lowWaterDoor(lowWaterDoor),
+        highWaterDoor(highWaterDoor),
         previousState(sluiceState),
         doorType(doorType),
         lowWaterInLight(TrafficLight(1)),
@@ -10,21 +12,6 @@ Sluice::Sluice(DoorType::DoorType doorType) :
         waterSensor(WaterSensor()),
         sluiceState(waterSensor.GetWaterLevel() ==
                             WaterLevel::High ? SluiceState::IdlingOnHighWater : SluiceState::IdlingOnLowWater) {
-
-    switch (doorType) {
-        case DoorType::Timed:
-            lowWaterDoor = new TimedDoor(DoorSide::LowWater);
-            highWaterDoor = new TimedDoor(DoorSide::HighWater);
-            break;
-        case DoorType::NeedsNewMotors:
-            lowWaterDoor = new DoorThatNeedsNewMotors(DoorSide::LowWater);
-            highWaterDoor = new DoorThatNeedsNewMotors(DoorSide::HighWater);
-            break;
-        default:
-            lowWaterDoor = new Door(DoorSide::LowWater);
-            highWaterDoor = new Door(DoorSide::HighWater);
-            break;
-    }
 }
 
 Sluice::~Sluice() {
@@ -151,7 +138,7 @@ void Sluice::Run() {
     pthread_create(&runningThread, NULL, Run, this);
 }
 
-void *Sluice::Run(void *threadArgs) {
+void* Sluice::Run(void *threadArgs) {
     Sluice *sluice = (Sluice*) threadArgs;
     bool loop = true;
 

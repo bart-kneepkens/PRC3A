@@ -12,9 +12,6 @@
 /** Controls a single sluice. */
 class Sluice {
 private:
-    /** The default duration of sleeps in busy-waiting loops. */
-    // static const unsigned int SLEEP_DURATION = 250;
-
     /** Water sensor for measuring water height. */
     const WaterSensor waterSensor;
 
@@ -56,11 +53,20 @@ private:
      * @param threadArgs Pointer to a Sluice instance. May not be NULL.
      * @return
      */
-    void static *Run(void *threadArgs);
+    static void *Run(void *threadArgs);
 
 public:
-    Sluice(DoorType::DoorType doorType = DoorType::Normal);
+    /**
+     * Constructor.
+     * @param lowWaterDoor Should not be NULL.
+     * @param highWaterDoor Should not be NULL.
+     * @return
+     */
+    Sluice(Door *lowWaterDoor, Door *highWaterDoor);
 
+    /**
+     * Destructor. Deletes lowWaterDoor and highWaterDoor.
+     */
     ~Sluice();
 
     /**

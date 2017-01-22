@@ -52,7 +52,25 @@ int main(int argc, char *argv[]) {
     // Determine what kind of doors the sluice control should have, and then instantiate it. Throw error if fails.
     try {
         DoorType::DoorType doorsType = DoorType::toDoorType(doorsTypeStr);
-        control = new Sluice(doorsType);
+        Door *lowWaterDoor = 0;
+        Door *highWaterDoor = 0;
+
+        switch (doorsType) {
+            case DoorType::Timed:
+                lowWaterDoor = new TimedDoor(DoorSide::LowWater);
+                highWaterDoor = new TimedDoor(DoorSide::HighWater);
+                break;
+            case DoorType::NeedsNewMotors:
+                lowWaterDoor = new DoorThatNeedsNewMotors(DoorSide::LowWater);
+                highWaterDoor = new DoorThatNeedsNewMotors(DoorSide::HighWater);
+                break;
+            default:
+                lowWaterDoor = new Door(DoorSide::LowWater);
+                highWaterDoor = new Door(DoorSide::HighWater);
+                break;
+        }
+
+        control = new Sluice(lowWaterDoor, highWaterDoor);
         control->Run();
     } catch (std::invalid_argument ex) {
         std::cerr << ex.what() << std::endl;
